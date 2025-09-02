@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Play, Ticket, Calendar, Users } from 'lucide-react';
@@ -69,18 +70,24 @@ const Hero = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button 
             size="lg" 
+            asChild
             className="theatre-gradient text-white px-8 py-4 text-lg font-semibold hover:scale-105 theatre-transition premiere-glow"
           >
-            <Ticket className="w-5 h-5 mr-3" />
-            Browse Premieres
+            <Link to="/premieres">
+              <Ticket className="w-5 h-5 mr-3" />
+              Browse Premieres
+            </Link>
           </Button>
           <Button 
             variant="outline" 
             size="lg" 
+            asChild
             className="border-golden/50 text-golden hover:bg-golden/10 px-8 py-4 text-lg font-semibold hover:scale-105 theatre-transition"
           >
-            <Play className="w-5 h-5 mr-3" />
-            Explore Library
+            <Link to="/library">
+              <Play className="w-5 h-5 mr-3" />
+              Explore Library
+            </Link>
           </Button>
         </div>
 
