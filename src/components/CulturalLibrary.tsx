@@ -102,17 +102,181 @@ const movies = [
     language: 'Manipuri',
     duration: '2h 20m',
     owned: false
+  },
+  // Additional movies for "Load More" functionality
+  {
+    id: 7,
+    title: 'Weaver\'s Song',
+    state: 'tripura',
+    category: 'traditional',
+    poster: moviePoster1,
+    rating: 4.4,
+    year: 2023,
+    language: 'Kokborok',
+    duration: '1h 45m',
+    owned: false
+  },
+  {
+    id: 8,
+    title: 'Mountain Echoes',
+    state: 'arunachal',
+    category: 'traditional',
+    poster: moviePoster2,
+    rating: 4.6,
+    year: 2024,
+    language: 'Nyishi',
+    duration: '2h 12m',
+    owned: true
+  },
+  {
+    id: 9,
+    title: 'Digital Village',
+    state: 'assam',
+    category: 'modern',
+    poster: moviePoster3,
+    rating: 4.3,
+    year: 2024,
+    language: 'Assamese',
+    duration: '1h 48m',
+    owned: false
+  },
+  {
+    id: 10,
+    title: 'Urban Legends',
+    state: 'manipur',
+    category: 'modern',
+    poster: moviePoster4,
+    rating: 4.7,
+    year: 2024,
+    language: 'Manipuri',
+    duration: '2h 05m',
+    owned: true
+  },
+  {
+    id: 11,
+    title: 'Tech Dreams',
+    state: 'sikkim',
+    category: 'modern',
+    poster: moviePoster5,
+    rating: 4.2,
+    year: 2024,
+    language: 'Nepali',
+    duration: '1h 52m',
+    owned: false
+  },
+  {
+    id: 12,
+    title: 'Sacred Groves',
+    state: 'meghalaya',
+    category: 'documentary',
+    poster: moviePoster6,
+    rating: 4.9,
+    year: 2023,
+    language: 'Khasi',
+    duration: '1h 38m',
+    owned: true
+  },
+  {
+    id: 13,
+    title: 'Hunter\'s Tale',
+    state: 'nagaland',
+    category: 'folk',
+    poster: moviePoster1,
+    rating: 4.5,
+    year: 2023,
+    language: 'Sema Naga',
+    duration: '1h 55m',
+    owned: false
+  },
+  {
+    id: 14,
+    title: 'Bamboo Forest',
+    state: 'mizoram',
+    category: 'documentary',
+    poster: moviePoster2,
+    rating: 4.6,
+    year: 2024,
+    language: 'Mizo',
+    duration: '1h 42m',
+    owned: true
+  },
+  {
+    id: 15,
+    title: 'Royal Heritage',
+    state: 'tripura',
+    category: 'documentary',
+    poster: moviePoster3,
+    rating: 4.4,
+    year: 2023,
+    language: 'Bengali',
+    duration: '2h 15m',
+    owned: false
+  },
+  {
+    id: 16,
+    title: 'Spirit Dance',
+    state: 'arunachal',
+    category: 'folk',
+    poster: moviePoster4,
+    rating: 4.8,
+    year: 2024,
+    language: 'Apatani',
+    duration: '1h 48m',
+    owned: true
+  },
+  {
+    id: 17,
+    title: 'City Lights',
+    state: 'assam',
+    category: 'modern',
+    poster: moviePoster5,
+    rating: 4.1,
+    year: 2024,
+    language: 'Assamese',
+    duration: '1h 58m',
+    owned: false
+  },
+  {
+    id: 18,
+    title: 'Love in Hills',
+    state: 'sikkim',
+    category: 'modern',
+    poster: moviePoster6,
+    rating: 4.5,
+    year: 2024,
+    language: 'Nepali',
+    duration: '2h 08m',
+    owned: true
   }
 ];
 
 const CulturalLibrary = () => {
   const [selectedState, setSelectedState] = useState('all');
   const [selectedCategory, setSelectedCategory] = useState('traditional');
+  const [visibleMovies, setVisibleMovies] = useState(6); // Show first 6 movies initially
 
   const filteredMovies = movies.filter(movie => 
     (selectedState === 'all' || movie.state === selectedState) &&
     movie.category === selectedCategory
   );
+
+  const displayedMovies = filteredMovies.slice(0, visibleMovies);
+  const hasMoreMovies = visibleMovies < filteredMovies.length;
+
+  const handleLoadMore = () => {
+    setVisibleMovies(prev => prev + 6);
+  };
+
+  // Reset visible movies when filters change
+  const handleStateChange = (stateId: string) => {
+    setSelectedState(stateId);
+    setVisibleMovies(6);
+  };
+
+  const handleCategoryChange = (categoryId: string) => {
+    setSelectedCategory(categoryId);
+    setVisibleMovies(6);
+  };
 
   return (
     <section className="py-20 px-6 bg-gradient-to-b from-background to-card-accent/20">
@@ -148,7 +312,7 @@ const CulturalLibrary = () => {
               <Button
                 key={state.id}
                 variant={selectedState === state.id ? "default" : "outline"}
-                onClick={() => setSelectedState(state.id)}
+                onClick={() => handleStateChange(state.id)}
                 className={`
                   ${selectedState === state.id 
                     ? 'theatre-gradient text-white' 
@@ -169,7 +333,7 @@ const CulturalLibrary = () => {
         </div>
 
         {/* Category Tabs */}
-        <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="mb-8">
+        <Tabs value={selectedCategory} onValueChange={handleCategoryChange} className="mb-8">
           <TabsList className="grid w-full grid-cols-4 bg-card-accent/50">
             {categories.map((category) => (
               <TabsTrigger
@@ -186,7 +350,7 @@ const CulturalLibrary = () => {
           {categories.map((category) => (
             <TabsContent key={category.id} value={category.id} className="mt-8">
               <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {filteredMovies.map((movie) => (
+                {displayedMovies.map((movie) => (
                   <Card 
                     key={movie.id}
                     className="group bg-card-accent/30 border-border/20 hover:border-golden/30 theatre-transition overflow-hidden ticket-hover"
@@ -247,15 +411,24 @@ const CulturalLibrary = () => {
         </Tabs>
 
         {/* Load More */}
-        <div className="text-center mt-12">
-          <Button 
-            variant="outline" 
-            size="lg" 
-            className="border-golden/50 text-golden hover:bg-golden/10 px-8 py-3"
-          >
-            Load More Films
-          </Button>
-        </div>
+        {hasMoreMovies && (
+          <div className="text-center mt-12">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              onClick={handleLoadMore}
+              className="border-golden/50 text-golden hover:bg-golden/10 px-8 py-3"
+            >
+              Load More Films ({filteredMovies.length - visibleMovies} remaining)
+            </Button>
+          </div>
+        )}
+        
+        {!hasMoreMovies && filteredMovies.length > 6 && (
+          <div className="text-center mt-12">
+            <p className="text-muted-foreground">You've seen all films in this category</p>
+          </div>
+        )}
       </div>
     </section>
   );
