@@ -1,12 +1,35 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Search, User, Ticket, Film, Award, BookOpen, Home } from 'lucide-react';
+import AuthDialog from './AuthDialog';
+import UserProfileDialog from './UserProfileDialog';
 
 const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isAuthDialogOpen, setIsAuthDialogOpen] = useState(false);
+  const [isProfileDialogOpen, setIsProfileDialogOpen] = useState(false);
+  const [user, setUser] = useState<any>(null);
   const location = useLocation();
+
+  // Load user from localStorage on component mount
+  useEffect(() => {
+    const savedUser = localStorage.getItem('hillypix-user');
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    }
+  }, []);
+
+  const handleAuthSuccess = (userData: any) => {
+    setUser(userData);
+    localStorage.setItem('hillypix-user', JSON.stringify(userData));
+  };
+
+  const handleSignOut = () => {
+    setUser(null);
+    localStorage.removeItem('hillypix-user');
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/20">
@@ -85,20 +108,69 @@ const Header = () => {
               )}
             </div>
 
-            {/* My Library */}
-            <Button variant="outline" size="sm" asChild className="hidden sm:flex border-golden/30 text-golden hover:bg-golden/10">
-              <Link to="/my-library">
-                <BookOpen className="w-4 h-4 mr-2" />
-                My Library
-              </Link>
-            </Button>
+            {/* My Library / Auth */}
+            {user ? (
+              <Button variant="outline" size="sm" asChild className="hidden sm:flex border-golden/30 text-golden hover:bg-golden/10">
+                <Link to="/my-library">
+                  <BookOpen className="w-4 h-4 mr-2" />
+                  My Library ({user.purchasedMovies})
+                </Link>
+              </Button>
+            ) : (
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => setIsAuthDialogOpen(true)}
+                className="hidden sm:flex border-golden/30 text-golden hover:bg-golden/10"
+              >
+                <User className="w-4 h-4 mr-2" />
+                Sign In
+              </Button>
+            )}
 
             {/* Profile */}
-            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-golden">
-              <User className="w-4 h-4" />
-            </Button>
+            {user ? (
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => setIsProfileDialogOpen(true)}
+                className="text-muted-foreground hover:text-golden"
+              >
+                <div className="w-8 h-8 rounded-full bg-golden/20 flex items-center justify-center">
+                  <span className="text-xs font-semibold text-golden">
+                    {user.name.charAt(0).toUpperCase()}
+                  </span>
+                </div>
+              </Button>
+            ) : (
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => setIsAuthDialogOpen(true)}
+                className="text-muted-foreground hover:text-golden md:hidden"
+              >
+                <User className="w-4 h-4" />
+              </Button>
+            )}
           </div>
         </div>
+
+        {/* Auth Dialog */}
+        <AuthDialog 
+          open={isAuthDialogOpen}
+          onOpenChange={setIsAuthDialogOpen}
+          onAuthSuccess={handleAuthSuccess}
+        />
+
+        {/* Profile Dialog */}
+        {user && (
+          <UserProfileDialog 
+            open={isProfileDialogOpen}
+            onOpenChange={setIsProfileDialogOpen}
+            user={user}
+            onSignOut={handleSignOut}
+          />
+        )}
       </div>
     </header>
   );
