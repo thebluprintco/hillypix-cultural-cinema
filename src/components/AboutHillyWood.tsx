@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Heart, Users, Globe, Zap, ArrowRight, Mountain } from 'lucide-react';
+import SupportHillyWoodDialog from './SupportHillyWoodDialog';
+import LearnMoreDialog from './LearnMoreDialog';
 
 const values = [
   {
@@ -38,6 +41,8 @@ const stats = [
 ];
 
 const AboutHillyWood = () => {
+  const [isSupportDialogOpen, setIsSupportDialogOpen] = useState(false);
+  const [isLearnMoreDialogOpen, setIsLearnMoreDialogOpen] = useState(false);
   return (
     <section className="py-20 px-6 relative overflow-hidden">
       {/* Background Pattern */}
@@ -176,6 +181,7 @@ const AboutHillyWood = () => {
             <Button 
               size="lg" 
               className="theatre-gradient text-white px-8 py-4 text-lg font-semibold hover:scale-105 theatre-transition"
+              onClick={() => setIsSupportDialogOpen(true)}
             >
               Support HillyWood
               <ArrowRight className="w-5 h-5 ml-3" />
@@ -184,6 +190,7 @@ const AboutHillyWood = () => {
               variant="outline" 
               size="lg" 
               className="border-golden/50 text-golden hover:bg-golden/10 px-8 py-4 text-lg"
+              onClick={() => setIsLearnMoreDialogOpen(true)}
             >
               Learn More
             </Button>
@@ -195,6 +202,19 @@ const AboutHillyWood = () => {
             </p>
           </div>
         </div>
+
+        {/* Support Dialog */}
+        <SupportHillyWoodDialog 
+          open={isSupportDialogOpen}
+          onOpenChange={setIsSupportDialogOpen}
+        />
+
+        {/* Learn More Dialog */}
+        <LearnMoreDialog 
+          open={isLearnMoreDialogOpen}
+          onOpenChange={setIsLearnMoreDialogOpen}
+          topic="hillywood"
+        />
       </div>
     </section>
   );

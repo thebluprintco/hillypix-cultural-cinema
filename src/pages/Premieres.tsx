@@ -1,10 +1,13 @@
+import { useState } from 'react';
 import Header from '@/components/Header';
 import NowPremiering from '@/components/NowPremiering';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, MapPin } from 'lucide-react';
+import LearnMoreDialog from '@/components/LearnMoreDialog';
 
 const Premieres = () => {
+  const [isLearnMoreDialogOpen, setIsLearnMoreDialogOpen] = useState(false);
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-card-accent/20">
       <Header />
@@ -82,7 +85,12 @@ const Premieres = () => {
                     <Button size="sm" className="theatre-gradient text-white">
                       Set Reminder
                     </Button>
-                    <Button variant="outline" size="sm" className="border-golden/50 text-golden">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="border-golden/50 text-golden"
+                      onClick={() => setIsLearnMoreDialogOpen(true)}
+                    >
                       Learn More
                     </Button>
                   </div>
@@ -91,6 +99,13 @@ const Premieres = () => {
             </div>
           </div>
         </section>
+
+        {/* Learn More Dialog */}
+        <LearnMoreDialog 
+          open={isLearnMoreDialogOpen}
+          onOpenChange={setIsLearnMoreDialogOpen}
+          topic="premiere"
+        />
       </main>
     </div>
   );
