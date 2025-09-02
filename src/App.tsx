@@ -9,6 +9,7 @@ import Premieres from "./pages/Premieres";
 import Library from "./pages/Library";
 import HallOfFamePage from "./pages/HallOfFamePage";
 import MyLibrary from "./pages/MyLibrary";
+import AllHonorees from "./pages/AllHonorees";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/library" element={<Library />} />
           <Route path="/hall-of-fame" element={<HallOfFamePage />} />
           <Route path="/my-library" element={<MyLibrary />} />
+          <Route path="/all-honorees" element={<AllHonorees />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

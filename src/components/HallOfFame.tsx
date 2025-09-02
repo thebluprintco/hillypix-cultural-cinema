@@ -1,7 +1,10 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Award, Star, Trophy, Users, Film, Crown } from 'lucide-react';
+import NominationDialog from './NominationDialog';
 
 const awardCategories = [
   {
@@ -88,6 +91,7 @@ const milestones = [
 ];
 
 const HallOfFame = () => {
+  const [isNominationOpen, setIsNominationOpen] = useState(false);
   return (
     <section className="py-20 px-6 bg-gradient-to-b from-card-accent/20 to-background">
       <div className="container mx-auto">
@@ -212,14 +216,29 @@ const HallOfFame = () => {
             Help us celebrate and preserve their legacy.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="theatre-gradient text-white px-6 py-3">
+            <Button 
+              className="theatre-gradient text-white px-6 py-3"
+              onClick={() => setIsNominationOpen(true)}
+            >
               Submit Nomination
             </Button>
-            <Button variant="outline" className="border-golden/50 text-golden hover:bg-golden/10 px-6 py-3">
-              View All Honorees
+            <Button 
+              variant="outline" 
+              className="border-golden/50 text-golden hover:bg-golden/10 px-6 py-3"
+              asChild
+            >
+              <Link to="/all-honorees">
+                View All Honorees
+              </Link>
             </Button>
           </div>
         </div>
+
+        {/* Nomination Dialog */}
+        <NominationDialog 
+          open={isNominationOpen} 
+          onOpenChange={setIsNominationOpen} 
+        />
       </div>
     </section>
   );
