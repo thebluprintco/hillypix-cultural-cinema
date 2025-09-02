@@ -26,7 +26,14 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
+					light: 'hsl(var(--primary-light))',
+					glow: 'hsl(var(--primary-glow))',
 					foreground: 'hsl(var(--primary-foreground))'
+				},
+				golden: {
+					DEFAULT: 'hsl(var(--golden))',
+					light: 'hsl(var(--golden-light))',
+					dark: 'hsl(var(--golden-dark))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -50,6 +57,7 @@ export default {
 				},
 				card: {
 					DEFAULT: 'hsl(var(--card))',
+					accent: 'hsl(var(--card-accent))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				sidebar: {
@@ -84,11 +92,37 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'curtain-rise': {
+					'0%': { transform: 'translateY(0%)', opacity: '1' },
+					'100%': { transform: 'translateY(-100%)', opacity: '0' }
+				},
+				'spotlight-fade': {
+					'0%': { opacity: '0', transform: 'scale(0.8)' },
+					'50%': { opacity: '0.8', transform: 'scale(1.1)' },
+					'100%': { opacity: '0.6', transform: 'scale(1)' }
+				},
+				'ticket-float': {
+					'0%, 100%': { transform: 'translateY(0px)' },
+					'50%': { transform: 'translateY(-10px)' }
+				},
+				'golden-shimmer': {
+					'0%': { backgroundPosition: '-200% 0' },
+					'100%': { backgroundPosition: '200% 0' }
+				},
+				'theatre-entrance': {
+					'0%': { opacity: '0', transform: 'translateY(50px) scale(0.9)' },
+					'100%': { opacity: '1', transform: 'translateY(0px) scale(1)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'curtain-rise': 'curtain-rise 2s ease-in-out',
+				'spotlight-fade': 'spotlight-fade 3s ease-in-out infinite',
+				'ticket-float': 'ticket-float 3s ease-in-out infinite',
+				'golden-shimmer': 'golden-shimmer 2s ease-in-out infinite',
+				'theatre-entrance': 'theatre-entrance 0.8s ease-out'
 			}
 		}
 	},
