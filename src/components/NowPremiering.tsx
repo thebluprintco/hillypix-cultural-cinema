@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Clock, Ticket, Star, Play, Calendar } from 'lucide-react';
+import TicketPurchaseDialog from './TicketPurchaseDialog';
 import moviePoster1 from '@/assets/movie-poster-1.jpg';
 import moviePoster2 from '@/assets/movie-poster-2.jpg';
 import moviePoster3 from '@/assets/movie-poster-3.jpg';
@@ -55,6 +57,13 @@ const premieres = [
 ];
 
 const NowPremiering = () => {
+  const [selectedMovie, setSelectedMovie] = useState<any>(null);
+  const [isTicketDialogOpen, setIsTicketDialogOpen] = useState(false);
+
+  const handleBuyTicket = (movie: any) => {
+    setSelectedMovie(movie);
+    setIsTicketDialogOpen(true);
+  };
   return (
     <section className="py-20 px-6">
       <div className="container mx-auto">
@@ -152,6 +161,7 @@ const NowPremiering = () => {
                   {/* Action Button */}
                   <Button 
                     className="w-full mt-4 theatre-gradient text-white font-semibold hover:scale-105 theatre-transition"
+                    onClick={() => handleBuyTicket(movie)}
                   >
                     <Ticket className="w-4 h-4 mr-2" />
                     Buy Premiere Ticket
@@ -172,6 +182,15 @@ const NowPremiering = () => {
             View All Premieres
           </Button>
         </div>
+
+        {/* Ticket Purchase Dialog */}
+        {selectedMovie && (
+          <TicketPurchaseDialog 
+            open={isTicketDialogOpen}
+            onOpenChange={setIsTicketDialogOpen}
+            movie={selectedMovie}
+          />
+        )}
       </div>
     </section>
   );

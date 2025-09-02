@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Play, BookOpen, Filter, Star } from 'lucide-react';
+import TicketPurchaseDialog from './TicketPurchaseDialog';
 import moviePoster1 from '@/assets/movie-poster-1.jpg';
 import moviePoster2 from '@/assets/movie-poster-2.jpg';
 import moviePoster3 from '@/assets/movie-poster-3.jpg';
@@ -254,6 +255,13 @@ const CulturalLibrary = () => {
   const [selectedState, setSelectedState] = useState('all');
   const [selectedCategory, setSelectedCategory] = useState('traditional');
   const [visibleMovies, setVisibleMovies] = useState(6); // Show first 6 movies initially
+  const [selectedMovie, setSelectedMovie] = useState<any>(null);
+  const [isTicketDialogOpen, setIsTicketDialogOpen] = useState(false);
+
+  const handleBuyTicket = (movie: any) => {
+    setSelectedMovie(movie);
+    setIsTicketDialogOpen(true);
+  };
 
   const filteredMovies = movies.filter(movie => 
     (selectedState === 'all' || movie.state === selectedState) &&
@@ -383,6 +391,7 @@ const CulturalLibrary = () => {
                           <Button 
                             size="lg" 
                             className={movie.owned ? 'bg-golden hover:bg-golden-dark text-black' : 'theatre-gradient text-white'}
+                            onClick={() => movie.owned ? null : handleBuyTicket(movie)}
                           >
                             <Play className="w-4 h-4 mr-2" />
                             {movie.owned ? 'Watch Now' : 'Buy Ticket'}
@@ -428,6 +437,15 @@ const CulturalLibrary = () => {
           <div className="text-center mt-12">
             <p className="text-muted-foreground">You've seen all films in this category</p>
           </div>
+        )}
+        
+        {/* Ticket Purchase Dialog */}
+        {selectedMovie && (
+          <TicketPurchaseDialog 
+            open={isTicketDialogOpen}
+            onOpenChange={setIsTicketDialogOpen}
+            movie={selectedMovie}
+          />
         )}
       </div>
     </section>
