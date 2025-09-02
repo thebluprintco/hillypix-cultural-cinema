@@ -37,6 +37,13 @@ const Hero = () => {
           <span className="text-foreground">HillyPix</span>
         </h1>
 
+        {/* Tagline */}
+        <div className="mb-8">
+          <p className="text-2xl md:text-3xl font-medium text-muted-foreground">
+            Preserving Culture Through Cinema
+          </p>
+        </div>
+
         {/* Subtitle */}
         <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
           Step into the grand cultural theatre celebrating the stories, traditions, and cinema of 
