@@ -7,6 +7,9 @@ import { Play, BookOpen, Filter, Star } from 'lucide-react';
 import moviePoster1 from '@/assets/movie-poster-1.jpg';
 import moviePoster2 from '@/assets/movie-poster-2.jpg';
 import moviePoster3 from '@/assets/movie-poster-3.jpg';
+import moviePoster4 from '@/assets/movie-poster-4.jpg';
+import moviePoster5 from '@/assets/movie-poster-5.jpg';
+import moviePoster6 from '@/assets/movie-poster-6.jpg';
 
 const states = [
   { id: 'all', name: 'All States', count: 127 },
@@ -30,74 +33,73 @@ const categories = [
 const movies = [
   {
     id: 1,
-    title: 'Bihu Dreams',
-    state: 'assam',
+    title: 'Ka Jainsen',
+    state: 'meghalaya',
     category: 'traditional',
     poster: moviePoster1,
     rating: 4.8,
     year: 2023,
-    language: 'Assamese',
+    language: 'Khasi',
     duration: '2h 15m',
     owned: true
   },
   {
     id: 2,
-    title: 'Raas Chronicles',
-    state: 'manipur',
+    title: 'Naga Rangtsa',
+    state: 'nagaland',
     category: 'traditional',
     poster: moviePoster2,
     rating: 4.9,
     year: 2023,
-    language: 'Manipuri',
+    language: 'Ao Naga',
     duration: '2h 05m',
     owned: false
   },
   {
     id: 3,
-    title: 'Warriors of the Hills',
-    state: 'nagaland',
+    title: 'Puanchei',
+    state: 'mizoram',
     category: 'traditional',
     poster: moviePoster3,
     rating: 4.7,
     year: 2023,
-    language: 'Ao Naga',
+    language: 'Mizo',
     duration: '1h 58m',
     owned: true
   },
-  // Duplicate for demo purposes
   {
     id: 4,
-    title: 'Modern Guwahati',
-    state: 'assam',
+    title: 'Himalayan Dreams',
+    state: 'sikkim',
     category: 'modern',
-    poster: moviePoster1,
+    poster: moviePoster4,
     rating: 4.5,
     year: 2024,
-    language: 'Assamese',
+    language: 'Nepali',
     duration: '2h 10m',
     owned: false
   },
   {
     id: 5,
-    title: 'Dance Revolution',
-    state: 'manipur',
+    title: 'Gamosa Tales',
+    state: 'assam',
     category: 'modern',
-    poster: moviePoster2,
+    poster: moviePoster5,
     rating: 4.6,
     year: 2024,
-    language: 'Manipuri',
+    language: 'Assamese',
     duration: '1h 55m',
     owned: true
   },
   {
     id: 6,
-    title: 'Tribal Legends',
-    state: 'nagaland',
+    title: 'Raas Leela',
+    state: 'manipur',
     category: 'folk',
-    poster: moviePoster3,
+    poster: moviePoster6,
     rating: 4.8,
     year: 2023,
-    language: 'Ao Naga',
+    language: 'Manipuri',
     duration: '2h 20m',
     owned: false
   }
