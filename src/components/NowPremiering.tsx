@@ -77,7 +77,7 @@ const NowPremiering = () => {
               This Week's
             </span>
             <br />
-            Cultural Premieres
+            Premieres
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Get your tickets now for exclusive premieres celebrating the diverse cultures 
