@@ -84,7 +84,7 @@ const allHonorees = [
     id: 7,
     name: 'Donkupar Roy',
     state: 'Meghalaya',
-    category: 'Cultural Preservation',
+    category: 'Celebrating NorthEast Culture',
     achievement: 'Folk Tale Documentarian',
     films: 10,
     years: '2015-2023',
@@ -106,7 +106,7 @@ const allHonorees = [
   }
 ];
 
-const categories = ['All Categories', 'Lifetime Achievement', 'Outstanding Directors', 'Celebrated Performers', 'Rising Star', 'Cultural Preservation', 'Technical Excellence'];
+const categories = ['All Categories', 'Lifetime Achievement', 'Outstanding Directors', 'Celebrated Performers', 'Rising Star', 'Celebrating NorthEast Culture', 'Technical Excellence'];
 const states = ['All States', 'Arunachal Pradesh', 'Assam', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Sikkim', 'Tripura'];
 
 const AllHonorees = () => {

@@ -78,7 +78,7 @@ const milestones = [
   },
   {
     year: '2022',
-    title: 'Cultural Preservation Initiative',
+    title: 'Celebrating NorthEast Culture Initiative',
     description: 'Started digitizing and preserving traditional folk tales through cinema',
     icon: Star
   },

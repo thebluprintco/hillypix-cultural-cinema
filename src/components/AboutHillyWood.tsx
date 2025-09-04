@@ -9,7 +9,7 @@ import LearnMoreDialog from './LearnMoreDialog';
 const values = [
   {
     icon: Heart,
-    title: 'Cultural Preservation',
+    title: 'Celebrating NorthEast Culture',
     description: 'Every film is a living archive, preserving languages, traditions, and stories that might otherwise be lost to time.',
     color: 'text-red-400'
   },

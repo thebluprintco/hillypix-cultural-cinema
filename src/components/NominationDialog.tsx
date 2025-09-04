@@ -30,7 +30,7 @@ const categories = [
   'Outstanding Directors',
   'Celebrated Performers',
   'Best Film',
-  'Cultural Preservation',
+  'Celebrating NorthEast Culture',
   'Technical Excellence',
   'Rising Star',
   'Community Impact'

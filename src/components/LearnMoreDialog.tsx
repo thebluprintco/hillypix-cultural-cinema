@@ -25,7 +25,7 @@ const hillywoodStory = {
       icon: Mountain
     },
     {
-      title: "Cultural Preservation",
+      title: "Celebrating NorthEast Culture",
       content: "Every film in our collection serves as a digital archive, preserving languages, traditions, and stories that might otherwise be lost. We work directly with communities to ensure authentic representation and cultural accuracy in every production.",
       icon: Heart
     },
