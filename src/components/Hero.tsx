@@ -40,7 +40,7 @@ const Hero = () => {
         {/* Tagline */}
         <div className="mb-8">
           <p className="text-2xl md:text-3xl font-medium text-muted-foreground">
-            Preserving Culture Through Cinema
+            Celebrating Culture Through Cinema
           </p>
         </div>
 
