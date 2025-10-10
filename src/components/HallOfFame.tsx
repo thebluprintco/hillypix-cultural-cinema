@@ -5,175 +5,131 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Award, Star, Trophy, Users, Film, Crown } from 'lucide-react';
 import NominationDialog from './NominationDialog';
-
-const awardCategories = [
-  {
-    id: 'lifetime',
-    title: 'Lifetime Achievement',
-    icon: Crown,
-    color: 'golden',
-    recipients: [
-      {
-        name: 'Dr. Bhabendra Nath Saikia',
-        state: 'Assam',
-        achievement: 'Pioneer of Assamese Cinema',
-        films: 15,
-        years: '1975-2003',
-        quote: 'Cinema is the mirror of society',
-        awards: 'National Film Award, Padma Shri'
-      },
-      {
-        name: 'Jahnu Barua',
-        state: 'Assam',
-        achievement: 'Master of Neorealism',
-        films: 18,
-        years: '1982-2023',
-        quote: 'Stories from the heart of Northeast',
-        awards: 'Multiple National Awards'
-      }
-    ]
-  },
-  {
-    id: 'directors',
-    title: 'Visionary Directors',
-    icon: Film,
-    color: 'primary',
-    recipients: [
-      {
-        name: 'Aribam Syam Sharma',
-        state: 'Manipur',
-        achievement: 'Master of Manipuri Cinema',
-        films: 12,
-        years: '1985-2023',
-        quote: 'Preserving culture through frames',
-        awards: 'Padma Shri, National Awards'
-      },
-      {
-        name: 'Pradip Kurbah',
-        state: 'Meghalaya',
-        achievement: 'Contemporary Storytelling',
-        films: 8,
-        years: '2010-2023',
-        quote: 'Modern voices, timeless stories',
-        awards: 'Multiple Festival Awards'
-      },
-      {
-        name: 'Rima Das',
-        state: 'Assam',
-        achievement: 'Independent Cinema Pioneer',
-        films: 5,
-        years: '2017-2023',
-        quote: 'Village tales for the world',
-        awards: 'National Award, International Recognition'
-      }
-    ]
-  },
-  {
-    id: 'actors',
-    title: 'Celebrated Performers',
-    icon: Users,
-    color: 'golden',
-    recipients: [
-      {
-        name: 'Seema Biswas',
-        state: 'Assam',
-        achievement: 'National Award Winner',
-        films: 25,
-        years: '1990-2023',
-        quote: 'Every role is a new journey',
-        awards: 'National Film Award, Sangeet Natak Akademi'
-      },
-      {
-        name: 'Adil Hussain',
-        state: 'Assam',
-        achievement: 'International Cinema Icon',
-        films: 40,
-        years: '2000-2023',
-        quote: 'From Assam to the world stage',
-        awards: 'Multiple International Awards'
-      },
-      {
-        name: 'Danny Denzongpa',
-        state: 'Sikkim',
-        achievement: 'Legendary Character Artist',
-        films: 190,
-        years: '1971-2023',
-        quote: 'A lifetime in cinema',
-        awards: 'Filmfare Lifetime Achievement'
-      }
-    ]
-  }
-];
-
-const milestones = [
-  {
-    year: '2023',
-    title: 'HillyWood Movement Launch',
-    description: 'HillyPix launched as the first dedicated platform for Northeast Indian cinema, bringing together eight states under one cultural umbrella',
-    icon: Trophy,
-    highlight: true,
-    impact: '10,000+ films catalogued'
-  },
-  {
-    year: '2017',
-    title: 'Village Rockstars Global Success',
-    description: 'Rima Das\'s film became India\'s official Oscar entry, putting Assamese cinema on the world map',
-    icon: Star,
-    impact: '93 festivals, 25+ awards'
-  },
-  {
-    year: '2011',
-    title: 'Haanduk Film Revolution',
-    description: 'Pradip Kurbah\'s groundbreaking Khasi language film opened doors for regional language cinema',
-    icon: Film,
-    impact: 'First Khasi film at MAMI'
-  },
-  {
-    year: '2000',
-    title: 'Digital Renaissance Begins',
-    description: 'Northeast filmmakers embrace digital technology, democratizing film production across the region',
-    icon: Award,
-    impact: '300% increase in productions'
-  }
-];
-
+const awardCategories = [{
+  id: 'lifetime',
+  title: 'Lifetime Achievement',
+  icon: Crown,
+  color: 'golden',
+  recipients: [{
+    name: 'Dr. Bhabendra Nath Saikia',
+    state: 'Assam',
+    achievement: 'Pioneer of Assamese Cinema',
+    films: 15,
+    years: '1975-2003',
+    quote: 'Cinema is the mirror of society',
+    awards: 'National Film Award, Padma Shri'
+  }, {
+    name: 'Jahnu Barua',
+    state: 'Assam',
+    achievement: 'Master of Neorealism',
+    films: 18,
+    years: '1982-2023',
+    quote: 'Stories from the heart of Northeast',
+    awards: 'Multiple National Awards'
+  }]
+}, {
+  id: 'directors',
+  title: 'Visionary Directors',
+  icon: Film,
+  color: 'primary',
+  recipients: [{
+    name: 'Aribam Syam Sharma',
+    state: 'Manipur',
+    achievement: 'Master of Manipuri Cinema',
+    films: 12,
+    years: '1985-2023',
+    quote: 'Preserving culture through frames',
+    awards: 'Padma Shri, National Awards'
+  }, {
+    name: 'Pradip Kurbah',
+    state: 'Meghalaya',
+    achievement: 'Contemporary Storytelling',
+    films: 8,
+    years: '2010-2023',
+    quote: 'Modern voices, timeless stories',
+    awards: 'Multiple Festival Awards'
+  }, {
+    name: 'Rima Das',
+    state: 'Assam',
+    achievement: 'Independent Cinema Pioneer',
+    films: 5,
+    years: '2017-2023',
+    quote: 'Village tales for the world',
+    awards: 'National Award, International Recognition'
+  }]
+}, {
+  id: 'actors',
+  title: 'Celebrated Performers',
+  icon: Users,
+  color: 'golden',
+  recipients: [{
+    name: 'Seema Biswas',
+    state: 'Assam',
+    achievement: 'National Award Winner',
+    films: 25,
+    years: '1990-2023',
+    quote: 'Every role is a new journey',
+    awards: 'National Film Award, Sangeet Natak Akademi'
+  }, {
+    name: 'Adil Hussain',
+    state: 'Assam',
+    achievement: 'International Cinema Icon',
+    films: 40,
+    years: '2000-2023',
+    quote: 'From Assam to the world stage',
+    awards: 'Multiple International Awards'
+  }, {
+    name: 'Danny Denzongpa',
+    state: 'Sikkim',
+    achievement: 'Legendary Character Artist',
+    films: 190,
+    years: '1971-2023',
+    quote: 'A lifetime in cinema',
+    awards: 'Filmfare Lifetime Achievement'
+  }]
+}];
+const milestones = [{
+  year: '2023',
+  title: 'HillyWood Movement Launch',
+  description: 'HillyPix launched as the first dedicated platform for Northeast Indian cinema, bringing together eight states under one cultural umbrella',
+  icon: Trophy,
+  highlight: true,
+  impact: '10,000+ films catalogued'
+}, {
+  year: '2017',
+  title: 'Village Rockstars Global Success',
+  description: 'Rima Das\'s film became India\'s official Oscar entry, putting Assamese cinema on the world map',
+  icon: Star,
+  impact: '93 festivals, 25+ awards'
+}, {
+  year: '2011',
+  title: 'Haanduk Film Revolution',
+  description: 'Pradip Kurbah\'s groundbreaking Khasi language film opened doors for regional language cinema',
+  icon: Film,
+  impact: 'First Khasi film at MAMI'
+}, {
+  year: '2000',
+  title: 'Digital Renaissance Begins',
+  description: 'Northeast filmmakers embrace digital technology, democratizing film production across the region',
+  icon: Award,
+  impact: '300% increase in productions'
+}];
 const HallOfFame = () => {
   const [isNominationOpen, setIsNominationOpen] = useState(false);
-  return (
-    <section className="py-20 px-6 bg-gradient-to-b from-card-accent/20 to-background">
+  return <section className="py-20 px-6 bg-gradient-to-b from-card-accent/20 to-background">
       <div className="container mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <Badge className="mb-4 bg-golden/20 text-golden px-4 py-2">
-            🏆 HALL OF FAME
-          </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-golden to-primary-light bg-clip-text text-transparent">
-              Honoring
-            </span>
-            <br />
-            Cultural Legends
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Celebrating the visionaries, storytellers, and artists who have shaped 
-            and continue to build the rich cinematic heritage of Northeast India.
-          </p>
-        </div>
+        
 
         {/* Award Categories */}
         <div className="mb-20">
-          {awardCategories.map((category, categoryIndex) => (
-            <div key={category.id} className="mb-16">
+          {awardCategories.map((category, categoryIndex) => <div key={category.id} className="mb-16">
               {/* Category Header with Theatre Curtain Effect */}
               <div className="flex items-center justify-center mb-10 relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-golden/5 to-transparent h-px top-1/2"></div>
                 <div className="flex items-center space-x-4 bg-background px-6 py-3 rounded-full border border-golden/20 relative z-10 theatre-shadow">
-                  <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${
-                    category.color === 'golden' ? 'from-golden/30 to-golden/10' : 'from-primary/30 to-primary/10'
-                  } flex items-center justify-center backdrop-blur-sm`}>
-                    <category.icon className={`w-7 h-7 ${
-                      category.color === 'golden' ? 'text-golden' : 'text-primary'
-                    }`} />
+                  <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${category.color === 'golden' ? 'from-golden/30 to-golden/10' : 'from-primary/30 to-primary/10'} flex items-center justify-center backdrop-blur-sm`}>
+                    <category.icon className={`w-7 h-7 ${category.color === 'golden' ? 'text-golden' : 'text-primary'}`} />
                   </div>
                   <h3 className="text-3xl font-bold bg-gradient-to-r from-golden to-primary bg-clip-text text-transparent">
                     {category.title}
@@ -182,11 +138,7 @@ const HallOfFame = () => {
               </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {category.recipients.map((recipient, recipientIndex) => (
-                  <Card 
-                    key={recipientIndex}
-                    className="bg-gradient-to-br from-card-accent/60 to-card-accent/20 border-border/30 hover:border-golden/60 theatre-transition group overflow-hidden relative"
-                  >
+                {category.recipients.map((recipient, recipientIndex) => <Card key={recipientIndex} className="bg-gradient-to-br from-card-accent/60 to-card-accent/20 border-border/30 hover:border-golden/60 theatre-transition group overflow-hidden relative">
                     {/* Spotlight Background Effect */}
                     <div className="absolute inset-0 bg-gradient-to-br from-golden/5 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 theatre-transition"></div>
                     
@@ -249,11 +201,9 @@ const HallOfFame = () => {
                         </div>
                       </div>
                     </CardContent>
-                  </Card>
-                ))}
+                  </Card>)}
               </div>
-            </div>
-          ))}
+            </div>)}
         </div>
 
         {/* HillyWood Milestones - Enhanced Timeline */}
@@ -276,23 +226,14 @@ const HallOfFame = () => {
             {/* Vertical Timeline Line */}
             <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-golden via-primary to-golden/20 hidden md:block"></div>
             
-            {milestones.map((milestone, index) => (
-              <div key={index} className="relative mb-12 last:mb-0 group">
+            {milestones.map((milestone, index) => <div key={index} className="relative mb-12 last:mb-0 group">
                 <div className="flex items-start space-x-8">
                   {/* Timeline Icon with Pulse Animation */}
                   <div className="relative flex-shrink-0 z-10">
-                    <div className={`w-16 h-16 rounded-full flex items-center justify-center border-4 border-background ${
-                      milestone.highlight 
-                        ? 'bg-gradient-to-br from-golden to-golden/70 shadow-lg shadow-golden/50' 
-                        : 'bg-gradient-to-br from-primary to-primary-light'
-                    } group-hover:scale-110 theatre-transition`}>
-                      <milestone.icon className={`w-8 h-8 ${
-                        milestone.highlight ? 'text-black' : 'text-primary-foreground'
-                      }`} />
+                    <div className={`w-16 h-16 rounded-full flex items-center justify-center border-4 border-background ${milestone.highlight ? 'bg-gradient-to-br from-golden to-golden/70 shadow-lg shadow-golden/50' : 'bg-gradient-to-br from-primary to-primary-light'} group-hover:scale-110 theatre-transition`}>
+                      <milestone.icon className={`w-8 h-8 ${milestone.highlight ? 'text-black' : 'text-primary-foreground'}`} />
                     </div>
-                    {milestone.highlight && (
-                      <div className="absolute inset-0 rounded-full bg-golden animate-ping opacity-20"></div>
-                    )}
+                    {milestone.highlight && <div className="absolute inset-0 rounded-full bg-golden animate-ping opacity-20"></div>}
                   </div>
 
                   {/* Content Card */}
@@ -301,21 +242,15 @@ const HallOfFame = () => {
                     
                     <CardContent className="p-6 relative z-10">
                       <div className="flex flex-wrap items-center gap-3 mb-3">
-                        <span className={`text-3xl font-bold ${
-                          milestone.highlight ? 'text-golden' : 'text-primary'
-                        }`}>
+                        <span className={`text-3xl font-bold ${milestone.highlight ? 'text-golden' : 'text-primary'}`}>
                           {milestone.year}
                         </span>
-                        {milestone.highlight && (
-                          <Badge className="bg-golden text-black font-semibold animate-pulse">
+                        {milestone.highlight && <Badge className="bg-golden text-black font-semibold animate-pulse">
                             🎬 Latest
-                          </Badge>
-                        )}
-                        {milestone.impact && (
-                          <Badge className="bg-primary/20 text-primary border border-primary/30">
+                          </Badge>}
+                        {milestone.impact && <Badge className="bg-primary/20 text-primary border border-primary/30">
                             {milestone.impact}
-                          </Badge>
-                        )}
+                          </Badge>}
                       </div>
                       
                       <h4 className="text-2xl font-bold text-foreground mb-3 group-hover:text-golden theatre-transition">
@@ -328,8 +263,7 @@ const HallOfFame = () => {
                     </CardContent>
                   </Card>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
 
@@ -358,20 +292,11 @@ const HallOfFame = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button 
-                size="lg"
-                className="bg-gradient-to-r from-golden to-golden/80 hover:from-golden/90 hover:to-golden/70 text-black font-semibold px-8 py-6 text-lg golden-glow"
-                onClick={() => setIsNominationOpen(true)}
-              >
+              <Button size="lg" className="bg-gradient-to-r from-golden to-golden/80 hover:from-golden/90 hover:to-golden/70 text-black font-semibold px-8 py-6 text-lg golden-glow" onClick={() => setIsNominationOpen(true)}>
                 <Award className="w-5 h-5 mr-2" />
                 Submit Nomination
               </Button>
-              <Button 
-                size="lg"
-                variant="outline" 
-                className="border-2 border-primary/50 text-primary hover:bg-primary/10 px-8 py-6 text-lg backdrop-blur-sm"
-                asChild
-              >
+              <Button size="lg" variant="outline" className="border-2 border-primary/50 text-primary hover:bg-primary/10 px-8 py-6 text-lg backdrop-blur-sm" asChild>
                 <Link to="/all-honorees">
                   <Users className="w-5 h-5 mr-2" />
                   View All Honorees
@@ -398,13 +323,8 @@ const HallOfFame = () => {
         </div>
 
         {/* Nomination Dialog */}
-        <NominationDialog 
-          open={isNominationOpen} 
-          onOpenChange={setIsNominationOpen} 
-        />
+        <NominationDialog open={isNominationOpen} onOpenChange={setIsNominationOpen} />
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HallOfFame;
