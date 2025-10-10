@@ -170,39 +170,6 @@ const AboutHillyWood = () => {
           </div>
         </div>
 
-        {/* Call to Action */}
-        <div className="text-center bg-card-accent/40 p-10 rounded-2xl border border-golden/20">
-          <h3 className="text-3xl font-bold text-foreground mb-4">Join the Movement</h3>
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Every ticket purchased, every story shared, every tradition celebrated brings us closer to 
-            making HillyWood a global phenomenon. Be part of this cultural revolution.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button 
-              size="lg" 
-              className="theatre-gradient text-white px-8 py-4 text-lg font-semibold hover:scale-105 theatre-transition"
-              onClick={() => setIsSupportDialogOpen(true)}
-            >
-              Support HillyWood
-              <ArrowRight className="w-5 h-5 ml-3" />
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="border-golden/50 text-golden hover:bg-golden/10 px-8 py-4 text-lg"
-              onClick={() => setIsLearnMoreDialogOpen(true)}
-            >
-              Learn More
-            </Button>
-          </div>
-          
-          <div className="mt-8 pt-6 border-t border-border/20">
-            <p className="text-sm text-muted-foreground italic">
-              "HillyWood isn't just about movies—it's about identity, pride, and the future of our cultural heritage."
-            </p>
-          </div>
-        </div>
-
         {/* Support Dialog */}
         <SupportHillyWoodDialog 
           open={isSupportDialogOpen}
