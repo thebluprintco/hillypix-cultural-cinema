@@ -6,7 +6,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Premieres from "./pages/Premieres";
-import Library from "./pages/Library";
+import TVSeries from "./pages/TVSeries";
+import Music from "./pages/Music";
+import HillywoodFiesta from "./pages/HillywoodFiesta";
 import HallOfFamePage from "./pages/HallOfFamePage";
 import MyLibrary from "./pages/MyLibrary";
 import AllHonorees from "./pages/AllHonorees";
@@ -22,7 +24,9 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/premieres" element={<Premieres />} />
-          <Route path="/library" element={<Library />} />
+          <Route path="/tv-series" element={<TVSeries />} />
+          <Route path="/music" element={<Music />} />
+          <Route path="/hillywood-fiesta" element={<HillywoodFiesta />} />
           <Route path="/hall-of-fame" element={<HallOfFamePage />} />
           <Route path="/my-library" element={<MyLibrary />} />
           <Route path="/all-honorees" element={<AllHonorees />} />

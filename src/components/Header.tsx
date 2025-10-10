@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Search, User, Ticket, Film, Award, BookOpen, Home } from 'lucide-react';
+import { Search, User, Ticket, Film, Award, Home, Tv, Music, PartyPopper, BookOpen } from 'lucide-react';
 import AuthDialog from './AuthDialog';
 import UserProfileDialog from './UserProfileDialog';
 
@@ -50,29 +50,41 @@ const Header = () => {
           </Link>
 
           {/* Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-6">
             <Button variant="ghost" asChild className={`text-foreground hover:text-golden theatre-transition ${location.pathname === '/' ? 'text-golden' : ''}`}>
               <Link to="/">
                 <Home className="w-4 h-4 mr-2" />
-                Theatre
+                Home
               </Link>
             </Button>
             <Button variant="ghost" asChild className={`text-foreground hover:text-golden theatre-transition ${location.pathname === '/premieres' ? 'text-golden' : ''}`}>
               <Link to="/premieres">
-                <Ticket className="w-4 h-4 mr-2" />
-                Premieres
+                <Film className="w-4 h-4 mr-2" />
+                Movies
               </Link>
             </Button>
-            <Button variant="ghost" asChild className={`text-foreground hover:text-golden theatre-transition ${location.pathname === '/library' ? 'text-golden' : ''}`}>
-              <Link to="/library">
-                <BookOpen className="w-4 h-4 mr-2" />
-                Library
+            <Button variant="ghost" asChild className={`text-foreground hover:text-golden theatre-transition ${location.pathname === '/tv-series' ? 'text-golden' : ''}`}>
+              <Link to="/tv-series">
+                <Tv className="w-4 h-4 mr-2" />
+                TV Series
+              </Link>
+            </Button>
+            <Button variant="ghost" asChild className={`text-foreground hover:text-golden theatre-transition ${location.pathname === '/music' ? 'text-golden' : ''}`}>
+              <Link to="/music">
+                <Music className="w-4 h-4 mr-2" />
+                Music
               </Link>
             </Button>
             <Button variant="ghost" asChild className={`text-foreground hover:text-golden theatre-transition ${location.pathname === '/hall-of-fame' ? 'text-golden' : ''}`}>
               <Link to="/hall-of-fame">
                 <Award className="w-4 h-4 mr-2" />
                 Hall of Fame
+              </Link>
+            </Button>
+            <Button variant="ghost" asChild className={`text-foreground hover:text-golden theatre-transition ${location.pathname === '/hillywood-fiesta' ? 'text-golden' : ''}`}>
+              <Link to="/hillywood-fiesta">
+                <PartyPopper className="w-4 h-4 mr-2" />
+                Hillywood Fiesta
               </Link>
             </Button>
           </nav>
