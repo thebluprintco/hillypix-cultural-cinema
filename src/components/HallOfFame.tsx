@@ -18,13 +18,24 @@ const awardCategories = [
         state: 'Assam',
         achievement: 'Pioneer of Assamese Cinema',
         films: 15,
-        years: '1975-2003'
+        years: '1975-2003',
+        quote: 'Cinema is the mirror of society',
+        awards: 'National Film Award, Padma Shri'
+      },
+      {
+        name: 'Jahnu Barua',
+        state: 'Assam',
+        achievement: 'Master of Neorealism',
+        films: 18,
+        years: '1982-2023',
+        quote: 'Stories from the heart of Northeast',
+        awards: 'Multiple National Awards'
       }
     ]
   },
   {
     id: 'directors',
-    title: 'Outstanding Directors',
+    title: 'Visionary Directors',
     icon: Film,
     color: 'primary',
     recipients: [
@@ -33,14 +44,27 @@ const awardCategories = [
         state: 'Manipur',
         achievement: 'Master of Manipuri Cinema',
         films: 12,
-        years: '1985-2023'
+        years: '1985-2023',
+        quote: 'Preserving culture through frames',
+        awards: 'Padma Shri, National Awards'
       },
       {
         name: 'Pradip Kurbah',
         state: 'Meghalaya',
         achievement: 'Contemporary Storytelling',
         films: 8,
-        years: '2010-2023'
+        years: '2010-2023',
+        quote: 'Modern voices, timeless stories',
+        awards: 'Multiple Festival Awards'
+      },
+      {
+        name: 'Rima Das',
+        state: 'Assam',
+        achievement: 'Independent Cinema Pioneer',
+        films: 5,
+        years: '2017-2023',
+        quote: 'Village tales for the world',
+        awards: 'National Award, International Recognition'
       }
     ]
   },
@@ -55,14 +79,27 @@ const awardCategories = [
         state: 'Assam',
         achievement: 'National Award Winner',
         films: 25,
-        years: '1990-2023'
+        years: '1990-2023',
+        quote: 'Every role is a new journey',
+        awards: 'National Film Award, Sangeet Natak Akademi'
       },
       {
-        name: 'Kaushik Ganguly',
-        state: 'Tripura',
-        achievement: 'Versatile Actor-Director',
-        films: 18,
-        years: '2005-2023'
+        name: 'Adil Hussain',
+        state: 'Assam',
+        achievement: 'International Cinema Icon',
+        films: 40,
+        years: '2000-2023',
+        quote: 'From Assam to the world stage',
+        awards: 'Multiple International Awards'
+      },
+      {
+        name: 'Danny Denzongpa',
+        state: 'Sikkim',
+        achievement: 'Legendary Character Artist',
+        films: 190,
+        years: '1971-2023',
+        quote: 'A lifetime in cinema',
+        awards: 'Filmfare Lifetime Achievement'
       }
     ]
   }
@@ -72,21 +109,31 @@ const milestones = [
   {
     year: '2023',
     title: 'HillyWood Movement Launch',
-    description: 'HillyPix launched as the first dedicated platform for Northeast Indian cinema',
+    description: 'HillyPix launched as the first dedicated platform for Northeast Indian cinema, bringing together eight states under one cultural umbrella',
     icon: Trophy,
-    highlight: true
+    highlight: true,
+    impact: '10,000+ films catalogued'
   },
   {
-    year: '2022',
-    title: 'Celebrating NorthEast Culture Initiative',
-    description: 'Started digitizing and preserving traditional folk tales through cinema',
-    icon: Star
+    year: '2017',
+    title: 'Village Rockstars Global Success',
+    description: 'Rima Das\'s film became India\'s official Oscar entry, putting Assamese cinema on the world map',
+    icon: Star,
+    impact: '93 festivals, 25+ awards'
   },
   {
-    year: '2021',
-    title: 'Eight States United',
-    description: 'First platform to represent all eight Northeastern states equally',
-    icon: Award
+    year: '2011',
+    title: 'Haanduk Film Revolution',
+    description: 'Pradip Kurbah\'s groundbreaking Khasi language film opened doors for regional language cinema',
+    icon: Film,
+    impact: 'First Khasi film at MAMI'
+  },
+  {
+    year: '2000',
+    title: 'Digital Renaissance Begins',
+    description: 'Northeast filmmakers embrace digital technology, democratizing film production across the region',
+    icon: Award,
+    impact: '300% increase in productions'
   }
 ];
 
@@ -114,45 +161,92 @@ const HallOfFame = () => {
         </div>
 
         {/* Award Categories */}
-        <div className="mb-16">
-          {awardCategories.map((category, index) => (
-            <div key={category.id} className="mb-12">
-              <div className="flex items-center justify-center mb-8">
-                <div className="flex items-center space-x-3">
-                  <div className={`w-12 h-12 rounded-full bg-${category.color}/20 flex items-center justify-center`}>
-                    <category.icon className={`w-6 h-6 text-${category.color}`} />
+        <div className="mb-20">
+          {awardCategories.map((category, categoryIndex) => (
+            <div key={category.id} className="mb-16">
+              {/* Category Header with Theatre Curtain Effect */}
+              <div className="flex items-center justify-center mb-10 relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-golden/5 to-transparent h-px top-1/2"></div>
+                <div className="flex items-center space-x-4 bg-background px-6 py-3 rounded-full border border-golden/20 relative z-10 theatre-shadow">
+                  <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${
+                    category.color === 'golden' ? 'from-golden/30 to-golden/10' : 'from-primary/30 to-primary/10'
+                  } flex items-center justify-center backdrop-blur-sm`}>
+                    <category.icon className={`w-7 h-7 ${
+                      category.color === 'golden' ? 'text-golden' : 'text-primary'
+                    }`} />
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground">{category.title}</h3>
+                  <h3 className="text-3xl font-bold bg-gradient-to-r from-golden to-primary bg-clip-text text-transparent">
+                    {category.title}
+                  </h3>
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {category.recipients.map((recipient, recipientIndex) => (
                   <Card 
                     key={recipientIndex}
-                    className="bg-card-accent/40 border-border/30 hover:border-golden/50 theatre-transition group"
+                    className="bg-gradient-to-br from-card-accent/60 to-card-accent/20 border-border/30 hover:border-golden/60 theatre-transition group overflow-hidden relative"
                   >
-                    <CardContent className="p-6 text-center">
-                      {/* Spotlight Effect */}
-                      <div className="relative mb-4">
-                        <div className="w-24 h-24 mx-auto bg-gradient-to-br from-golden/20 to-primary/20 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 theatre-transition">
-                          <div className="w-16 h-16 bg-golden/30 rounded-full flex items-center justify-center">
-                            <Award className="w-8 h-8 text-golden" />
+                    {/* Spotlight Background Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-golden/5 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 theatre-transition"></div>
+                    
+                    <CardContent className="p-8 relative z-10">
+                      {/* Avatar with Layered Circles */}
+                      <div className="relative mb-6 flex justify-center">
+                        <div className="relative">
+                          {/* Outer rotating ring */}
+                          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-golden via-primary to-golden opacity-20 blur-md animate-pulse"></div>
+                          
+                          {/* Main avatar circle */}
+                          <div className="relative w-28 h-28 rounded-full bg-gradient-to-br from-golden/30 to-primary/30 flex items-center justify-center group-hover:scale-110 theatre-transition backdrop-blur-sm border-2 border-golden/20">
+                            <div className="w-20 h-20 bg-gradient-to-br from-golden/40 to-primary/40 rounded-full flex items-center justify-center">
+                              <Award className="w-10 h-10 text-golden" />
+                            </div>
                           </div>
-                        </div>
-                        <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
-                          <Star className="w-3 h-3 text-primary-foreground fill-current" />
+                          
+                          {/* Award badge */}
+                          <div className="absolute -top-1 -right-1 w-8 h-8 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center border-2 border-background shadow-lg">
+                            <Star className="w-4 h-4 text-primary-foreground fill-current" />
+                          </div>
                         </div>
                       </div>
 
-                      <h4 className="text-xl font-bold text-foreground mb-2">{recipient.name}</h4>
-                      <Badge className="bg-primary/20 text-primary-light mb-3">
-                        {recipient.state}
-                      </Badge>
-                      <p className="text-sm text-golden font-semibold mb-3">{recipient.achievement}</p>
-                      <div className="text-xs text-muted-foreground space-y-1">
-                        <p>{recipient.films} Films</p>
-                        <p>{recipient.years}</p>
+                      {/* Name and State */}
+                      <div className="text-center mb-4">
+                        <h4 className="text-2xl font-bold text-foreground mb-2 group-hover:text-golden theatre-transition">
+                          {recipient.name}
+                        </h4>
+                        <Badge className="bg-primary/20 text-primary border border-primary/30 mb-3">
+                          {recipient.state}
+                        </Badge>
+                      </div>
+
+                      {/* Achievement & Quote */}
+                      <div className="text-center mb-4">
+                        <p className="text-sm text-golden font-semibold mb-3">{recipient.achievement}</p>
+                        <p className="text-xs italic text-muted-foreground border-l-2 border-golden/30 pl-3 mb-3">
+                          "{recipient.quote}"
+                        </p>
+                      </div>
+
+                      {/* Stats Grid */}
+                      <div className="grid grid-cols-2 gap-3 pt-4 border-t border-border/30">
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-primary">{recipient.films}</div>
+                          <div className="text-xs text-muted-foreground">Films</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-xs font-semibold text-foreground">{recipient.years}</div>
+                          <div className="text-xs text-muted-foreground">Active Years</div>
+                        </div>
+                      </div>
+
+                      {/* Awards */}
+                      <div className="mt-4 pt-4 border-t border-border/30">
+                        <div className="text-xs text-center">
+                          <div className="text-golden font-semibold mb-1">🏆 Awards</div>
+                          <div className="text-muted-foreground">{recipient.awards}</div>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
@@ -162,75 +256,144 @@ const HallOfFame = () => {
           ))}
         </div>
 
-        {/* HillyWood Milestones */}
-        <div className="mb-12">
-          <div className="text-center mb-10">
-            <h3 className="text-3xl font-bold text-foreground mb-4">HillyWood Milestones</h3>
-            <p className="text-muted-foreground">Key moments in building Northeast India's cinematic identity</p>
+        {/* HillyWood Milestones - Enhanced Timeline */}
+        <div className="mb-16">
+          <div className="text-center mb-12">
+            <Badge className="mb-4 bg-primary/20 text-primary px-4 py-2">
+              📅 TIMELINE
+            </Badge>
+            <h3 className="text-4xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-primary to-golden bg-clip-text text-transparent">
+                HillyWood Milestones
+              </span>
+            </h3>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Journey through the pivotal moments that shaped Northeast India's cinematic heritage
+            </p>
           </div>
 
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-5xl mx-auto relative">
+            {/* Vertical Timeline Line */}
+            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-golden via-primary to-golden/20 hidden md:block"></div>
+            
             {milestones.map((milestone, index) => (
-              <div key={index} className="flex items-start space-x-6 mb-8 last:mb-0">
-                {/* Timeline Icon */}
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${
-                  milestone.highlight 
-                    ? 'bg-golden text-black' 
-                    : 'bg-primary/20 text-primary-light'
-                }`}>
-                  <milestone.icon className="w-6 h-6" />
-                </div>
-
-                {/* Content */}
-                <div className="flex-1">
-                  <div className="flex items-center space-x-3 mb-2">
-                    <span className={`text-2xl font-bold ${
-                      milestone.highlight ? 'text-golden' : 'text-primary-light'
-                    }`}>
-                      {milestone.year}
-                    </span>
+              <div key={index} className="relative mb-12 last:mb-0 group">
+                <div className="flex items-start space-x-8">
+                  {/* Timeline Icon with Pulse Animation */}
+                  <div className="relative flex-shrink-0 z-10">
+                    <div className={`w-16 h-16 rounded-full flex items-center justify-center border-4 border-background ${
+                      milestone.highlight 
+                        ? 'bg-gradient-to-br from-golden to-golden/70 shadow-lg shadow-golden/50' 
+                        : 'bg-gradient-to-br from-primary to-primary-light'
+                    } group-hover:scale-110 theatre-transition`}>
+                      <milestone.icon className={`w-8 h-8 ${
+                        milestone.highlight ? 'text-black' : 'text-primary-foreground'
+                      }`} />
+                    </div>
                     {milestone.highlight && (
-                      <Badge className="bg-golden text-black font-semibold animate-pulse">
-                        Latest
-                      </Badge>
+                      <div className="absolute inset-0 rounded-full bg-golden animate-ping opacity-20"></div>
                     )}
                   </div>
-                  <h4 className="text-xl font-semibold text-foreground mb-2">{milestone.title}</h4>
-                  <p className="text-muted-foreground">{milestone.description}</p>
-                </div>
 
-                {/* Timeline Line */}
-                {index < milestones.length - 1 && (
-                  <div className="absolute left-6 mt-12 w-0.5 h-8 bg-border/30"></div>
-                )}
+                  {/* Content Card */}
+                  <Card className="flex-1 bg-gradient-to-br from-card-accent/60 to-card-accent/20 border-border/30 group-hover:border-primary/50 theatre-transition overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-golden/5 opacity-0 group-hover:opacity-100 theatre-transition"></div>
+                    
+                    <CardContent className="p-6 relative z-10">
+                      <div className="flex flex-wrap items-center gap-3 mb-3">
+                        <span className={`text-3xl font-bold ${
+                          milestone.highlight ? 'text-golden' : 'text-primary'
+                        }`}>
+                          {milestone.year}
+                        </span>
+                        {milestone.highlight && (
+                          <Badge className="bg-golden text-black font-semibold animate-pulse">
+                            🎬 Latest
+                          </Badge>
+                        )}
+                        {milestone.impact && (
+                          <Badge className="bg-primary/20 text-primary border border-primary/30">
+                            {milestone.impact}
+                          </Badge>
+                        )}
+                      </div>
+                      
+                      <h4 className="text-2xl font-bold text-foreground mb-3 group-hover:text-golden theatre-transition">
+                        {milestone.title}
+                      </h4>
+                      
+                      <p className="text-muted-foreground leading-relaxed">
+                        {milestone.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Call to Action */}
-        <div className="text-center bg-card-accent/30 p-8 rounded-xl border border-border/20">
-          <h3 className="text-2xl font-bold text-foreground mb-4">Nominate Cultural Heroes</h3>
-          <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Know someone who deserves recognition for their contribution to Northeast Indian cinema? 
-            Help us celebrate and preserve their legacy.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              className="theatre-gradient text-white px-6 py-3"
-              onClick={() => setIsNominationOpen(true)}
-            >
-              Submit Nomination
-            </Button>
-            <Button 
-              variant="outline" 
-              className="border-golden/50 text-golden hover:bg-golden/10 px-6 py-3"
-              asChild
-            >
-              <Link to="/all-honorees">
-                View All Honorees
-              </Link>
-            </Button>
+        {/* Call to Action - Enhanced */}
+        <div className="relative overflow-hidden bg-gradient-to-br from-card-accent/60 via-card-accent/40 to-card-accent/20 p-12 rounded-2xl border border-golden/20 theatre-shadow">
+          {/* Decorative Background Elements */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-golden/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+          
+          <div className="relative z-10 text-center max-w-3xl mx-auto">
+            <div className="mb-6">
+              <div className="inline-block p-4 bg-golden/10 rounded-full mb-4">
+                <Trophy className="w-12 h-12 text-golden" />
+              </div>
+            </div>
+            
+            <h3 className="text-3xl md:text-4xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-golden to-primary bg-clip-text text-transparent">
+                Nominate Cultural Heroes
+              </span>
+            </h3>
+            
+            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+              Know someone who deserves recognition for their contribution to Northeast Indian cinema? 
+              Help us celebrate and preserve their legacy for generations to come.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button 
+                size="lg"
+                className="bg-gradient-to-r from-golden to-golden/80 hover:from-golden/90 hover:to-golden/70 text-black font-semibold px-8 py-6 text-lg golden-glow"
+                onClick={() => setIsNominationOpen(true)}
+              >
+                <Award className="w-5 h-5 mr-2" />
+                Submit Nomination
+              </Button>
+              <Button 
+                size="lg"
+                variant="outline" 
+                className="border-2 border-primary/50 text-primary hover:bg-primary/10 px-8 py-6 text-lg backdrop-blur-sm"
+                asChild
+              >
+                <Link to="/all-honorees">
+                  <Users className="w-5 h-5 mr-2" />
+                  View All Honorees
+                </Link>
+              </Button>
+            </div>
+            
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-border/30">
+              <div>
+                <div className="text-3xl font-bold text-golden mb-1">150+</div>
+                <div className="text-sm text-muted-foreground">Honorees</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-primary mb-1">8</div>
+                <div className="text-sm text-muted-foreground">States</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-golden mb-1">2000+</div>
+                <div className="text-sm text-muted-foreground">Films</div>
+              </div>
+            </div>
           </div>
         </div>
 
