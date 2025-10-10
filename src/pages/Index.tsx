@@ -3,8 +3,6 @@ import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import NowPremiering from '@/components/NowPremiering';
 import CulturalLibrary from '@/components/CulturalLibrary';
-import HallOfFame from '@/components/HallOfFame';
-import AboutHillyWood from '@/components/AboutHillyWood';
 
 const Index = () => {
   useEffect(() => {
@@ -66,12 +64,6 @@ const Index = () => {
         
         {/* Cultural Library - Film Collection */}
         <CulturalLibrary />
-        
-        {/* Hall of Fame - Cultural Legends */}
-        <HallOfFame />
-        
-        {/* About HillyWood Movement */}
-        <AboutHillyWood />
       </main>
 
       {/* Footer */}

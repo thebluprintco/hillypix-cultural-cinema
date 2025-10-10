@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Search, User, Ticket, Film, Award, Home, Tv, Music, PartyPopper, BookOpen } from 'lucide-react';
+import { Search, User, Ticket, Film, Award, Home, Tv, Music, PartyPopper, BookOpen, Info } from 'lucide-react';
 import AuthDialog from './AuthDialog';
 import UserProfileDialog from './UserProfileDialog';
 
@@ -85,6 +85,12 @@ const Header = () => {
               <Link to="/hillywood-fiesta">
                 <PartyPopper className="w-4 h-4 mr-2" />
                 Hillywood Fiesta
+              </Link>
+            </Button>
+            <Button variant="ghost" asChild className={`text-foreground hover:text-golden theatre-transition ${location.pathname === '/about' ? 'text-golden' : ''}`}>
+              <Link to="/about">
+                <Info className="w-4 h-4 mr-2" />
+                About
               </Link>
             </Button>
           </nav>
