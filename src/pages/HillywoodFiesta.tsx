@@ -24,7 +24,7 @@ const HillywoodFiesta = () => {
           </div>
 
           <div className="relative container mx-auto px-6 h-full flex flex-col justify-center items-center text-center">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bebas mb-8">
               <span className="bg-gradient-to-r from-golden via-primary-light to-golden bg-clip-text text-transparent">
                 Hillywood Red Carpet Event
               </span>
@@ -44,10 +44,10 @@ const HillywoodFiesta = () => {
                 />
               </div>
               <div className="flex flex-col justify-center">
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-foreground">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-anton mb-6 text-foreground">
                   Hillywood Fiesta
                 </h2>
-                <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-merriweather">
                   Hillywood Fiesta is a Hillywood annual red-carpet event to ignite the perennially inherent wealth of talents amongst the people of North East India in the industry of Arts, Film, Fashion and Music. The Hillywood Fiesta gala indulges in ecstasy with voices echoing from the hills and mountains of North-East India to blend with the richly blessed exotic colours of North East India Culture and Tradition.
                 </p>
               </div>
@@ -58,14 +58,14 @@ const HillywoodFiesta = () => {
         {/* Hillywood Fiesta Awards */}
         <section className="py-20 px-6">
           <div className="container mx-auto max-w-6xl">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 text-center text-foreground">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-anton mb-12 text-center text-foreground">
               Hillywood Fiesta Awards
             </h2>
 
             <div className="grid md:grid-cols-2 gap-12 items-stretch">
               <div className="flex flex-col">
                 <div className="bg-card-accent border border-golden/20 rounded-lg p-6 md:p-8 h-full">
-                  <h3 className="text-xl md:text-2xl font-bold text-golden mb-6">TITLES</h3>
+                  <h3 className="text-xl md:text-2xl font-spartan font-bold text-golden mb-6">TITLES</h3>
                   
                   <div className="space-y-6">
                     <div>
@@ -110,8 +110,8 @@ const HillywoodFiesta = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent rounded-lg flex items-end justify-center pb-8">
                     <div className="text-center">
                       <Award className="w-12 h-12 md:w-16 md:h-16 text-golden mx-auto mb-4" />
-                      <h3 className="text-2xl md:text-3xl font-bold text-golden">HILLYWOOD</h3>
-                      <p className="text-lg md:text-xl text-foreground">FIESTA AWARDS</p>
+                      <h3 className="text-2xl md:text-3xl font-bebas text-golden">HILLYWOOD</h3>
+                      <p className="text-lg md:text-xl text-foreground font-spartan">FIESTA AWARDS</p>
                     </div>
                   </div>
                 </div>
@@ -123,10 +123,10 @@ const HillywoodFiesta = () => {
         {/* CTA Section */}
         <section className="py-20 px-6 bg-gradient-to-r from-primary via-primary-light to-golden">
           <div className="container mx-auto text-center max-w-4xl">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-primary-foreground">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-anton mb-6 text-primary-foreground">
               Be Part of the Red Carpet Experience
             </h2>
-            <p className="text-lg md:text-xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto font-merriweather">
               Join us at the annual Hillywood Fiesta red carpet event celebrating the talents of North East India in Arts, Film, Fashion and Music.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

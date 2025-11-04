@@ -14,14 +14,14 @@ const HallOfFamePage = () => {
             <Badge className="mb-4 bg-golden/20 text-golden px-4 py-2">
               🏆 HALL OF FAME
             </Badge>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            <h1 className="text-4xl md:text-6xl font-bebas mb-6">
               <span className="bg-gradient-to-r from-primary-light to-golden bg-clip-text text-transparent">
                 Honoring Our
               </span>
               <br />
               Cinema Legends
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-merriweather">
               Celebrating the visionary filmmakers, talented actors, and groundbreaking films 
               that have shaped and continue to define the HillyWood movement.
             </p>

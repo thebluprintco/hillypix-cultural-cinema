@@ -131,7 +131,7 @@ const HallOfFame = () => {
                   <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${category.color === 'golden' ? 'from-golden/30 to-golden/10' : 'from-primary/30 to-primary/10'} flex items-center justify-center backdrop-blur-sm`}>
                     <category.icon className={`w-7 h-7 ${category.color === 'golden' ? 'text-golden' : 'text-primary'}`} />
                   </div>
-                  <h3 className="text-3xl font-bold bg-gradient-to-r from-golden to-primary bg-clip-text text-transparent">
+                  <h3 className="text-3xl font-anton bg-gradient-to-r from-golden to-primary bg-clip-text text-transparent">
                     {category.title}
                   </h3>
                 </div>
@@ -165,7 +165,7 @@ const HallOfFame = () => {
 
                       {/* Name and State */}
                       <div className="text-center mb-4">
-                        <h4 className="text-2xl font-bold text-foreground mb-2 group-hover:text-golden theatre-transition">
+                        <h4 className="text-2xl font-spartan font-bold text-foreground mb-2 group-hover:text-golden theatre-transition">
                           {recipient.name}
                         </h4>
                         <Badge className="bg-primary/20 text-primary border border-primary/30 mb-3">
@@ -175,8 +175,8 @@ const HallOfFame = () => {
 
                       {/* Achievement & Quote */}
                       <div className="text-center mb-4">
-                        <p className="text-sm text-golden font-semibold mb-3">{recipient.achievement}</p>
-                        <p className="text-xs italic text-muted-foreground border-l-2 border-golden/30 pl-3 mb-3">
+                        <p className="text-sm text-golden font-semibold mb-3 font-inter">{recipient.achievement}</p>
+                        <p className="text-xs italic text-muted-foreground border-l-2 border-golden/30 pl-3 mb-3 font-playfair">
                           "{recipient.quote}"
                         </p>
                       </div>
@@ -212,12 +212,12 @@ const HallOfFame = () => {
             <Badge className="mb-4 bg-primary/20 text-primary px-4 py-2">
               📅 TIMELINE
             </Badge>
-            <h3 className="text-4xl font-bold mb-4">
+            <h3 className="text-4xl font-anton mb-4">
               <span className="bg-gradient-to-r from-primary to-golden bg-clip-text text-transparent">
                 HillyWood Milestones
               </span>
             </h3>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-muted-foreground max-w-2xl mx-auto font-merriweather">
               Journey through the pivotal moments that shaped Northeast India's cinematic heritage
             </p>
           </div>
@@ -253,11 +253,11 @@ const HallOfFame = () => {
                           </Badge>}
                       </div>
                       
-                      <h4 className="text-2xl font-bold text-foreground mb-3 group-hover:text-golden theatre-transition">
+                      <h4 className="text-2xl font-spartan font-bold text-foreground mb-3 group-hover:text-golden theatre-transition">
                         {milestone.title}
                       </h4>
                       
-                      <p className="text-muted-foreground leading-relaxed">
+                      <p className="text-muted-foreground leading-relaxed font-merriweather">
                         {milestone.description}
                       </p>
                     </CardContent>
@@ -280,13 +280,13 @@ const HallOfFame = () => {
               </div>
             </div>
             
-            <h3 className="text-3xl md:text-4xl font-bold mb-4">
+            <h3 className="text-3xl md:text-4xl font-anton mb-4">
               <span className="bg-gradient-to-r from-golden to-primary bg-clip-text text-transparent">
                 Nominate Cultural Heroes
               </span>
             </h3>
             
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-lg text-muted-foreground mb-8 leading-relaxed font-merriweather">
               Know someone who deserves recognition for their contribution to Northeast Indian cinema? 
               Help us celebrate and preserve their legacy for generations to come.
             </p>

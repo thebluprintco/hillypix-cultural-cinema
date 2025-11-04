@@ -42,10 +42,10 @@ const Header = () => {
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full"></div>
             </div>
             <div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-golden to-primary-light bg-clip-text text-transparent">
+              <h1 className="text-2xl font-bebas bg-gradient-to-r from-golden to-primary-light bg-clip-text text-transparent">
                 HillyPix
               </h1>
-              <p className="text-xs text-muted-foreground tracking-wider">HILLYWOOD</p>
+              <p className="text-xs text-muted-foreground tracking-wider font-spartan">HILLYWOOD</p>
             </div>
           </Link>
 

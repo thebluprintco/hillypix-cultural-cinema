@@ -18,6 +18,25 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				// Headers - Bold & Impactful
+				'bebas': ['Bebas Neue', 'Arial', 'sans-serif'],
+				'anton': ['Anton', 'Arial', 'sans-serif'],
+				'spartan': ['League Spartan', 'Arial', 'sans-serif'],
+				
+				// Digital Body - Clean & Modern
+				'inter': ['Inter', 'system-ui', 'sans-serif'],
+				
+				// Narrative - Elegant & Traditional
+				'merriweather': ['Merriweather', 'Georgia', 'serif'],
+				'playfair': ['Playfair Display', 'Georgia', 'serif'],
+				'georgia': ['Georgia', 'serif'],
+				
+				// Semantic aliases for easier usage
+				'heading': ['Bebas Neue', 'Anton', 'League Spartan', 'Arial', 'sans-serif'],
+				'body': ['Inter', 'system-ui', 'sans-serif'],
+				'narrative': ['Merriweather', 'Playfair Display', 'Georgia', 'serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',

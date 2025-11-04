@@ -25,14 +25,14 @@ const AboutUs = () => {
             <Badge className="mb-4 bg-primary/20 text-primary px-4 py-2">
               🎬 ABOUT HILLYWOOD
             </Badge>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            <h1 className="text-4xl md:text-6xl font-bebas mb-6">
               <span className="bg-gradient-to-r from-primary-light to-golden bg-clip-text text-transparent">
                 More than
               </span>
               <br />
               Entertainment
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-merriweather">
               Discover the story behind HillyWood - a cultural movement dedicated to celebrating 
               and preserving Northeast India's cinematic heritage.
             </p>
