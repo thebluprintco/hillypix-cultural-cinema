@@ -22,10 +22,8 @@ const HillywoodFiesta = () => {
           </div>
 
           <div className="relative container mx-auto px-6 h-full flex flex-col justify-center items-center text-center">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bebas mb-8">
-              <span className="bg-gradient-to-r from-golden via-primary-light to-golden bg-clip-text text-transparent">
-                Hillywood Red Carpet Event
-              </span>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bebas mb-8 text-primary">
+              Hillywood Red Carpet Event
             </h1>
           </div>
         </section>
@@ -112,7 +110,7 @@ const HillywoodFiesta = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 px-6 bg-gradient-to-r from-primary via-primary-light to-golden">
+        <section className="py-20 px-6 bg-primary">
           <div className="container mx-auto text-center max-w-4xl">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-anton mb-6 text-primary-foreground">
               Be Part of the Red Carpet Experience
@@ -121,11 +119,11 @@ const HillywoodFiesta = () => {
               Join us at the annual Hillywood Fiesta red carpet event celebrating the talents of North East India in Arts, Film, Fashion and Music.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button size="lg" variant="outline" className="border-2 border-primary-foreground/80 text-primary-foreground hover:bg-primary-foreground hover:text-primary text-base md:text-lg px-6 md:px-8 py-5 md:py-6 bg-transparent" onClick={() => setRegistrationOpen(true)}>
+              <Button size="lg" variant="outline" className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 text-base md:text-lg px-6 md:px-8 py-5 md:py-6 bg-transparent" onClick={() => setRegistrationOpen(true)}>
                 <Ticket className="w-5 h-5 mr-2" />
                 Register for Event
               </Button>
-              <Button size="lg" variant="outline" className="border-2 border-primary-foreground/80 text-primary-foreground hover:bg-primary-foreground hover:text-primary text-base md:text-lg px-6 md:px-8 py-5 md:py-6 bg-transparent">
+              <Button size="lg" variant="outline" className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 text-base md:text-lg px-6 md:px-8 py-5 md:py-6 bg-transparent">
                 Learn More
               </Button>
             </div>
