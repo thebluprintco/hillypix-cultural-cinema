@@ -6,55 +6,55 @@
 
 @layer base {
   :root {
-    /* Core Theatre Colors */
-    --background: 0 0% 2%;
-    --foreground: 0 0% 98%;
+    /* Core HillyPix Colors - Dark Theme */
+    --background: 230 40% 5%;      /* Very Dark Navy/Black */
+    --foreground: 0 0% 98%;        /* Pure White Text */
 
-    /* Theatre Purple Palette */
-    --primary: 262 65% 25%;        /* Deep Royal Purple */
-    --primary-light: 262 55% 45%;  /* Lighter Purple */
-    --primary-glow: 262 80% 60%;   /* Purple Glow */
-    --primary-foreground: 0 0% 98%;
+    /* Vibrant Purple Palette */
+    --primary: 260 80% 60%;        /* Vibrant Purple */
+    --primary-light: 260 70% 70%;  /* Lighter Purple */
+    --primary-glow: 260 85% 65%;   /* Purple Glow */
+    --primary-foreground: 0 0% 100%;
 
     /* Golden Accent */
-    --golden: 45 90% 55%;          /* Rich Golden Yellow */
-    --golden-light: 45 85% 70%;    /* Light Golden */
-    --golden-dark: 42 95% 40%;     /* Deep Golden */
+    --golden: 45 93% 47%;          /* Rich Golden Yellow */
+    --golden-light: 45 90% 65%;    /* Light Golden */
+    --golden-dark: 42 96% 40%;     /* Deep Golden */
 
-    /* Theatre Atmosphere */
-    --card: 0 0% 5%;
+    /* Dark Theme Cards */
+    --card: 230 35% 8%;            /* Dark Card Background */
     --card-foreground: 0 0% 95%;
-    --card-accent: 262 35% 12%;    /* Dark Purple Card */
+    --card-accent: 260 40% 15%;    /* Purple Tinted Card */
 
-    --secondary: 0 0% 10%;
+    --secondary: 230 30% 12%;      /* Dark Gray Secondary */
     --secondary-foreground: 0 0% 90%;
 
-    --muted: 0 0% 12%;
+    --muted: 230 25% 15%;          /* Muted Dark Gray */
     --muted-foreground: 0 0% 65%;
 
-    --accent: 262 35% 15%;
+    --accent: 260 50% 20%;         /* Purple Accent */
     --accent-foreground: 0 0% 95%;
 
     /* Interactive Elements */
     --destructive: 0 75% 55%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 15%;
-    --ring: 262 65% 45%;
+    --border: 230 30% 18%;         /* Subtle Dark Border */
+    --input: 230 30% 12%;          /* Dark Input Background */
+    --ring: 260 80% 60%;           /* Purple Focus Ring */
 
     --radius: 0.75rem;
 
-    /* Cultural Gradients */
-    --gradient-theatre: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-light)) 50%, hsl(var(--golden-dark)) 100%);
+    /* HillyPix Gradients */
+    --gradient-theatre: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-light)) 50%, hsl(var(--golden)) 100%);
     --gradient-golden: linear-gradient(90deg, hsl(var(--golden-dark)) 0%, hsl(var(--golden)) 50%, hsl(var(--golden-light)) 100%);
-    --gradient-curtain: linear-gradient(180deg, hsl(262 35% 8%) 0%, hsl(262 45% 15%) 50%, hsl(262 35% 8%) 100%);
+    --gradient-curtain: linear-gradient(180deg, hsl(230 40% 5%) 0%, hsl(260 50% 12%) 50%, hsl(230 40% 5%) 100%);
     --gradient-spotlight: radial-gradient(circle at center, hsl(var(--golden)) 0%, transparent 70%);
 
-    /* Theatre Shadows & Glows */
-    --shadow-theatre: 0 25px 50px -12px hsl(var(--primary) / 0.4);
-    --shadow-golden: 0 0 40px hsl(var(--golden) / 0.3);
-    --shadow-premiere: 0 0 60px hsl(var(--primary-glow) / 0.5);
+    /* Purple & Golden Glows */
+    --shadow-theatre: 0 25px 50px -12px hsl(var(--primary) / 0.5);
+    --shadow-golden: 0 0 40px hsl(var(--golden) / 0.4);
+    --shadow-premiere: 0 0 60px hsl(var(--primary-glow) / 0.6);
 
     /* Animation Timings */
     --transition-theatre: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
