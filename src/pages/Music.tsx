@@ -2,315 +2,304 @@ import { useState } from 'react';
 import Header from '@/components/Header';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Play, Plus, Star, ChevronLeft, ChevronRight, Music2 } from 'lucide-react';
-import { Card } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Play, TrendingUp, Sparkles, MapPin, Eye, Heart, Share2 } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
+import moviePoster1 from '@/assets/movie-poster-1.jpg';
+import moviePoster2 from '@/assets/movie-poster-2.jpg';
+import moviePoster3 from '@/assets/movie-poster-3.jpg';
+import moviePoster4 from '@/assets/movie-poster-4.jpg';
+import moviePoster5 from '@/assets/movie-poster-5.jpg';
+import moviePoster6 from '@/assets/movie-poster-6.jpg';
 
-// Mock data for music
-const featuredMusic = [
-  {
-    id: 1,
-    title: "Kiman Bhi Bhal",
-    artist: "Various Artists",
-    year: "2022",
-    genre: "Classical",
-    language: "Nagamese",
-    rating: 4.7,
-    poster: "/src/assets/movie-poster-1.jpg",
-    backdrop: "/src/assets/theatre-hero.jpg"
-  },
-  {
-    id: 2,
-    title: "Chamdan La Tho",
-    artist: "Gospel Choir",
-    year: "2024",
-    genre: "Gospel",
-    language: "Rongmei",
-    rating: 4.9,
-    poster: "/src/assets/movie-poster-2.jpg",
-    backdrop: "/src/assets/theatre-hero.jpg"
-  },
-  {
-    id: 3,
-    title: "Hills Echo",
-    artist: "Northeast Ensemble",
-    year: "2023",
-    genre: "Folk",
-    language: "Khasi",
-    rating: 4.8,
-    poster: "/src/assets/movie-poster-3.jpg",
-    backdrop: "/src/assets/theatre-hero.jpg"
-  }
+const musicVideos = [
+  // Trending (Free - Ad Supported)
+  { id: 1, title: "Kiman Bhi Bhal", artist: "Traditional Ensemble", state: "Nagaland", genre: "Classical", poster: moviePoster1, views: "125K", likes: "8.2K", isFree: true, price: 0, trending: true, new: false },
+  { id: 2, title: "Hills Echo", artist: "Northeast Voices", state: "Meghalaya", genre: "Folk", poster: moviePoster2, views: "98K", likes: "6.5K", isFree: true, price: 0, trending: true, new: false },
+  { id: 3, title: "Chamdan La Tho", artist: "Gospel Choir", state: "Manipur", genre: "Gospel", poster: moviePoster3, views: "156K", likes: "12K", isFree: true, price: 0, trending: true, new: false },
+  
+  // New Releases (Mix of Free and Paid)
+  { id: 4, title: "Better Man", artist: "Jazz Fusion", state: "Assam", genre: "Jazz", poster: moviePoster4, views: "45K", likes: "3.8K", isFree: false, price: 29, trending: false, new: true },
+  { id: 5, title: "Tuna", artist: "Pop Stars", state: "Mizoram", genre: "Pop", poster: moviePoster5, views: "78K", likes: "5.2K", isFree: true, price: 0, trending: false, new: true },
+  { id: 6, title: "Mountain Melodies", artist: "Folk Ensemble", state: "Arunachal Pradesh", genre: "Traditional", poster: moviePoster6, views: "34K", likes: "2.9K", isFree: false, price: 39, trending: false, new: true },
+  
+  // Assam
+  { id: 7, title: "Bihu Beats", artist: "Assamese Band", state: "Assam", genre: "Folk", poster: moviePoster1, views: "89K", likes: "7.1K", isFree: true, price: 0, trending: false, new: false },
+  { id: 8, title: "Tea Garden Songs", artist: "Rural Artists", state: "Assam", genre: "Traditional", poster: moviePoster2, views: "52K", likes: "4.3K", isFree: false, price: 49, trending: false, new: true },
+  
+  // Manipur
+  { id: 9, title: "Lai Haraoba", artist: "Manipuri Dancers", state: "Manipur", genre: "Classical", poster: moviePoster3, views: "67K", likes: "5.8K", isFree: true, price: 0, trending: false, new: false },
+  { id: 10, title: "Valley Dreams", artist: "Modern Beats", state: "Manipur", genre: "Pop", poster: moviePoster4, views: "93K", likes: "8.4K", isFree: false, price: 39, trending: true, new: true },
+  
+  // Nagaland  
+  { id: 11, title: "Hornbill Rhythms", artist: "Naga Warriors", state: "Nagaland", genre: "Traditional", poster: moviePoster5, views: "71K", likes: "6.2K", isFree: true, price: 0, trending: false, new: false },
+  { id: 12, title: "Tribal Echoes", artist: "Contemporary Fusion", state: "Nagaland", genre: "Fusion", poster: moviePoster6, views: "44K", likes: "3.5K", isFree: false, price: 29, trending: false, new: true },
+  
+  // Meghalaya
+  { id: 13, title: "Living Root", artist: "Khasi Voices", state: "Meghalaya", genre: "Folk", poster: moviePoster1, views: "58K", likes: "4.9K", isFree: true, price: 0, trending: false, new: false },
+  
+  // Mizoram
+  { id: 14, title: "Bamboo Whispers", artist: "Mizo Artists", state: "Mizoram", genre: "Traditional", poster: moviePoster2, views: "39K", likes: "3.2K", isFree: true, price: 0, trending: false, new: false },
+  
+  // Tripura
+  { id: 15, title: "Royal Heritage", artist: "Tripuri Ensemble", state: "Tripura", genre: "Classical", poster: moviePoster3, views: "42K", likes: "3.6K", isFree: false, price: 49, trending: false, new: true },
+  
+  // Sikkim
+  { id: 16, title: "Himalayan Hymns", artist: "Mountain Voices", state: "Sikkim", genre: "Folk", poster: moviePoster4, views: "31K", likes: "2.7K", isFree: true, price: 0, trending: false, new: false },
 ];
 
-const recentlyAdded = [
-  {
-    id: 1,
-    title: "Kiman Bhi Bhal",
-    artist: "Various Artists",
-    genre: "Classical",
-    rating: 4.7,
-    poster: "/src/assets/movie-poster-1.jpg",
-    newRelease: true
-  },
-  {
-    id: 2,
-    title: "Chamdan La Tho",
-    artist: "Gospel Choir",
-    genre: "Gospel",
-    rating: 4.9,
-    poster: "/src/assets/movie-poster-2.jpg",
-    newRelease: true
-  },
-  {
-    id: 3,
-    title: "Better Man",
-    artist: "Jazz Quartet",
-    genre: "Jazz",
-    rating: 4.5,
-    poster: "/src/assets/movie-poster-3.jpg",
-    newRelease: false
-  },
-  {
-    id: 4,
-    title: "Tuna",
-    artist: "Pop Artist",
-    genre: "Pop",
-    rating: 4.6,
-    poster: "/src/assets/movie-poster-4.jpg",
-    newRelease: true
-  },
-  {
-    id: 5,
-    title: "Mountain Songs",
-    artist: "Folk Ensemble",
-    genre: "Folk",
-    rating: 4.8,
-    poster: "/src/assets/movie-poster-5.jpg",
-    newRelease: false
-  }
+const states = [
+  { id: 'all', name: 'All States' },
+  { id: 'Assam', name: 'Assam' },
+  { id: 'Manipur', name: 'Manipur' },
+  { id: 'Nagaland', name: 'Nagaland' },
+  { id: 'Meghalaya', name: 'Meghalaya' },
+  { id: 'Mizoram', name: 'Mizoram' },
+  { id: 'Tripura', name: 'Tripura' },
+  { id: 'Arunachal Pradesh', name: 'Arunachal Pradesh' },
+  { id: 'Sikkim', name: 'Sikkim' },
 ];
 
 const Music = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const featured = featuredMusic[currentSlide];
+  const [selectedTab, setSelectedTab] = useState('trending');
+  const [selectedState, setSelectedState] = useState('all');
+  const { toast } = useToast();
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % featuredMusic.length);
+  const handlePlayVideo = (video: any) => {
+    if (video.isFree) {
+      toast({
+        title: "Playing Music Video",
+        description: `Enjoy ${video.title} by ${video.artist} (Ad-supported)`,
+      });
+    } else {
+      toast({
+        title: "Premium Content",
+        description: `Buy ${video.title} for ₹${video.price} to watch without ads.`,
+      });
+    }
   };
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + featuredMusic.length) % featuredMusic.length);
+  const handleLike = (video: any) => {
+    toast({
+      title: "Liked!",
+      description: `You liked ${video.title}`,
+    });
   };
+
+  const handleShare = async (video: any) => {
+    const shareData = {
+      title: video.title,
+      text: `Check out ${video.title} by ${video.artist}!`,
+      url: window.location.href,
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {}
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      toast({
+        title: "Link Copied!",
+        description: "Share this music video with friends.",
+      });
+    }
+  };
+
+  const getFilteredVideos = () => {
+    let filtered = musicVideos;
+
+    // Filter by tab
+    if (selectedTab === 'trending') {
+      filtered = filtered.filter(v => v.trending);
+    } else if (selectedTab === 'new') {
+      filtered = filtered.filter(v => v.new);
+    } else if (selectedTab === 'state' && selectedState !== 'all') {
+      filtered = filtered.filter(v => v.state === selectedState);
+    }
+
+    return filtered;
+  };
+
+  const filteredVideos = getFilteredVideos();
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="pt-16">
-        {/* Hero Carousel */}
-        <section className="relative h-[70vh] overflow-hidden">
-          <div 
-            className="absolute inset-0 bg-cover bg-center transition-all duration-500"
-            style={{
-              backgroundImage: `url(${featured.backdrop})`,
-              backgroundPosition: 'center'
-            }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background/80" />
-          </div>
-
-          <div className="relative container mx-auto px-6 h-full flex items-center">
-            <div className="max-w-2xl">
-              <div className="flex items-center gap-2 mb-4">
-                <Music2 className="w-8 h-8 text-golden" />
-                <span className="text-golden text-sm font-semibold tracking-wider">MUSIC</span>
-              </div>
-              <h1 className="text-5xl md:text-7xl font-bold mb-4 text-foreground">
-                {featured.title}
-              </h1>
-              <p className="text-xl text-muted-foreground mb-6">By {featured.artist}</p>
-              <div className="flex items-center gap-4 mb-6">
-                <span className="text-muted-foreground">{featured.year}</span>
-                <span className="text-muted-foreground">•</span>
-                <span className="text-foreground">{featured.genre}</span>
-                <span className="text-muted-foreground">•</span>
-                <span className="text-foreground">{featured.language}</span>
-                <span className="text-muted-foreground">•</span>
-                <div className="flex items-center gap-1">
-                  <Star className="w-4 h-4 fill-golden text-golden" />
-                  <span className="text-foreground font-semibold">{featured.rating}</span>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <Button size="lg" className="bg-primary hover:bg-primary-light">
-                  <Play className="w-5 h-5 mr-2" />
-                  PLAY NOW
-                </Button>
-                <Button size="lg" variant="outline" className="border-foreground/30 hover:bg-foreground/10">
-                  <Plus className="w-5 h-5 mr-2" />
-                  ADD TO PLAYLIST
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          {/* Navigation Arrows */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background/50 backdrop-blur-sm flex items-center justify-center hover:bg-background/70 transition-colors"
-          >
-            <ChevronLeft className="w-6 h-6 text-foreground" />
-          </button>
-          <button
-            onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background/50 backdrop-blur-sm flex items-center justify-center hover:bg-background/70 transition-colors"
-          >
-            <ChevronRight className="w-6 h-6 text-foreground" />
-          </button>
-
-          {/* Slide Indicators */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
-            {featuredMusic.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  index === currentSlide ? 'bg-golden w-8' : 'bg-foreground/30'
-                }`}
-              />
-            ))}
+      <main className="pt-24">
+        {/* Page Header */}
+        <section className="py-16 px-6 text-center bg-gradient-to-b from-card-accent/20 to-background">
+          <div className="container mx-auto">
+            <Badge className="mb-4 bg-golden/20 text-golden px-4 py-2">
+              🎵 MUSIC VIDEOS
+            </Badge>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-primary-light to-golden bg-clip-text text-transparent">
+                Northeast
+              </span>
+              <br />
+              Music Showcase
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Discover and support Northeast artists. Watch free music videos with ads, 
+              or buy exclusive premium content for ₹29-₹49.
+            </p>
           </div>
         </section>
 
-        {/* Recently Added */}
+        {/* Tabs Navigation */}
+        <section className="py-8 px-6 sticky top-16 bg-background/95 backdrop-blur-md z-40 border-b border-border/20">
+          <div className="container mx-auto">
+            <Tabs value={selectedTab} onValueChange={setSelectedTab}>
+              <TabsList className="grid w-full max-w-lg mx-auto grid-cols-3 bg-card-accent/50">
+                <TabsTrigger value="trending" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                  <TrendingUp className="w-4 h-4 mr-2" />
+                  Trending
+                </TabsTrigger>
+                <TabsTrigger value="new" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  New Releases
+                </TabsTrigger>
+                <TabsTrigger value="state" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                  <MapPin className="w-4 h-4 mr-2" />
+                  By State
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </div>
+        </section>
+
+        {/* State Filter (shown only in By State tab) */}
+        {selectedTab === 'state' && (
+          <section className="py-6 px-6 bg-card-accent/10">
+            <div className="container mx-auto">
+              <div className="flex flex-wrap gap-2 justify-center">
+                {states.map((state) => (
+                  <Button
+                    key={state.id}
+                    variant={selectedState === state.id ? "default" : "outline"}
+                    onClick={() => setSelectedState(state.id)}
+                    className={selectedState === state.id ? 'bg-golden text-black hover:bg-golden/90' : 'border-border/30'}
+                  >
+                    {state.name}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Music Videos Grid */}
         <section className="py-16 px-6">
           <div className="container mx-auto">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-3xl font-bold text-foreground">Recently Added</h2>
-              <div className="flex gap-2">
-                <button className="w-10 h-10 rounded-full bg-card-accent flex items-center justify-center hover:bg-accent transition-colors">
-                  <ChevronLeft className="w-5 h-5 text-foreground" />
-                </button>
-                <button className="w-10 h-10 rounded-full bg-card-accent flex items-center justify-center hover:bg-accent transition-colors">
-                  <ChevronRight className="w-5 h-5 text-foreground" />
-                </button>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-              {recentlyAdded.map((music) => (
-                <Card
-                  key={music.id}
-                  className="group relative overflow-hidden bg-card-accent border-none hover:scale-105 transition-transform duration-300 cursor-pointer"
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {filteredVideos.map((video) => (
+                <Card 
+                  key={video.id}
+                  className="group bg-card-accent/30 border-border/20 hover:border-golden/30 theatre-transition overflow-hidden"
                 >
-                  {music.newRelease && (
-                    <Badge className="absolute top-2 left-2 z-10 bg-primary text-primary-foreground">
-                      New Release
-                    </Badge>
-                  )}
-                  <div className="aspect-square overflow-hidden">
-                    <img
-                      src={music.poster}
-                      alt={music.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <Play className="w-12 h-12 text-golden" />
+                  <CardContent className="p-0">
+                    {/* Video Thumbnail */}
+                    <div className="relative aspect-video overflow-hidden">
+                      <img 
+                        src={video.poster} 
+                        alt={video.title}
+                        className="w-full h-full object-cover group-hover:scale-105 theatre-transition"
+                      />
+                      
+                      {/* Badges */}
+                      <div className="absolute top-3 left-3 right-3 flex justify-between items-start">
+                        <div className="flex gap-2">
+                          {video.isFree && (
+                            <Badge className="bg-green-600 text-white text-xs">
+                              FREE
+                            </Badge>
+                          )}
+                          {!video.isFree && (
+                            <Badge className="bg-golden text-black text-xs font-semibold">
+                              ₹{video.price}
+                            </Badge>
+                          )}
+                          {video.new && (
+                            <Badge className="bg-primary text-primary-foreground text-xs">
+                              NEW
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Play Overlay */}
+                      <div 
+                        className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 theatre-transition flex items-center justify-center cursor-pointer"
+                        onClick={() => handlePlayVideo(video)}
+                      >
+                        <div className="w-16 h-16 rounded-full bg-golden flex items-center justify-center">
+                          <Play className="w-8 h-8 text-black fill-black ml-1" />
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-semibold text-foreground mb-1 line-clamp-1">{music.title}</h3>
-                    <p className="text-sm text-muted-foreground mb-1">{music.artist}</p>
-                    <p className="text-xs text-muted-foreground">Genre: {music.genre}</p>
-                  </div>
+
+                    {/* Video Info */}
+                    <div className="p-4">
+                      <h3 className="font-bold text-foreground mb-1 line-clamp-1">{video.title}</h3>
+                      <p className="text-sm text-muted-foreground mb-2">{video.artist}</p>
+                      
+                      <div className="flex items-center justify-between text-xs text-muted-foreground mb-3">
+                        <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-1">
+                            <Eye className="w-3 h-3" />
+                            {video.views}
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Heart className="w-3 h-3" />
+                            {video.likes}
+                          </div>
+                        </div>
+                        <Badge variant="secondary" className="text-xs">
+                          {video.state}
+                        </Badge>
+                      </div>
+
+                      {/* Actions */}
+                      <div className="flex gap-2">
+                        <Button 
+                          size="sm" 
+                          className="flex-1 bg-golden text-black hover:bg-golden/90"
+                          onClick={() => handlePlayVideo(video)}
+                        >
+                          <Play className="w-3 h-3 mr-1" />
+                          {video.isFree ? 'Watch' : 'Buy'}
+                        </Button>
+                        <Button 
+                          size="sm" 
+                          variant="outline"
+                          className="border-golden/30"
+                          onClick={() => handleLike(video)}
+                        >
+                          <Heart className="w-3 h-3" />
+                        </Button>
+                        <Button 
+                          size="sm" 
+                          variant="outline"
+                          className="border-golden/30"
+                          onClick={() => handleShare(video)}
+                        >
+                          <Share2 className="w-3 h-3" />
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
                 </Card>
               ))}
             </div>
-          </div>
-        </section>
 
-        {/* Classical */}
-        <section className="py-16 px-6 bg-card-accent/20">
-          <div className="container mx-auto">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-3xl font-bold text-foreground">Classical</h2>
-              <div className="flex gap-2">
-                <button className="w-10 h-10 rounded-full bg-card-accent flex items-center justify-center hover:bg-accent transition-colors">
-                  <ChevronLeft className="w-5 h-5 text-foreground" />
-                </button>
-                <button className="w-10 h-10 rounded-full bg-card-accent flex items-center justify-center hover:bg-accent transition-colors">
-                  <ChevronRight className="w-5 h-5 text-foreground" />
-                </button>
+            {filteredVideos.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground">No music videos found in this category.</p>
               </div>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-              {recentlyAdded.slice(0, 5).map((music) => (
-                <Card
-                  key={music.id}
-                  className="group relative overflow-hidden bg-card-accent border-none hover:scale-105 transition-transform duration-300 cursor-pointer"
-                >
-                  <div className="aspect-square overflow-hidden">
-                    <img
-                      src={music.poster}
-                      alt={music.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <Play className="w-12 h-12 text-golden" />
-                    </div>
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-semibold text-foreground mb-1 line-clamp-1">{music.title}</h3>
-                    <p className="text-sm text-muted-foreground mb-1">{music.artist}</p>
-                    <p className="text-xs text-muted-foreground">Genre: {music.genre}</p>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Gospel */}
-        <section className="py-16 px-6">
-          <div className="container mx-auto">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-3xl font-bold text-foreground">Gospel</h2>
-              <div className="flex gap-2">
-                <button className="w-10 h-10 rounded-full bg-card-accent flex items-center justify-center hover:bg-accent transition-colors">
-                  <ChevronLeft className="w-5 h-5 text-foreground" />
-                </button>
-                <button className="w-10 h-10 rounded-full bg-card-accent flex items-center justify-center hover:bg-accent transition-colors">
-                  <ChevronRight className="w-5 h-5 text-foreground" />
-                </button>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-              {recentlyAdded.slice(0, 5).map((music) => (
-                <Card
-                  key={music.id}
-                  className="group relative overflow-hidden bg-card-accent border-none hover:scale-105 transition-transform duration-300 cursor-pointer"
-                >
-                  <div className="aspect-square overflow-hidden">
-                    <img
-                      src={music.poster}
-                      alt={music.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <Play className="w-12 h-12 text-golden" />
-                    </div>
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-semibold text-foreground mb-1 line-clamp-1">{music.title}</h3>
-                    <p className="text-sm text-muted-foreground mb-1">{music.artist}</p>
-                    <p className="text-xs text-muted-foreground">Genre: {music.genre}</p>
-                  </div>
-                </Card>
-              ))}
-            </div>
+            )}
           </div>
         </section>
       </main>

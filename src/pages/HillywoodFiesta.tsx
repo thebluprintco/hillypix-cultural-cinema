@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Header from '@/components/Header';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Card } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Calendar, MapPin, Ticket, Award, Music2, Film, Users, Sparkles } from 'lucide-react';
 import theatreHero from '@/assets/theatre-hero.jpg';
 import EventRegistrationDialog from '@/components/EventRegistrationDialog';
@@ -122,6 +122,80 @@ const HillywoodFiesta = () => {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Award Winners Gallery */}
+        <section className="py-20 px-6 bg-gradient-to-b from-background to-card-accent/20">
+          <div className="container mx-auto max-w-6xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-anton mb-6 text-foreground">
+                Award Winners 2024
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Celebrating excellence in Northeast Indian cinema
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                { name: "Best Actor", winner: "Rajesh Kumar", film: "Ka Jainsen", image: theatreHero },
+                { name: "Best Actress", winner: "Priya Sharma", film: "Puanchei", image: theatreHero },
+                { name: "Best Director", winner: "David Meitei", film: "Raas Leela", image: theatreHero },
+                { name: "Best Music", winner: "Traditional Ensemble", film: "Kiman Bhi Bhal", image: theatreHero },
+                { name: "Best Cinematography", winner: "Arun Khasi", film: "Ka Jainsen", image: theatreHero },
+                { name: "Best Film", winner: "Ka Jainsen", film: "Meghalaya Cinema", image: theatreHero },
+              ].map((award, index) => (
+                <Card key={index} className="bg-card-accent border border-golden/20 overflow-hidden group hover:border-golden/50 transition-all">
+                  <CardContent className="p-0">
+                    <div className="relative h-64 overflow-hidden">
+                      <img 
+                        src={award.image} 
+                        alt={award.winner}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-4">
+                        <Badge className="bg-golden text-black mb-2">{award.name}</Badge>
+                        <h3 className="text-xl font-bold text-foreground">{award.winner}</h3>
+                        <p className="text-sm text-muted-foreground">{award.film}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Red Carpet Moments */}
+        <section className="py-20 px-6">
+          <div className="container mx-auto max-w-6xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-anton mb-6 text-foreground">
+                Red Carpet Highlights
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Fashion, glamour, and celebration
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-4 gap-4">
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+                <Card key={i} className="bg-card-accent border-golden/20 overflow-hidden group cursor-pointer">
+                  <CardContent className="p-0">
+                    <div className="relative aspect-[3/4] overflow-hidden">
+                      <img 
+                        src={theatreHero} 
+                        alt={`Red Carpet ${i}`}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
