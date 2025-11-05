@@ -6,24 +6,18 @@ import { Card } from '@/components/ui/card';
 import { Calendar, MapPin, Ticket, Award, Music2, Film, Users, Sparkles } from 'lucide-react';
 import theatreHero from '@/assets/theatre-hero.jpg';
 import EventRegistrationDialog from '@/components/EventRegistrationDialog';
-
 const HillywoodFiesta = () => {
   const [registrationOpen, setRegistrationOpen] = useState(false);
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Header />
       
       <main className="pt-16">
         {/* Hero Section */}
         <section className="relative h-[80vh] overflow-hidden">
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: `url(${theatreHero})`,
-              backgroundPosition: 'center'
-            }}
-          >
+          <div className="absolute inset-0 bg-cover bg-center" style={{
+          backgroundImage: `url(${theatreHero})`,
+          backgroundPosition: 'center'
+        }}>
             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/60" />
           </div>
 
@@ -41,11 +35,7 @@ const HillywoodFiesta = () => {
           <div className="container mx-auto max-w-6xl">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="w-full">
-                <img 
-                  src={theatreHero} 
-                  alt="Hillywood Fiesta" 
-                  className="rounded-lg shadow-2xl w-full h-auto object-cover"
-                />
+                <img src={theatreHero} alt="Hillywood Fiesta" className="rounded-lg shadow-2xl w-full h-auto object-cover" />
               </div>
               <div className="flex flex-col justify-center">
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-anton mb-6 text-foreground">
@@ -54,9 +44,7 @@ const HillywoodFiesta = () => {
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-merriweather mb-6">
                   Hillywood Fiesta is a Hillywood annual red-carpet event to ignite the perennially inherent wealth of talents amongst the people of North East India in the industry of Arts, Film, Fashion and Music. The Hillywood Fiesta gala indulges in ecstasy with voices echoing from the hills and mountains of North-East India to blend with the richly blessed exotic colours of North East India Culture and Tradition.
                 </p>
-                <p className="text-xl md:text-2xl font-semibold text-foreground italic font-merriweather">
-                  "This isn't just a festival, it is revolution in practice."
-                </p>
+                <p className="text-xl md:text-2xl font-semibold text-foreground italic font-merriweather">"This isn't just a festival, it is revolution in motion."</p>
               </div>
             </div>
           </div>
@@ -109,11 +97,7 @@ const HillywoodFiesta = () => {
 
               <div className="flex items-stretch">
                 <div className="relative w-full">
-                  <img 
-                    src={theatreHero} 
-                    alt="Hillywood Fiesta Awards" 
-                    className="rounded-lg shadow-2xl w-full h-full object-cover"
-                  />
+                  <img src={theatreHero} alt="Hillywood Fiesta Awards" className="rounded-lg shadow-2xl w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent rounded-lg flex items-end justify-center pb-8">
                     <div className="text-center">
                       <Award className="w-12 h-12 md:w-16 md:h-16 text-golden mx-auto mb-4" />
@@ -137,12 +121,7 @@ const HillywoodFiesta = () => {
               Join us at the annual Hillywood Fiesta red carpet event celebrating the talents of North East India in Arts, Film, Fashion and Music.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-2 border-primary-foreground/80 text-primary-foreground hover:bg-primary-foreground hover:text-primary text-base md:text-lg px-6 md:px-8 py-5 md:py-6 bg-transparent"
-                onClick={() => setRegistrationOpen(true)}
-              >
+              <Button size="lg" variant="outline" className="border-2 border-primary-foreground/80 text-primary-foreground hover:bg-primary-foreground hover:text-primary text-base md:text-lg px-6 md:px-8 py-5 md:py-6 bg-transparent" onClick={() => setRegistrationOpen(true)}>
                 <Ticket className="w-5 h-5 mr-2" />
                 Register for Event
               </Button>
@@ -154,12 +133,7 @@ const HillywoodFiesta = () => {
         </section>
       </main>
 
-      <EventRegistrationDialog 
-        open={registrationOpen} 
-        onOpenChange={setRegistrationOpen} 
-      />
-    </div>
-  );
+      <EventRegistrationDialog open={registrationOpen} onOpenChange={setRegistrationOpen} />
+    </div>;
 };
-
 export default HillywoodFiesta;
