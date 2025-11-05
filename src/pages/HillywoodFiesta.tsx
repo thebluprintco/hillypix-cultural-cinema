@@ -40,6 +40,7 @@ const HillywoodFiesta = () => {
               isLive={isEventLive}
               eventDate="2025-12-15T18:00:00"
               viewerCount={isEventLive ? 1247 : 0}
+              onRegisterClick={() => setRegistrationOpen(true)}
             />
           </div>
         </section>
@@ -139,7 +140,15 @@ const HillywoodFiesta = () => {
                 <Ticket className="w-5 h-5 mr-2" />
                 Register for Event
               </Button>
-              <Button size="lg" variant="outline" className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 text-base md:text-lg px-6 md:px-8 py-5 md:py-6 bg-transparent">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 text-base md:text-lg px-6 md:px-8 py-5 md:py-6 bg-transparent"
+                onClick={() => {
+                  const aboutSection = document.querySelector('section.bg-card-accent\\/20');
+                  aboutSection?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
                 Learn More
               </Button>
             </div>

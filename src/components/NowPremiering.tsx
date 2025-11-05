@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Clock, Ticket, Star, Play, Calendar } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 import TicketPurchaseDialog from './TicketPurchaseDialog';
 import moviePoster1 from '@/assets/movie-poster-1.jpg';
 import moviePoster2 from '@/assets/movie-poster-2.jpg';
@@ -59,11 +61,25 @@ const premieres = [
 const NowPremiering = () => {
   const [selectedMovie, setSelectedMovie] = useState<any>(null);
   const [isTicketDialogOpen, setIsTicketDialogOpen] = useState(false);
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   const handleBuyTicket = (movie: any) => {
     setSelectedMovie(movie);
     setIsTicketDialogOpen(true);
   };
+
+  const handleWatchTrailer = (movie: any) => {
+    toast({
+      title: "Trailer Coming Soon",
+      description: `The trailer for ${movie.title} will be available shortly.`,
+    });
+  };
+
+  const handleViewAllPremieres = () => {
+    navigate('/premieres');
+  };
+
   return (
     <section className="py-20 px-6">
       <div className="container mx-auto">
@@ -125,7 +141,11 @@ const NowPremiering = () => {
 
                   {/* Play Button Overlay */}
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 theatre-transition flex items-center justify-center">
-                    <Button size="lg" className="bg-golden hover:bg-golden-dark text-black">
+                    <Button 
+                      size="lg" 
+                      className="bg-golden hover:bg-golden-dark text-black"
+                      onClick={() => handleWatchTrailer(movie)}
+                    >
                       <Play className="w-5 h-5 mr-2" />
                       Watch Trailer
                     </Button>
@@ -178,6 +198,7 @@ const NowPremiering = () => {
             variant="outline" 
             size="lg" 
             className="border-golden/50 text-golden hover:bg-golden/10 px-8 py-3"
+            onClick={handleViewAllPremieres}
           >
             View All Premieres
           </Button>

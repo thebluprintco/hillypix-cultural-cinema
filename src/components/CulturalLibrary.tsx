@@ -316,7 +316,7 @@ const CulturalLibrary = () => {
   };
 
   return (
-    <section className="py-20 px-6 bg-gradient-to-b from-background to-card-accent/20">
+    <section className="py-20 px-6 bg-gradient-to-b from-background to-card-accent/20" data-section="cultural-library">
       <div className="container mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">

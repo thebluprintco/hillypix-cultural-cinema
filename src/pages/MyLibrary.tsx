@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -51,6 +52,7 @@ const MyLibrary = () => {
   const [selectedTab, setSelectedTab] = useState('owned');
   const { watchlist, removeFromWatchlist } = useWatchlist();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleRemoveFromWatchlist = (id: number, title: string) => {
     removeFromWatchlist(id);
@@ -58,6 +60,16 @@ const MyLibrary = () => {
       title: "Removed from Watchlist",
       description: `${title} has been removed from your watchlist.`,
     });
+  };
+
+  const handleBrowseLibrary = () => {
+    navigate('/');
+    setTimeout(() => {
+      const librarySection = document.querySelector('[data-section="cultural-library"]');
+      if (librarySection) {
+        librarySection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
   };
 
   return (
@@ -165,7 +177,12 @@ const MyLibrary = () => {
                 {watchlist.length === 0 ? (
                   <div className="text-center py-12">
                     <p className="text-muted-foreground">Your watchlist is empty. Start exploring our library to add films!</p>
-                    <Button className="mt-4 theatre-gradient text-white">Browse Library</Button>
+                    <Button 
+                      className="mt-4 theatre-gradient text-white"
+                      onClick={handleBrowseLibrary}
+                    >
+                      Browse Library
+                    </Button>
                   </div>
                 ) : (
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -227,7 +244,12 @@ const MyLibrary = () => {
               <TabsContent value="bundles" className="mt-8">
                 <div className="text-center py-12">
                   <p className="text-muted-foreground">No bundles purchased yet. Check out our cultural packs!</p>
-                  <Button className="mt-4 theatre-gradient text-white">View Bundles</Button>
+                  <Button 
+                    className="mt-4 theatre-gradient text-white"
+                    onClick={handleBrowseLibrary}
+                  >
+                    View Bundles
+                  </Button>
                 </div>
               </TabsContent>
             </Tabs>

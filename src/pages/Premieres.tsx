@@ -4,10 +4,41 @@ import NowPremiering from '@/components/NowPremiering';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, MapPin } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
+import { requestNotificationPermission, scheduleReminder } from '@/utils/notifications';
 import LearnMoreDialog from '@/components/LearnMoreDialog';
 
 const Premieres = () => {
   const [isLearnMoreDialogOpen, setIsLearnMoreDialogOpen] = useState(false);
+  const { toast } = useToast();
+
+  const handleSetReminder = async (premiereTitle: string, premiereDate: string) => {
+    const hasPermission = await requestNotificationPermission();
+    
+    if (!hasPermission) {
+      toast({
+        title: "Notification Permission Denied",
+        description: "Please enable notifications in your browser settings to receive reminders.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      scheduleReminder(premiereTitle, premiereDate);
+      toast({
+        title: "Reminder Set!",
+        description: `You'll receive a notification 1 hour before ${premiereTitle} premieres.`,
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to set reminder. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-card-accent/20">
       <Header />
@@ -45,13 +76,15 @@ const Premieres = () => {
                 {
                   title: "Legends of Arunachal",
                   date: "Dec 15, 2024",
+                  fullDate: "2024-12-15T19:00:00",
                   time: "7:00 PM IST",
                   state: "Arunachal Pradesh",
                   language: "Nyishi"
                 },
                 {
                   title: "Songs of Tripura",
-                  date: "Dec 22, 2024", 
+                  date: "Dec 22, 2024",
+                  fullDate: "2024-12-22T20:00:00",
                   time: "8:00 PM IST",
                   state: "Tripura",
                   language: "Kokborok"
@@ -59,6 +92,7 @@ const Premieres = () => {
                 {
                   title: "Bamboo Dreams",
                   date: "Dec 29, 2024",
+                  fullDate: "2024-12-29T19:30:00",
                   time: "7:30 PM IST", 
                   state: "Mizoram",
                   language: "Mizo"
@@ -82,7 +116,11 @@ const Premieres = () => {
                   </div>
                   <Badge variant="secondary" className="mb-4">{premiere.language}</Badge>
                   <div className="flex gap-2">
-                    <Button size="sm" className="theatre-gradient text-white">
+                    <Button 
+                      size="sm" 
+                      className="theatre-gradient text-white"
+                      onClick={() => handleSetReminder(premiere.title, premiere.fullDate)}
+                    >
                       Set Reminder
                     </Button>
                     <Button 

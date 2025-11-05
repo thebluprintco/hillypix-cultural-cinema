@@ -2,22 +2,81 @@ import { useState, useEffect } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Play, Radio, Clock, Users } from 'lucide-react';
+import { Play, Radio, Clock, Users, Share2 } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
+import { requestNotificationPermission, scheduleReminder } from '@/utils/notifications';
 
 interface LiveStreamPlayerProps {
   streamUrl?: string;
   isLive?: boolean;
   eventDate?: string;
   viewerCount?: number;
+  onRegisterClick?: () => void;
 }
 
 const LiveStreamPlayer = ({ 
   streamUrl = '', 
   isLive = false, 
   eventDate = '2025-12-15T18:00:00',
-  viewerCount = 0 
+  viewerCount = 0,
+  onRegisterClick
 }: LiveStreamPlayerProps) => {
   const [timeUntilEvent, setTimeUntilEvent] = useState('');
+  const { toast } = useToast();
+
+  const handleSetReminder = async () => {
+    const hasPermission = await requestNotificationPermission();
+    
+    if (!hasPermission) {
+      toast({
+        title: "Notification Permission Denied",
+        description: "Please enable notifications in your browser settings to receive reminders.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      scheduleReminder("Hillywood Red Carpet Event", eventDate);
+      toast({
+        title: "Reminder Set!",
+        description: "You'll receive a notification 1 hour before the event starts.",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to set reminder. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleShare = async () => {
+    const shareData = {
+      title: 'Hillywood Red Carpet Event',
+      text: 'Watch the prestigious celebration of North East India\'s finest talents!',
+      url: window.location.href,
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+        toast({
+          title: "Shared Successfully!",
+          description: "Thanks for spreading the word!",
+        });
+      } catch (err) {
+        // User cancelled or error occurred
+      }
+    } else {
+      // Fallback: Copy to clipboard
+      navigator.clipboard.writeText(window.location.href);
+      toast({
+        title: "Link Copied!",
+        description: "Share this link with your friends and family.",
+      });
+    }
+  };
 
   useEffect(() => {
     if (!isLive) {
@@ -114,10 +173,15 @@ const LiveStreamPlayer = ({
                   <Button 
                     variant="outline" 
                     className="border-golden/50 text-golden hover:bg-golden/10"
+                    onClick={handleSetReminder}
                   >
+                    <Clock className="w-4 h-4 mr-2" />
                     Set Reminder
                   </Button>
-                  <Button className="bg-golden text-black hover:bg-golden/90">
+                  <Button 
+                    className="bg-golden text-black hover:bg-golden/90"
+                    onClick={onRegisterClick}
+                  >
                     Register for Event
                   </Button>
                 </div>
@@ -162,11 +226,14 @@ const LiveStreamPlayer = ({
               <p className="text-sm text-muted-foreground">Celebrating North East India's finest talent</p>
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm" className="border-golden/30">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="border-golden/30"
+                onClick={handleShare}
+              >
+                <Share2 className="w-4 h-4 mr-2" />
                 Share
-              </Button>
-              <Button variant="outline" size="sm" className="border-golden/30">
-                Full Screen
               </Button>
             </div>
           </div>
