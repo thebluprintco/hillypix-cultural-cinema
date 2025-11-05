@@ -3,7 +3,9 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Play, BookOpen, Filter, Star } from 'lucide-react';
+import { Play, BookOpen, Filter, Star, BookmarkPlus, BookmarkCheck } from 'lucide-react';
+import { useWatchlist } from '@/hooks/useWatchlist';
+import { useToast } from '@/hooks/use-toast';
 import TicketPurchaseDialog from './TicketPurchaseDialog';
 import moviePoster1 from '@/assets/movie-poster-1.jpg';
 import moviePoster2 from '@/assets/movie-poster-2.jpg';
@@ -254,13 +256,40 @@ const movies = [
 const CulturalLibrary = () => {
   const [selectedState, setSelectedState] = useState('all');
   const [selectedCategory, setSelectedCategory] = useState('traditional');
-  const [visibleMovies, setVisibleMovies] = useState(6); // Show first 6 movies initially
+  const [visibleMovies, setVisibleMovies] = useState(6);
   const [selectedMovie, setSelectedMovie] = useState<any>(null);
   const [isTicketDialogOpen, setIsTicketDialogOpen] = useState(false);
+  const { addToWatchlist, removeFromWatchlist, isInWatchlist } = useWatchlist();
+  const { toast } = useToast();
 
   const handleBuyTicket = (movie: any) => {
     setSelectedMovie(movie);
     setIsTicketDialogOpen(true);
+  };
+
+  const handleWatchlistToggle = (movie: any, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (isInWatchlist(movie.id)) {
+      removeFromWatchlist(movie.id);
+      toast({
+        title: "Removed from Watchlist",
+        description: `${movie.title} has been removed from your watchlist.`,
+      });
+    } else {
+      addToWatchlist({
+        id: movie.id,
+        title: movie.title,
+        poster: movie.poster,
+        rating: movie.rating,
+        duration: movie.duration,
+        language: movie.language,
+        state: states.find(s => s.id === movie.state)?.name || movie.state
+      });
+      toast({
+        title: "Added to Watchlist",
+        description: `${movie.title} has been added to your watchlist.`,
+      });
+    }
   };
 
   const filteredMovies = movies.filter(movie => 
@@ -374,12 +403,26 @@ const CulturalLibrary = () => {
                         
                         {/* Overlay Info */}
                         <div className="absolute top-3 left-3 right-3 flex justify-between items-start">
-                          {movie.owned && (
-                            <Badge className="bg-golden text-black text-xs font-semibold">
-                              <BookOpen className="w-3 h-3 mr-1" />
-                              Owned
-                            </Badge>
-                          )}
+                          <div className="flex gap-2">
+                            {movie.owned && (
+                              <Badge className="bg-golden text-black text-xs font-semibold">
+                                <BookOpen className="w-3 h-3 mr-1" />
+                                Owned
+                              </Badge>
+                            )}
+                            <Button
+                              size="sm"
+                              variant="secondary"
+                              className="h-6 px-2 bg-black/60 backdrop-blur-sm hover:bg-black/80 border-none"
+                              onClick={(e) => handleWatchlistToggle(movie, e)}
+                            >
+                              {isInWatchlist(movie.id) ? (
+                                <BookmarkCheck className="w-3 h-3 text-golden" />
+                              ) : (
+                                <BookmarkPlus className="w-3 h-3 text-white" />
+                              )}
+                            </Button>
+                          </div>
                           <div className="flex items-center space-x-1 bg-black/60 backdrop-blur-sm px-2 py-1 rounded-full">
                             <Star className="w-3 h-3 text-golden fill-current" />
                             <span className="text-xs text-white font-medium">{movie.rating}</span>

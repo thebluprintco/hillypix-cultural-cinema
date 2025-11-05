@@ -23,24 +23,27 @@ interface TicketPurchaseDialogProps {
 const ticketTypes = [
   {
     id: 'single',
-    name: 'Single Ticket',
+    name: 'Basic Tier',
     price: 299,
-    description: 'Access to this premiere only',
-    features: ['Watch premiere live', 'High quality streaming', 'Cultural program access']
+    description: 'Perfect for casual viewing',
+    viewingLimit: '3 times',
+    features: ['Watch up to 3 times', 'HD quality streaming', '48-hour access window', 'Mobile & desktop viewing']
   },
   {
     id: 'premium',
-    name: 'Premium Experience',
+    name: 'Premium Tier',
     price: 499,
-    description: 'Enhanced viewing with extras',
-    features: ['Watch premiere live', 'Behind-the-scenes content', 'Director commentary', 'Cultural insights', 'Download option']
+    description: 'Enhanced viewing experience',
+    viewingLimit: '6 times',
+    features: ['Watch up to 6 times', 'Full HD quality', '7-day access window', 'Behind-the-scenes content', 'Download option', 'Multi-device support']
   },
   {
     id: 'bundle',
-    name: 'State Bundle',
+    name: 'Unlimited Tier',
     price: 899,
-    description: 'All films from this state',
-    features: ['All state premieres', 'Complete cultural collection', 'Exclusive documentaries', 'Early access', 'Lifetime access']
+    description: 'Complete unlimited access',
+    viewingLimit: 'Unlimited',
+    features: ['Unlimited viewing', 'Lifetime access', '4K quality available', 'All bonus content', 'Download for offline', 'Priority support', 'Share with family (2 devices)']
   }
 ];
 
@@ -154,7 +157,12 @@ const TicketPurchaseDialog = ({ open, onOpenChange, movie }: TicketPurchaseDialo
                             ₹{ticket.price}
                           </Badge>
                         </div>
-                        <p className="text-sm text-muted-foreground mb-3">{ticket.description}</p>
+                        <div className="flex items-center gap-2 mb-2">
+                          <Badge variant="outline" className="border-golden/30 text-golden text-xs">
+                            {ticket.viewingLimit}
+                          </Badge>
+                          <p className="text-sm text-muted-foreground">{ticket.description}</p>
+                        </div>
                         <div className="space-y-1">
                           {ticket.features.map((feature, index) => (
                             <div key={index} className="flex items-center text-xs text-muted-foreground">
