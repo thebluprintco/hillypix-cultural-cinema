@@ -1,11 +1,15 @@
+import { useState } from 'react';
 import Header from '@/components/Header';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { Calendar, MapPin, Ticket, Award, Music2, Film, Users, Sparkles } from 'lucide-react';
 import theatreHero from '@/assets/theatre-hero.jpg';
+import EventRegistrationDialog from '@/components/EventRegistrationDialog';
 
 const HillywoodFiesta = () => {
+  const [registrationOpen, setRegistrationOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -130,7 +134,12 @@ const HillywoodFiesta = () => {
               Join us at the annual Hillywood Fiesta red carpet event celebrating the talents of North East India in Arts, Film, Fashion and Music.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button size="lg" variant="outline" className="border-2 border-primary-foreground/80 text-primary-foreground hover:bg-primary-foreground hover:text-primary text-base md:text-lg px-6 md:px-8 py-5 md:py-6 bg-transparent">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-2 border-primary-foreground/80 text-primary-foreground hover:bg-primary-foreground hover:text-primary text-base md:text-lg px-6 md:px-8 py-5 md:py-6 bg-transparent"
+                onClick={() => setRegistrationOpen(true)}
+              >
                 <Ticket className="w-5 h-5 mr-2" />
                 Register for Event
               </Button>
@@ -141,6 +150,11 @@ const HillywoodFiesta = () => {
           </div>
         </section>
       </main>
+
+      <EventRegistrationDialog 
+        open={registrationOpen} 
+        onOpenChange={setRegistrationOpen} 
+      />
     </div>
   );
 };
