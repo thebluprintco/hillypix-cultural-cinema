@@ -6,25 +6,41 @@ import { Card } from '@/components/ui/card';
 import { Calendar, MapPin, Ticket, Award, Music2, Film, Users, Sparkles } from 'lucide-react';
 import theatreHero from '@/assets/theatre-hero.jpg';
 import EventRegistrationDialog from '@/components/EventRegistrationDialog';
+import LiveStreamPlayer from '@/components/LiveStreamPlayer';
 const HillywoodFiesta = () => {
   const [registrationOpen, setRegistrationOpen] = useState(false);
+  // Toggle this to true when the event is live
+  const [isEventLive, setIsEventLive] = useState(false);
+  // Update this with your actual stream URL (YouTube, Vimeo, etc.)
+  const streamUrl = '';
+  
   return <div className="min-h-screen bg-background">
       <Header />
       
       <main className="pt-16">
-        {/* Hero Section */}
-        <section className="relative h-[80vh] overflow-hidden">
-          <div className="absolute inset-0 bg-cover bg-center" style={{
-          backgroundImage: `url(${theatreHero})`,
-          backgroundPosition: 'center'
-        }}>
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/60" />
-          </div>
+        {/* Hero Section with Live Stream */}
+        <section className="relative py-12 md:py-20 bg-gradient-to-b from-background via-card-accent/20 to-background">
+          <div className="container mx-auto px-6">
+            {/* Title */}
+            <div className="text-center mb-8">
+              <Badge className="mb-4 bg-golden/20 text-golden px-4 py-2 text-sm">
+                🎬 LIVE RED CARPET EVENT
+              </Badge>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bebas mb-4 text-primary">
+                Hillywood Red Carpet Event
+              </h1>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+                Watch the prestigious celebration of North East India's finest talents in Arts, Film, Fashion and Music
+              </p>
+            </div>
 
-          <div className="relative container mx-auto px-6 h-full flex flex-col justify-center items-center text-center">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bebas mb-8 text-primary">
-              Hillywood Red Carpet Event
-            </h1>
+            {/* Live Stream Player */}
+            <LiveStreamPlayer 
+              streamUrl={streamUrl}
+              isLive={isEventLive}
+              eventDate="2025-12-15T18:00:00"
+              viewerCount={isEventLive ? 1247 : 0}
+            />
           </div>
         </section>
 
