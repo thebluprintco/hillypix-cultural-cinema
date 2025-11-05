@@ -75,8 +75,11 @@ const Index = () => {
               <h3 className="text-2xl font-bebas bg-gradient-to-r from-golden to-primary-light bg-clip-text text-transparent mb-4">
                 HillyPix
               </h3>
-              <p className="text-sm text-muted-foreground mb-4 font-merriweather">
+              <p className="text-sm text-muted-foreground mb-3 font-merriweather">
                 Celebrating Northeast India's cultural cinema through the HillyWood movement.
+              </p>
+              <p className="text-xs text-golden italic font-semibold mb-3">
+                Traditionally rooted, futuristically bold
               </p>
               <p className="text-xs text-muted-foreground">
                 © 2024 HillyPix. Preserving culture through cinema.
@@ -117,7 +120,10 @@ const Index = () => {
             </div>
           </div>
 
-          <div className="mt-8 pt-8 border-t border-border/20 text-center">
+          <div className="mt-8 pt-8 border-t border-border/20 text-center space-y-2">
+            <p className="text-sm font-semibold text-golden">
+              From Northeast for Northeast India
+            </p>
             <p className="text-sm text-muted-foreground">
               Built with ❤️ for Northeast India's cultural heritage
             </p>

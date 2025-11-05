@@ -38,9 +38,12 @@ const Hero = () => {
         </h1>
 
         {/* Tagline */}
-        <div className="mb-8">
-          <p className="text-2xl md:text-3xl font-medium text-muted-foreground">
-            Celebrating Culture Through Cinema
+        <div className="mb-8 space-y-3">
+          <p className="text-2xl md:text-3xl font-bold text-golden">
+            From Northeast for Northeast India
+          </p>
+          <p className="text-lg md:text-xl font-medium text-muted-foreground italic">
+            Roots in soil, eyes on stars
           </p>
         </div>
 

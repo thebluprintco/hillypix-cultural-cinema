@@ -61,10 +61,12 @@ const AboutHillyWood = () => {
               Entertainment
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            HillyPix isn't just a platform—it's a cultural revolution. We're building 
-            <span className="text-golden font-semibold"> HillyWood</span>, 
-            a movement that celebrates the distinct identity of Northeast India through the power of cinema.
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-merriweather leading-relaxed mb-4">
+            HillyWood is a cultural revolution celebrating the stories, languages, and traditions 
+            of Northeast India's eight states through the powerful medium of cinema.
+          </p>
+          <p className="text-lg text-golden font-bold italic">
+            From Northeast for Northeast India
           </p>
         </div>
 

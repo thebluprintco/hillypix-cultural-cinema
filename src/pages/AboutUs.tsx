@@ -32,9 +32,15 @@ const AboutUs = () => {
               <br />
               Entertainment
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-merriweather">
+            <p className="text-xl md:text-2xl font-bold text-golden mb-4">
+              Traditionally rooted, futuristically bold
+            </p>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-merriweather mb-2">
               Discover the story behind HillyWood - a cultural movement dedicated to celebrating 
               and preserving Northeast India's cinematic heritage.
+            </p>
+            <p className="text-base text-muted-foreground italic font-semibold">
+              Roots in soil, eyes on stars
             </p>
           </div>
         </section>
