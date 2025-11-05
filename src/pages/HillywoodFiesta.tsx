@@ -51,8 +51,11 @@ const HillywoodFiesta = () => {
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-anton mb-6 text-foreground">
                   Hillywood Fiesta
                 </h2>
-                <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-merriweather">
+                <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-merriweather mb-6">
                   Hillywood Fiesta is a Hillywood annual red-carpet event to ignite the perennially inherent wealth of talents amongst the people of North East India in the industry of Arts, Film, Fashion and Music. The Hillywood Fiesta gala indulges in ecstasy with voices echoing from the hills and mountains of North-East India to blend with the richly blessed exotic colours of North East India Culture and Tradition.
+                </p>
+                <p className="text-xl md:text-2xl font-semibold text-foreground italic font-merriweather">
+                  "This isn't just a festival, it is revolution in practice."
                 </p>
               </div>
             </div>
