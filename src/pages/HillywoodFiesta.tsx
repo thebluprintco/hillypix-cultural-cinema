@@ -14,7 +14,6 @@ const HillywoodFiesta = () => {
   const [isEventLive, setIsEventLive] = useState(false);
   // Update this with your actual stream URL (YouTube, Vimeo, etc.)
   const streamUrl = '';
-  
   return <div className="min-h-screen bg-background">
       <Header />
       
@@ -30,19 +29,11 @@ const HillywoodFiesta = () => {
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bebas mb-4 text-primary">
                 Hillywood Red Carpet Event
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-                Watch the prestigious celebration of North East India's finest talents in Arts, Film, Fashion and Music
-              </p>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">Watch the one and only prestigious celebration of North East India's finest talents in Arts, Film, Fashion and Music</p>
             </div>
 
             {/* Live Stream Player */}
-            <LiveStreamPlayer 
-              streamUrl={streamUrl}
-              isLive={isEventLive}
-              eventDate="2025-12-15T18:00:00"
-              viewerCount={isEventLive ? 1247 : 0}
-              onRegisterClick={() => setRegistrationOpen(true)}
-            />
+            <LiveStreamPlayer streamUrl={streamUrl} isLive={isEventLive} eventDate="2025-12-15T18:00:00" viewerCount={isEventLive ? 1247 : 0} onRegisterClick={() => setRegistrationOpen(true)} />
           </div>
         </section>
 
@@ -145,22 +136,40 @@ const HillywoodFiesta = () => {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                { name: "Best Actor", winner: "Rajesh Kumar", film: "Ka Jainsen", image: theatreHero },
-                { name: "Best Actress", winner: "Priya Sharma", film: "Puanchei", image: theatreHero },
-                { name: "Best Director", winner: "David Meitei", film: "Raas Leela", image: theatreHero },
-                { name: "Best Music", winner: "Traditional Ensemble", film: "Kiman Bhi Bhal", image: theatreHero },
-                { name: "Best Cinematography", winner: "Arun Khasi", film: "Ka Jainsen", image: theatreHero },
-                { name: "Best Film", winner: "Ka Jainsen", film: "Meghalaya Cinema", image: theatreHero },
-              ].map((award, index) => (
-                <Card key={index} className="bg-card-accent border border-golden/20 overflow-hidden group hover:border-golden/50 transition-all">
+              {[{
+              name: "Best Actor",
+              winner: "Rajesh Kumar",
+              film: "Ka Jainsen",
+              image: theatreHero
+            }, {
+              name: "Best Actress",
+              winner: "Priya Sharma",
+              film: "Puanchei",
+              image: theatreHero
+            }, {
+              name: "Best Director",
+              winner: "David Meitei",
+              film: "Raas Leela",
+              image: theatreHero
+            }, {
+              name: "Best Music",
+              winner: "Traditional Ensemble",
+              film: "Kiman Bhi Bhal",
+              image: theatreHero
+            }, {
+              name: "Best Cinematography",
+              winner: "Arun Khasi",
+              film: "Ka Jainsen",
+              image: theatreHero
+            }, {
+              name: "Best Film",
+              winner: "Ka Jainsen",
+              film: "Meghalaya Cinema",
+              image: theatreHero
+            }].map((award, index) => <Card key={index} className="bg-card-accent border border-golden/20 overflow-hidden group hover:border-golden/50 transition-all">
                   <CardContent className="p-0">
                     <div className="relative h-64 overflow-hidden">
-                      <img 
-                        src={award.image} 
-                        alt={award.winner}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
+                      <img src={award.image} alt={award.winner} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
                       <div className="absolute bottom-0 left-0 right-0 p-4">
                         <Badge className="bg-golden text-black mb-2">{award.name}</Badge>
@@ -169,8 +178,7 @@ const HillywoodFiesta = () => {
                       </div>
                     </div>
                   </CardContent>
-                </Card>
-              ))}
+                </Card>)}
             </div>
           </div>
         </section>
@@ -188,20 +196,14 @@ const HillywoodFiesta = () => {
             </div>
 
             <div className="grid md:grid-cols-4 gap-4">
-              {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                <Card key={i} className="bg-card-accent border-golden/20 overflow-hidden group cursor-pointer">
+              {[1, 2, 3, 4, 5, 6, 7, 8].map(i => <Card key={i} className="bg-card-accent border-golden/20 overflow-hidden group cursor-pointer">
                   <CardContent className="p-0">
                     <div className="relative aspect-[3/4] overflow-hidden">
-                      <img 
-                        src={theatreHero} 
-                        alt={`Red Carpet ${i}`}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
+                      <img src={theatreHero} alt={`Red Carpet ${i}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
                   </CardContent>
-                </Card>
-              ))}
+                </Card>)}
             </div>
           </div>
         </section>
@@ -220,15 +222,12 @@ const HillywoodFiesta = () => {
                 <Ticket className="w-5 h-5 mr-2" />
                 Register for Event
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 text-base md:text-lg px-6 md:px-8 py-5 md:py-6 bg-transparent"
-                onClick={() => {
-                  const aboutSection = document.querySelector('section.bg-card-accent\\/20');
-                  aboutSection?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
+              <Button size="lg" variant="outline" className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 text-base md:text-lg px-6 md:px-8 py-5 md:py-6 bg-transparent" onClick={() => {
+              const aboutSection = document.querySelector('section.bg-card-accent\\/20');
+              aboutSection?.scrollIntoView({
+                behavior: 'smooth'
+              });
+            }}>
                 Learn More
               </Button>
             </div>
