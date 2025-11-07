@@ -331,12 +331,12 @@ const CulturalLibrary = () => {
           <Badge className="mb-4 bg-golden/20 text-golden px-4 py-2">
             📚 CULTURAL LIBRARY
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Eight States,
-Untold Stories Awaits The World<span className="bg-gradient-to-r from-primary-light to-golden bg-clip-text text-transparent">
-              Eight States,
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-primary-light to-golden bg-clip-text text-transparent">
+              North East India.
             </span>
             <br />
-            Countless Stories
+            Untold Stories Awaits The World
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Explore our vast collection of Music and Films from North East India. Each preserving unique cultural heritage and traditions the world has never seen</p>
         </div>
