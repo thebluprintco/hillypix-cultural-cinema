@@ -7,7 +7,7 @@ export interface WatchlistItem {
   rating: number;
   duration: string;
   language: string;
-  state: string;
+  genre: string;
   addedAt: string;
 }
 

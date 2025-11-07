@@ -13,50 +13,40 @@ import moviePoster3 from '@/assets/movie-poster-3.jpg';
 import moviePoster4 from '@/assets/movie-poster-4.jpg';
 import moviePoster5 from '@/assets/movie-poster-5.jpg';
 import moviePoster6 from '@/assets/movie-poster-6.jpg';
-const states = [{
+const genres = [{
   id: 'all',
-  name: 'All States',
+  name: 'All Genres',
   count: 127
 }, {
-  id: 'assam',
-  name: 'Assam',
-  count: 34,
-  color: 'text-green-400'
-}, {
-  id: 'manipur',
-  name: 'Manipur',
-  count: 18,
-  color: 'text-blue-400'
-}, {
-  id: 'nagaland',
-  name: 'Nagaland',
-  count: 15,
-  color: 'text-red-400'
-}, {
-  id: 'meghalaya',
-  name: 'Meghalaya',
-  count: 12,
-  color: 'text-purple-400'
-}, {
-  id: 'tripura',
-  name: 'Tripura',
-  count: 16,
-  color: 'text-yellow-400'
-}, {
-  id: 'arunachal',
-  name: 'Arunachal Pradesh',
-  count: 14,
-  color: 'text-orange-400'
-}, {
-  id: 'mizoram',
-  name: 'Mizoram',
-  count: 10,
+  id: 'romance',
+  name: 'Romance',
+  count: 22,
   color: 'text-pink-400'
 }, {
-  id: 'sikkim',
-  name: 'Sikkim',
-  count: 8,
-  color: 'text-cyan-400'
+  id: 'comedy',
+  name: 'Comedy',
+  count: 28,
+  color: 'text-yellow-400'
+}, {
+  id: 'action',
+  name: 'Action',
+  count: 35,
+  color: 'text-red-400'
+}, {
+  id: 'horror',
+  name: 'Horror',
+  count: 15,
+  color: 'text-purple-400'
+}, {
+  id: 'biopic',
+  name: 'Stories from Life/Biopic',
+  count: 18,
+  color: 'text-green-400'
+}, {
+  id: 'drama',
+  name: 'Drama',
+  count: 25,
+  color: 'text-blue-400'
 }];
 const categories = [{
   id: 'traditional',
@@ -78,7 +68,7 @@ const categories = [{
 const movies = [{
   id: 1,
   title: 'Ka Jainsen',
-  state: 'meghalaya',
+  genre: 'drama',
   category: 'traditional',
   poster: moviePoster1,
   rating: 4.8,
@@ -89,7 +79,7 @@ const movies = [{
 }, {
   id: 2,
   title: 'Naga Rangtsa',
-  state: 'nagaland',
+  genre: 'action',
   category: 'traditional',
   poster: moviePoster2,
   rating: 4.9,
@@ -100,7 +90,7 @@ const movies = [{
 }, {
   id: 3,
   title: 'Puanchei',
-  state: 'mizoram',
+  genre: 'romance',
   category: 'traditional',
   poster: moviePoster3,
   rating: 4.7,
@@ -111,7 +101,7 @@ const movies = [{
 }, {
   id: 4,
   title: 'Himalayan Dreams',
-  state: 'sikkim',
+  genre: 'drama',
   category: 'modern',
   poster: moviePoster4,
   rating: 4.5,
@@ -122,7 +112,7 @@ const movies = [{
 }, {
   id: 5,
   title: 'Gamosa Tales',
-  state: 'assam',
+  genre: 'comedy',
   category: 'modern',
   poster: moviePoster5,
   rating: 4.6,
@@ -133,7 +123,7 @@ const movies = [{
 }, {
   id: 6,
   title: 'Raas Leela',
-  state: 'manipur',
+  genre: 'drama',
   category: 'folk',
   poster: moviePoster6,
   rating: 4.8,
@@ -146,7 +136,7 @@ const movies = [{
 {
   id: 7,
   title: 'Weaver\'s Song',
-  state: 'tripura',
+  genre: 'romance',
   category: 'traditional',
   poster: moviePoster1,
   rating: 4.4,
@@ -157,7 +147,7 @@ const movies = [{
 }, {
   id: 8,
   title: 'Mountain Echoes',
-  state: 'arunachal',
+  genre: 'horror',
   category: 'traditional',
   poster: moviePoster2,
   rating: 4.6,
@@ -168,7 +158,7 @@ const movies = [{
 }, {
   id: 9,
   title: 'Digital Village',
-  state: 'assam',
+  genre: 'comedy',
   category: 'modern',
   poster: moviePoster3,
   rating: 4.3,
@@ -179,7 +169,7 @@ const movies = [{
 }, {
   id: 10,
   title: 'Urban Legends',
-  state: 'manipur',
+  genre: 'horror',
   category: 'modern',
   poster: moviePoster4,
   rating: 4.7,
@@ -190,7 +180,7 @@ const movies = [{
 }, {
   id: 11,
   title: 'Tech Dreams',
-  state: 'sikkim',
+  genre: 'action',
   category: 'modern',
   poster: moviePoster5,
   rating: 4.2,
@@ -201,7 +191,7 @@ const movies = [{
 }, {
   id: 12,
   title: 'Sacred Groves',
-  state: 'meghalaya',
+  genre: 'biopic',
   category: 'documentary',
   poster: moviePoster6,
   rating: 4.9,
@@ -212,7 +202,7 @@ const movies = [{
 }, {
   id: 13,
   title: 'Hunter\'s Tale',
-  state: 'nagaland',
+  genre: 'action',
   category: 'folk',
   poster: moviePoster1,
   rating: 4.5,
@@ -223,7 +213,7 @@ const movies = [{
 }, {
   id: 14,
   title: 'Bamboo Forest',
-  state: 'mizoram',
+  genre: 'biopic',
   category: 'documentary',
   poster: moviePoster2,
   rating: 4.6,
@@ -234,7 +224,7 @@ const movies = [{
 }, {
   id: 15,
   title: 'Royal Heritage',
-  state: 'tripura',
+  genre: 'drama',
   category: 'documentary',
   poster: moviePoster3,
   rating: 4.4,
@@ -245,7 +235,7 @@ const movies = [{
 }, {
   id: 16,
   title: 'Spirit Dance',
-  state: 'arunachal',
+  genre: 'horror',
   category: 'folk',
   poster: moviePoster4,
   rating: 4.8,
@@ -256,7 +246,7 @@ const movies = [{
 }, {
   id: 17,
   title: 'City Lights',
-  state: 'assam',
+  genre: 'romance',
   category: 'modern',
   poster: moviePoster5,
   rating: 4.1,
@@ -267,7 +257,7 @@ const movies = [{
 }, {
   id: 18,
   title: 'Love in Hills',
-  state: 'sikkim',
+  genre: 'romance',
   category: 'modern',
   poster: moviePoster6,
   rating: 4.5,
@@ -277,7 +267,7 @@ const movies = [{
   owned: true
 }];
 const CulturalLibrary = () => {
-  const [selectedState, setSelectedState] = useState('all');
+  const [selectedGenre, setSelectedGenre] = useState('all');
   const [selectedCategory, setSelectedCategory] = useState('traditional');
   const [visibleMovies, setVisibleMovies] = useState(6);
   const [selectedMovie, setSelectedMovie] = useState<any>(null);
@@ -310,7 +300,7 @@ const CulturalLibrary = () => {
         rating: movie.rating,
         duration: movie.duration,
         language: movie.language,
-        state: states.find(s => s.id === movie.state)?.name || movie.state
+        genre: genres.find(g => g.id === movie.genre)?.name || movie.genre
       });
       toast({
         title: "Added to Watchlist",
@@ -318,7 +308,7 @@ const CulturalLibrary = () => {
       });
     }
   };
-  const filteredMovies = movies.filter(movie => (selectedState === 'all' || movie.state === selectedState) && movie.category === selectedCategory);
+  const filteredMovies = movies.filter(movie => (selectedGenre === 'all' || movie.genre === selectedGenre) && movie.category === selectedCategory);
   const displayedMovies = filteredMovies.slice(0, visibleMovies);
   const hasMoreMovies = visibleMovies < filteredMovies.length;
   const handleLoadMore = () => {
@@ -326,8 +316,8 @@ const CulturalLibrary = () => {
   };
 
   // Reset visible movies when filters change
-  const handleStateChange = (stateId: string) => {
-    setSelectedState(stateId);
+  const handleGenreChange = (genreId: string) => {
+    setSelectedGenre(genreId);
     setVisibleMovies(6);
   };
   const handleCategoryChange = (categoryId: string) => {
@@ -351,21 +341,21 @@ Untold Stories Awaits The World<span className="bg-gradient-to-r from-primary-li
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Explore our vast collection of Music and Films from North East India. Each preserving unique cultural heritage and traditions the world has never seen</p>
         </div>
 
-        {/* State Filter */}
+        {/* Genre Filter */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-foreground flex items-center">
               <Filter className="w-5 h-5 mr-2 text-golden" />
-              Filter by State
+              Filter by Genre
             </h3>
           </div>
           <div className="flex flex-wrap gap-3">
-            {states.map(state => <Button key={state.id} variant={selectedState === state.id ? "default" : "outline"} onClick={() => handleStateChange(state.id)} className={`
-                  ${selectedState === state.id ? 'theatre-gradient text-white' : 'border-border/30 hover:border-golden/30'} theatre-transition
+            {genres.map(genre => <Button key={genre.id} variant={selectedGenre === genre.id ? "default" : "outline"} onClick={() => handleGenreChange(genre.id)} className={`
+                  ${selectedGenre === genre.id ? 'theatre-gradient text-white' : 'border-border/30 hover:border-golden/30'} theatre-transition
                 `}>
-                <span className={selectedState !== state.id ? state.color : ''}>{state.name}</span>
+                <span className={selectedGenre !== genre.id ? genre.color : ''}>{genre.name}</span>
                 <Badge variant="secondary" className="ml-2 text-xs">
-                  {state.count}
+                  {genre.count}
                 </Badge>
               </Button>)}
           </div>
@@ -422,7 +412,7 @@ Untold Stories Awaits The World<span className="bg-gradient-to-r from-primary-li
                         </p>
                         <div className="flex items-center justify-between">
                           <Badge variant="secondary" className="text-xs">
-                            {states.find(s => s.id === movie.state)?.name}
+                            {genres.find(g => g.id === movie.genre)?.name}
                           </Badge>
                         </div>
                       </div>

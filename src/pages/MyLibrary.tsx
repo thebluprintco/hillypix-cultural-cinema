@@ -16,7 +16,7 @@ const myMovies = [
   {
     id: 1,
     title: 'Ka Jainsen',
-    state: 'Meghalaya',
+    genre: 'Drama',
     poster: moviePoster1,
     rating: 4.8,
     duration: '2h 15m',
@@ -27,7 +27,7 @@ const myMovies = [
   {
     id: 3,
     title: 'Puanchei',
-    state: 'Mizoram', 
+    genre: 'Romance', 
     poster: moviePoster3,
     rating: 4.7,
     duration: '1h 58m',
@@ -38,7 +38,7 @@ const myMovies = [
   {
     id: 5,
     title: 'Gamosa Tales',
-    state: 'Assam',
+    genre: 'Comedy',
     poster: moviePoster5,
     rating: 4.6,
     duration: '1h 55m', 
@@ -153,7 +153,7 @@ const MyLibrary = () => {
                           </p>
                           <div className="flex items-center justify-between mb-2">
                             <Badge variant="secondary" className="text-xs">
-                              {movie.state}
+                              {movie.genre}
                             </Badge>
                             <div className="flex items-center text-xs text-muted-foreground">
                               <Clock className="w-3 h-3 mr-1" />
@@ -221,7 +221,7 @@ const MyLibrary = () => {
                             </p>
                             <div className="flex items-center justify-between mb-2">
                               <Badge variant="secondary" className="text-xs">
-                                {movie.state}
+                                {movie.genre}
                               </Badge>
                             </div>
                             <Button

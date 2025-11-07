@@ -180,7 +180,7 @@ const TVSeries = () => {
         rating: series.rating,
         duration: series.duration,
         language: series.language,
-        state: series.state
+        genre: series.genre
       });
       toast({
         title: "Added to Watchlist",
