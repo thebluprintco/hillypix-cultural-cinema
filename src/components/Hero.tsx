@@ -42,8 +42,8 @@ const Hero = () => {
         </div>
 
         {/* Subtitle */}
-        <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">Step into the grand cultural theatre of HillyWood defining North East India.
-Truly East
+        <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">Step into the grand cultural theatre of HillyWood, 
+ortheast India's eight states come alive on screen.
 
         <span className="text-golden font-semibold"> HillyWood</span> — 
           where Northeast India's eight states come alive on screen.
