@@ -7,6 +7,7 @@ import { Calendar, Clock, MapPin } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { requestNotificationPermission, scheduleReminder } from '@/utils/notifications';
 import LearnMoreDialog from '@/components/LearnMoreDialog';
+import Footer from '@/components/Footer';
 const Premieres = () => {
   const [isLearnMoreDialogOpen, setIsLearnMoreDialogOpen] = useState(false);
   const {
@@ -105,6 +106,9 @@ const Premieres = () => {
         {/* Learn More Dialog */}
         <LearnMoreDialog open={isLearnMoreDialogOpen} onOpenChange={setIsLearnMoreDialogOpen} topic="premiere" />
       </main>
+
+      {/* Footer */}
+      <Footer />
     </div>;
 };
 export default Premieres;

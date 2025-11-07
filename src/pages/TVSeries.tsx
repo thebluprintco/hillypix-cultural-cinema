@@ -10,6 +10,7 @@ import { useWatchlist } from '@/hooks/useWatchlist';
 import { useWatchProgress } from '@/hooks/useWatchProgress';
 import { useToast } from '@/hooks/use-toast';
 import TicketPurchaseDialog from '@/components/TicketPurchaseDialog';
+import Footer from '@/components/Footer';
 import moviePoster1 from '@/assets/movie-poster-1.jpg';
 import moviePoster2 from '@/assets/movie-poster-2.jpg';
 import moviePoster3 from '@/assets/movie-poster-3.jpg';
@@ -458,6 +459,9 @@ const TVSeries = () => {
           />
         )}
       </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

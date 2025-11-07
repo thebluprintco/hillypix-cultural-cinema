@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Play, Download, Star, Clock, Trash2 } from 'lucide-react';
 import { useWatchlist } from '@/hooks/useWatchlist';
 import { useToast } from '@/hooks/use-toast';
+import Footer from '@/components/Footer';
 import moviePoster1 from '@/assets/movie-poster-1.jpg';
 import moviePoster3 from '@/assets/movie-poster-3.jpg';
 import moviePoster5 from '@/assets/movie-poster-5.jpg';
@@ -256,6 +257,9 @@ const MyLibrary = () => {
           </div>
         </section>
       </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

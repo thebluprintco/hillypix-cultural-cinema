@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Award, Star, Trophy, Users, Film, Crown, Search, Filter } from 'lucide-react';
+import Footer from '@/components/Footer';
 
 const allHonorees = [
   {
@@ -273,6 +274,9 @@ const AllHonorees = () => {
           </div>
         </section>
       </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

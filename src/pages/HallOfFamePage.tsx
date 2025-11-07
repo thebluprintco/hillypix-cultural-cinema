@@ -1,6 +1,7 @@
 import Header from '@/components/Header';
 import HallOfFame from '@/components/HallOfFame';
 import { Badge } from '@/components/ui/badge';
+import Footer from '@/components/Footer';
 
 const HallOfFamePage = () => {
   return (
@@ -31,6 +32,9 @@ const HallOfFamePage = () => {
         {/* Hall of Fame Component */}
         <HallOfFame />
       </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

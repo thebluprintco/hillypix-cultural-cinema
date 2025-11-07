@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Play, TrendingUp, Sparkles, MapPin, Eye, Heart, Share2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import Footer from '@/components/Footer';
 import moviePoster1 from '@/assets/movie-poster-1.jpg';
 import moviePoster2 from '@/assets/movie-poster-2.jpg';
 import moviePoster3 from '@/assets/movie-poster-3.jpg';
@@ -303,6 +304,9 @@ const Music = () => {
           </div>
         </section>
       </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

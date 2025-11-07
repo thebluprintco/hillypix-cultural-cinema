@@ -7,6 +7,7 @@ import { Calendar, MapPin, Ticket, Award, Music2, Film, Users, Sparkles } from '
 import theatreHero from '@/assets/theatre-hero.jpg';
 import EventRegistrationDialog from '@/components/EventRegistrationDialog';
 import LiveStreamPlayer from '@/components/LiveStreamPlayer';
+import Footer from '@/components/Footer';
 const HillywoodFiesta = () => {
   const [registrationOpen, setRegistrationOpen] = useState(false);
   // Toggle this to true when the event is live
@@ -236,6 +237,9 @@ const HillywoodFiesta = () => {
       </main>
 
       <EventRegistrationDialog open={registrationOpen} onOpenChange={setRegistrationOpen} />
+      
+      {/* Footer */}
+      <Footer />
     </div>;
 };
 export default HillywoodFiesta;

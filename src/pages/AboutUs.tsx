@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import Header from '@/components/Header';
 import AboutHillyWood from '@/components/AboutHillyWood';
 import { Badge } from '@/components/ui/badge';
+import Footer from '@/components/Footer';
 
 const AboutUs = () => {
   useEffect(() => {
@@ -48,6 +49,9 @@ const AboutUs = () => {
         {/* About HillyWood Component */}
         <AboutHillyWood />
       </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
