@@ -12,76 +12,67 @@ import moviePoster3 from '@/assets/movie-poster-3.jpg';
 import moviePoster4 from '@/assets/movie-poster-4.jpg';
 import moviePoster5 from '@/assets/movie-poster-5.jpg';
 import moviePoster6 from '@/assets/movie-poster-6.jpg';
-
-const premieres = [
-  {
-    id: 1,
-    title: 'Ka Jainsen',
-    state: 'Meghalaya',
-    language: 'Khasi',
-    poster: moviePoster1,
-    price: '₹299',
-    premiereDate: '2024-01-15',
-    duration: '2h 15m',
-    genre: 'Cultural Drama',
-    rating: 4.8,
-    description: 'A powerful story celebrating Khasi matrilineal traditions and the strength of women.',
-    countdown: '2 days left'
-  },
-  {
-    id: 2,
-    title: 'Naga Rangtsa',
-    state: 'Nagaland',
-    language: 'Ao Naga',
-    poster: moviePoster2,
-    price: '₹349',
-    premiereDate: '2024-01-20',
-    duration: '2h 05m',
-    genre: 'Tribal Epic',
-    rating: 4.9,
-    description: 'Epic tale of Naga warriors and their sacred tribal traditions.',
-    countdown: '7 days left'
-  },
-  {
-    id: 3,
-    title: 'Puanchei',
-    state: 'Mizoram',
-    language: 'Mizo',
-    poster: moviePoster3,
-    price: '₹279',
-    premiereDate: '2024-01-25',
-    duration: '1h 58m',
-    genre: 'Traditional Drama',
-    rating: 4.7,
-    description: 'Beautiful narrative woven around traditional Mizo handloom and cultural heritage.',
-    countdown: '12 days left'
-  }
-];
-
+const premieres = [{
+  id: 1,
+  title: 'Ka Jainsen',
+  state: 'Meghalaya',
+  language: 'Khasi',
+  poster: moviePoster1,
+  price: '₹299',
+  premiereDate: '2024-01-15',
+  duration: '2h 15m',
+  genre: 'Cultural Drama',
+  rating: 4.8,
+  description: 'A powerful story celebrating Khasi matrilineal traditions and the strength of women.',
+  countdown: '2 days left'
+}, {
+  id: 2,
+  title: 'Naga Rangtsa',
+  state: 'Nagaland',
+  language: 'Ao Naga',
+  poster: moviePoster2,
+  price: '₹349',
+  premiereDate: '2024-01-20',
+  duration: '2h 05m',
+  genre: 'Tribal Epic',
+  rating: 4.9,
+  description: 'Epic tale of Naga warriors and their sacred tribal traditions.',
+  countdown: '7 days left'
+}, {
+  id: 3,
+  title: 'Puanchei',
+  state: 'Mizoram',
+  language: 'Mizo',
+  poster: moviePoster3,
+  price: '₹279',
+  premiereDate: '2024-01-25',
+  duration: '1h 58m',
+  genre: 'Traditional Drama',
+  rating: 4.7,
+  description: 'Beautiful narrative woven around traditional Mizo handloom and cultural heritage.',
+  countdown: '12 days left'
+}];
 const NowPremiering = () => {
   const [selectedMovie, setSelectedMovie] = useState<any>(null);
   const [isTicketDialogOpen, setIsTicketDialogOpen] = useState(false);
   const navigate = useNavigate();
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   const handleBuyTicket = (movie: any) => {
     setSelectedMovie(movie);
     setIsTicketDialogOpen(true);
   };
-
   const handleWatchTrailer = (movie: any) => {
     toast({
       title: "Trailer Coming Soon",
-      description: `The trailer for ${movie.title} will be available shortly.`,
+      description: `The trailer for ${movie.title} will be available shortly.`
     });
   };
-
   const handleViewAllPremieres = () => {
     navigate('/premieres');
   };
-
-  return (
-    <section className="py-20 px-6">
+  return <section className="py-20 px-6">
       <div className="container mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -95,27 +86,16 @@ const NowPremiering = () => {
             <br />
             Premieres
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Get your tickets now for exclusive premieres celebrating the diverse cultures 
-            and stories of Northeast India's eight states.
-          </p>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Get your tickets now for exclusive premieres celebrating the diverse cultures and stories of Northeast India.</p>
         </div>
 
         {/* Premieres Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {premieres.map((movie) => (
-            <Card 
-              key={movie.id} 
-              className="group bg-card-accent/30 border-border/20 hover:border-golden/30 theatre-transition overflow-hidden ticket-hover premiere-spotlight"
-            >
+          {premieres.map(movie => <Card key={movie.id} className="group bg-card-accent/30 border-border/20 hover:border-golden/30 theatre-transition overflow-hidden ticket-hover premiere-spotlight">
               <CardContent className="p-0">
                 {/* Movie Poster */}
                 <div className="relative overflow-hidden">
-                  <img 
-                    src={movie.poster} 
-                    alt={movie.title}
-                    className="w-full h-80 object-cover group-hover:scale-105 theatre-transition"
-                  />
+                  <img src={movie.poster} alt={movie.title} className="w-full h-80 object-cover group-hover:scale-105 theatre-transition" />
                   
                   {/* Overlay Info */}
                   <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
@@ -141,11 +121,7 @@ const NowPremiering = () => {
 
                   {/* Play Button Overlay */}
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 theatre-transition flex items-center justify-center">
-                    <Button 
-                      size="lg" 
-                      className="bg-golden hover:bg-golden-dark text-black"
-                      onClick={() => handleWatchTrailer(movie)}
-                    >
+                    <Button size="lg" className="bg-golden hover:bg-golden-dark text-black" onClick={() => handleWatchTrailer(movie)}>
                       <Play className="w-5 h-5 mr-2" />
                       Watch Trailer
                     </Button>
@@ -171,50 +147,33 @@ const NowPremiering = () => {
                     </Badge>
                     <div className="flex items-center space-x-1 text-xs text-muted-foreground">
                       <Calendar className="w-3 h-3" />
-                      <span>{new Date(movie.premiereDate).toLocaleDateString('en-US', { 
-                        month: 'short', 
-                        day: 'numeric' 
-                      })}</span>
+                      <span>{new Date(movie.premiereDate).toLocaleDateString('en-US', {
+                      month: 'short',
+                      day: 'numeric'
+                    })}</span>
                     </div>
                   </div>
 
                   {/* Action Button */}
-                  <Button 
-                    className="w-full mt-4 theatre-gradient text-white font-semibold hover:scale-105 theatre-transition"
-                    onClick={() => handleBuyTicket(movie)}
-                  >
+                  <Button className="w-full mt-4 theatre-gradient text-white font-semibold hover:scale-105 theatre-transition" onClick={() => handleBuyTicket(movie)}>
                     <Ticket className="w-4 h-4 mr-2" />
                     Buy Premiere Ticket
                   </Button>
                 </div>
               </CardContent>
-            </Card>
-          ))}
+            </Card>)}
         </div>
 
         {/* View All Button */}
         <div className="text-center">
-          <Button 
-            variant="outline" 
-            size="lg" 
-            className="border-golden/50 text-golden hover:bg-golden/10 px-8 py-3"
-            onClick={handleViewAllPremieres}
-          >
+          <Button variant="outline" size="lg" className="border-golden/50 text-golden hover:bg-golden/10 px-8 py-3" onClick={handleViewAllPremieres}>
             View All Premieres
           </Button>
         </div>
 
         {/* Ticket Purchase Dialog */}
-        {selectedMovie && (
-          <TicketPurchaseDialog 
-            open={isTicketDialogOpen}
-            onOpenChange={setIsTicketDialogOpen}
-            movie={selectedMovie}
-          />
-        )}
+        {selectedMovie && <TicketPurchaseDialog open={isTicketDialogOpen} onOpenChange={setIsTicketDialogOpen} movie={selectedMovie} />}
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default NowPremiering;
