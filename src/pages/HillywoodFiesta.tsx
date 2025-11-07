@@ -29,7 +29,7 @@ const HillywoodFiesta = () => {
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bebas mb-4 text-primary">
                 Hillywood Red Carpet Event
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">Watch the one and only prestigious celebration of North East India's finest talents in Arts, Film, Fashion and Music</p>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">Watch the one and only prestigious biannual celebration of North East India's finest talents in Arts, Film, Fashion and Music</p>
             </div>
 
             {/* Live Stream Player */}
@@ -49,7 +49,7 @@ const HillywoodFiesta = () => {
                   Hillywood Fiesta
                 </h2>
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-merriweather mb-6">
-                  Hillywood Fiesta is a Hillywood annual red-carpet event to ignite the perennially inherent wealth of talents amongst the people of North East India in the industry of Arts, Film, Fashion and Music. The Hillywood Fiesta gala indulges in ecstasy with voices echoing from the hills and mountains of North-East India to blend with the richly blessed exotic colours of North East India Culture and Tradition.
+                  Hillywood Fiesta is a Hillywood biannual red-carpet event to ignite the perennially inherent wealth of talents amongst the people of North East India in the industry of Arts, Film, Fashion and Music. The Hillywood Fiesta gala indulges in ecstasy with voices echoing from the hills and mountains of North-East India to blend with the richly blessed exotic colours of North East India Culture and Tradition.
                 </p>
                 <p className="text-xl md:text-2xl font-bold text-golden mb-3 font-merriweather">
                   "This isn't just a festival, it is revolution in motion."
@@ -76,32 +76,19 @@ const HillywoodFiesta = () => {
                   
                   <div className="space-y-6">
                     <div>
-                      <h4 className="text-base md:text-lg font-semibold text-foreground mb-2">1. BEST PERSONALITY IN ARTS, MUSIC, FILM AND FASHION:</h4>
-                      <p className="text-sm md:text-base text-muted-foreground">#Tower of Glory- North East India</p>
+                      <h4 className="text-base md:text-lg font-semibold text-foreground mb-2">Mr./Mrs. Hillywood</h4>
                     </div>
 
                     <div>
-                      <h4 className="text-base md:text-lg font-semibold text-foreground mb-2">2. THE TITLE OF THE MOST BEAUTY & HANDSOME:</h4>
-                      <p className="text-sm md:text-base text-muted-foreground">#Queen of Patriarchs- North East India</p>
-                      <p className="text-sm md:text-base text-muted-foreground">#Master Renowned- North East India</p>
+                      <h4 className="text-base md:text-lg font-semibold text-foreground mb-2">Best Actors and Actress</h4>
                     </div>
 
                     <div>
-                      <h4 className="text-base md:text-lg font-semibold text-foreground mb-2">3. THE TITLE OF BEST ACTOR AND ACTRESS:</h4>
-                      <p className="text-sm md:text-base text-muted-foreground">#Master Admirable- North East India</p>
-                      <p className="text-sm md:text-base text-muted-foreground">#Miss Admirable- North East India</p>
+                      <h4 className="text-base md:text-lg font-semibold text-foreground mb-2">Hillywood Mystical Voice – Male/Female</h4>
                     </div>
 
                     <div>
-                      <h4 className="text-base md:text-lg font-semibold text-foreground mb-2">4. THE TITLE OF BEST MUSIC:</h4>
-                      <p className="text-sm md:text-base text-muted-foreground">#Mystical Voice-Male</p>
-                      <p className="text-sm md:text-base text-muted-foreground">#Mystical Voice- Female</p>
-                    </div>
-
-                    <div>
-                      <h4 className="text-base md:text-lg font-semibold text-foreground mb-2">5. THE TITLE OF BEST FASHION AND DESIGNING:</h4>
-                      <p className="text-sm md:text-base text-muted-foreground">BEST DESIGNER TITLE:</p>
-                      <p className="text-sm md:text-base text-muted-foreground">#Eastern Star- North East India</p>
+                      <h4 className="text-base md:text-lg font-semibold text-foreground mb-2">Hillywood Iconic Designs – Eastern Star</h4>
                     </div>
                   </div>
                 </div>
@@ -131,7 +118,7 @@ const HillywoodFiesta = () => {
                 Award Winners 2024
               </h2>
               <p className="text-lg text-muted-foreground">
-                Celebrating excellence in Northeast Indian cinema
+                Celebrating excellence in Northeast Indian Cinema, Music and Fashion
               </p>
             </div>
 
@@ -215,20 +202,12 @@ const HillywoodFiesta = () => {
               Be Part of the Red Carpet Experience
             </h2>
             <p className="text-lg md:text-xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto font-merriweather">
-              Join us at the annual Hillywood Fiesta red carpet event celebrating the talents of North East India in Arts, Film, Fashion and Music.
+              Join us at the biannual Hillywood Fiesta red carpet event celebrating the talents of North East India in Arts, Film, Fashion and Music.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button size="lg" variant="outline" className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 text-base md:text-lg px-6 md:px-8 py-5 md:py-6 bg-transparent" onClick={() => setRegistrationOpen(true)}>
                 <Ticket className="w-5 h-5 mr-2" />
                 Register for Event
-              </Button>
-              <Button size="lg" variant="outline" className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 text-base md:text-lg px-6 md:px-8 py-5 md:py-6 bg-transparent" onClick={() => {
-              const aboutSection = document.querySelector('section.bg-card-accent\\/20');
-              aboutSection?.scrollIntoView({
-                behavior: 'smooth'
-              });
-            }}>
-                Learn More
               </Button>
             </div>
           </div>

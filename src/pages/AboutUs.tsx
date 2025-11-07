@@ -38,9 +38,9 @@ const AboutUs = () => {
             </p>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-merriweather mb-2">
               Discover the story behind HillyWood - a cultural movement dedicated to celebrating 
-              and preserving Northeast India's cinematic heritage.
+              and preserving Northeast India's cinematic, music and fashion heritage.
             </p>
-            <p className="text-base text-muted-foreground italic font-semibold">
+            <p className="text-base text-golden italic font-semibold">
               Roots in soil, eyes on stars
             </p>
           </div>

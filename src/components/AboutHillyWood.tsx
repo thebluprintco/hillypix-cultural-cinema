@@ -9,7 +9,7 @@ import LearnMoreDialog from './LearnMoreDialog';
 const values = [
   {
     icon: Heart,
-    title: 'Celebrating NorthEast Culture',
+    title: "Celebrating Northeast India's Culture",
     description: 'Every film is a living archive, preserving languages, traditions, and stories that might otherwise be lost to time.',
     color: 'text-red-400'
   },
@@ -55,18 +55,12 @@ const AboutHillyWood = () => {
             🏔️ THE HILLYWOOD MOVEMENT
           </Badge>
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="text-foreground">More Than</span>
-            <br />
             <span className="bg-gradient-to-r from-golden to-primary-light bg-clip-text text-transparent">
-              Entertainment
+              Its glorious destiny in NE India and beyond
             </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-merriweather leading-relaxed mb-4">
-            HillyWood is a cultural revolution celebrating the stories, languages, and traditions 
-            of Northeast India's eight states through the powerful medium of cinema.
-          </p>
-          <p className="text-lg text-golden font-bold italic">
-            From Northeast for Northeast India
+            Hillywood celebrates cultural identity and narratives through cinema, music and fashion from the North East India
           </p>
         </div>
 
@@ -79,9 +73,7 @@ const AboutHillyWood = () => {
               </div>
               <h3 className="text-2xl font-bold text-foreground mb-4">Our Mission</h3>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                "To create a thriving ecosystem where the eight states of Northeast India have their own 
-                cinematic identity—<strong className="text-golden">HillyWood</strong>—that rivals any film industry 
-                in the world while staying true to our roots, traditions, and unique cultural tapestry."
+                "Hillywood catalyses transformative change in North East India's cultural, social and economic landscape."
               </p>
             </CardContent>
           </Card>
@@ -128,9 +120,6 @@ const AboutHillyWood = () => {
         <div className="max-w-4xl mx-auto mb-16">
           <div className="text-center mb-8">
             <h3 className="text-3xl font-bold text-foreground mb-4">The HillyWood Vision</h3>
-            <p className="text-lg text-muted-foreground">
-              Imagine a future where Northeast India's cinema is celebrated globally...
-            </p>
           </div>
 
           <div className="space-y-6">
@@ -139,9 +128,8 @@ const AboutHillyWood = () => {
                 <span className="text-golden font-bold">1</span>
               </div>
               <div>
-                <h4 className="text-lg font-semibold text-foreground mb-2">Authentic Storytelling</h4>
                 <p className="text-muted-foreground">
-                  Films that authentically represent our diverse cultures, languages, and traditions without compromise or stereotypes.
+                  A platform to discover and launch new actress and actor talents from the North East.
                 </p>
               </div>
             </div>
@@ -151,9 +139,8 @@ const AboutHillyWood = () => {
                 <span className="text-primary-light font-bold">2</span>
               </div>
               <div>
-                <h4 className="text-lg font-semibold text-foreground mb-2">Economic Empowerment</h4>
                 <p className="text-muted-foreground">
-                  Creating sustainable livelihoods for artists, technicians, and storytellers across all eight states.
+                  Celebrating cultural identity while embracing futuristic cinematic storytelling, heartfelt music and unique fashion.
                 </p>
               </div>
             </div>
@@ -163,9 +150,8 @@ const AboutHillyWood = () => {
                 <span className="text-golden font-bold">3</span>
               </div>
               <div>
-                <h4 className="text-lg font-semibold text-foreground mb-2">Cultural Legacy</h4>
                 <p className="text-muted-foreground">
-                  Ensuring that future generations inherit a rich digital archive of their cultural heritage through cinema.
+                  Empowering youth and bridging generations through entertainment.
                 </p>
               </div>
             </div>
