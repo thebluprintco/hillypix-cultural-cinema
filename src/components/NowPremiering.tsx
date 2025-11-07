@@ -86,7 +86,7 @@ const NowPremiering = () => {
             <br />
             Premieres
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Get your tickets now for exclusive premieres celebrating the diverse cultures and stories of Northeast India.</p>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Get your digital tickets now for exclusive premieres celebrating the diverse cultures and stories of Northeast India.</p>
         </div>
 
         {/* Premieres Grid */}
