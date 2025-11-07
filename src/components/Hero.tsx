@@ -89,9 +89,7 @@ Truly East
 
         {/* Cultural Note */}
         <div className="mt-12 p-6 bg-card-accent/30 backdrop-blur-sm rounded-xl border border-border/20">
-          <p className="text-sm text-muted-foreground italic">
-            "Every ticket purchased supports the growing 
-            <span className="text-golden font-medium"> HillyWood</span> movement, 
+          <p className="text-sm text-muted-foreground italic">"Every ticket purchased supports the growing HillyWood movement, preserving and celebrating the rich cultural heritage of Northeast India through cinema, music and fashion.<span className="text-golden font-medium"> HillyWood</span> movement, 
             preserving and celebrating the rich cultural heritage of Northeast India through cinema."
           </p>
         </div>
