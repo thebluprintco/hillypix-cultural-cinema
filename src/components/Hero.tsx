@@ -3,8 +3,10 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Play, Ticket, Calendar, Users } from 'lucide-react';
 import theatreHero from '@/assets/theatre-hero.jpg';
+
 const Hero = () => {
-  return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Theatre Image */}
       <div className="absolute inset-0 z-0">
         <img src={theatreHero} alt="Grand Cultural Theatre" className="w-full h-full object-cover" />
@@ -42,11 +44,8 @@ const Hero = () => {
         </div>
 
         {/* Subtitle */}
-        <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">Step into the grand cultural theatre of HillyWood, 
-ortheast India's eight states come alive on screen.
-
-        <span className="text-golden font-semibold"> HillyWood</span> — 
-          where Northeast India's eight states come alive on screen.
+        <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
+          Step into the grand cultural theatre of Hillywood, defining North East India. <span className="text-golden font-semibold">"Truly East"</span>
         </p>
 
         {/* Stats */}
@@ -89,14 +88,16 @@ ortheast India's eight states come alive on screen.
 
         {/* Cultural Note */}
         <div className="mt-12 p-6 bg-card-accent/30 backdrop-blur-sm rounded-xl border border-border/20">
-          <p className="text-sm text-muted-foreground italic">"Every ticket purchased supports the growing HillyWood movement, preserving and celebrating the rich cultural heritage of Northeast India through cinema, music and fashion.<span className="text-golden font-medium"> HillyWood</span> movement, 
-            preserving and celebrating the rich cultural heritage of Northeast India through cinema."
+          <p className="text-sm text-muted-foreground italic">
+            "Every ticket purchased supports the growing <span className="text-golden font-medium">HillyWood</span> movement, preserving and celebrating the rich cultural heritage of Northeast India through cinema, music and fashion."
           </p>
         </div>
       </div>
 
       {/* Decorative Elements */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none"></div>
-    </section>;
+    </section>
+  );
 };
+
 export default Hero;
