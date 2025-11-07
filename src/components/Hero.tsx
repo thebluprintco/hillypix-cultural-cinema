@@ -3,17 +3,11 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Play, Ticket, Calendar, Users } from 'lucide-react';
 import theatreHero from '@/assets/theatre-hero.jpg';
-
 const Hero = () => {
-  return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+  return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Theatre Image */}
       <div className="absolute inset-0 z-0">
-        <img 
-          src={theatreHero} 
-          alt="Grand Cultural Theatre"
-          className="w-full h-full object-cover"
-        />
+        <img src={theatreHero} alt="Grand Cultural Theatre" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/20"></div>
         <div className="absolute inset-0 cultural-pattern opacity-30"></div>
       </div>
@@ -48,9 +42,10 @@ const Hero = () => {
         </div>
 
         {/* Subtitle */}
-        <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-          Step into the grand cultural theatre celebrating the stories, traditions, and cinema of 
-          <span className="text-golden font-semibold"> HillyWood</span> — 
+        <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">Step into the grand cultural theatre of HillyWood defining North East India.
+Truly East
+
+        <span className="text-golden font-semibold"> HillyWood</span> — 
           where Northeast India's eight states come alive on screen.
         </p>
 
@@ -78,22 +73,13 @@ const Hero = () => {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Button 
-            size="lg" 
-            asChild
-            className="theatre-gradient text-white px-8 py-4 text-lg font-semibold hover:scale-105 theatre-transition premiere-glow"
-          >
+          <Button size="lg" asChild className="theatre-gradient text-white px-8 py-4 text-lg font-semibold hover:scale-105 theatre-transition premiere-glow">
             <Link to="/premieres">
               <Ticket className="w-5 h-5 mr-3" />
               Browse Premieres
             </Link>
           </Button>
-          <Button 
-            variant="outline" 
-            size="lg" 
-            asChild
-            className="border-golden/50 text-golden hover:bg-golden/10 px-8 py-4 text-lg font-semibold hover:scale-105 theatre-transition"
-          >
+          <Button variant="outline" size="lg" asChild className="border-golden/50 text-golden hover:bg-golden/10 px-8 py-4 text-lg font-semibold hover:scale-105 theatre-transition">
             <Link to="/library">
               <Play className="w-5 h-5 mr-3" />
               Explore Library
@@ -113,8 +99,6 @@ const Hero = () => {
 
       {/* Decorative Elements */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none"></div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
