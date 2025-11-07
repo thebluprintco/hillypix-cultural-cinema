@@ -138,14 +138,14 @@ const Music = () => {
             </Badge>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               <span className="bg-gradient-to-r from-primary-light to-golden bg-clip-text text-transparent">
-                Northeast
+                North East India
               </span>
               <br />
-              Music Showcase
+              Showcasing the echoes from the hills and valleys
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Discover and support Northeast artists. Watch free music videos with ads, 
-              or buy exclusive premium content for ₹29-₹49.
+              Discover and support North Eastern Artists. Experience the music of Northeast India or buy
+              exclusive content for Rs. X. Each transaction directly supports the artists.
             </p>
           </div>
         </section>
@@ -157,7 +157,7 @@ const Music = () => {
               <TabsList className="grid w-full max-w-lg mx-auto grid-cols-3 bg-card-accent/50">
                 <TabsTrigger value="trending" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                   <TrendingUp className="w-4 h-4 mr-2" />
-                  Trending
+                  Trending Music
                 </TabsTrigger>
                 <TabsTrigger value="new" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                   <Sparkles className="w-4 h-4 mr-2" />
@@ -165,7 +165,7 @@ const Music = () => {
                 </TabsTrigger>
                 <TabsTrigger value="state" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                   <MapPin className="w-4 h-4 mr-2" />
-                  By State
+                  Languages
                 </TabsTrigger>
               </TabsList>
             </Tabs>

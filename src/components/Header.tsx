@@ -66,7 +66,7 @@ const Header = () => {
             <Button variant="ghost" asChild className={`text-foreground hover:text-golden theatre-transition ${location.pathname === '/tv-series' ? 'text-golden' : ''}`}>
               <Link to="/tv-series">
                 <Tv className="w-4 h-4 mr-2" />
-                TV Series
+                Series
               </Link>
             </Button>
             <Button variant="ghost" asChild className={`text-foreground hover:text-golden theatre-transition ${location.pathname === '/music' ? 'text-golden' : ''}`}>

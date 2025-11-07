@@ -17,14 +17,14 @@ const HallOfFamePage = () => {
             </Badge>
             <h1 className="text-4xl md:text-6xl font-bebas mb-6">
               <span className="bg-gradient-to-r from-primary-light to-golden bg-clip-text text-transparent">
-                Honoring Our
+                Honoring Legends of
               </span>
               <br />
-              Cinema Legends
+              North East India
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-merriweather">
-              Celebrating the visionary filmmakers, talented actors, and groundbreaking films 
-              that have shaped and continue to define the HillyWood movement.
+              Celebrating the visionary filmmakers, talented actors, musicians and groundbreaking fashion icons 
+              that have shaped and continue to define the Hillywood awakening.
             </p>
           </div>
         </section>

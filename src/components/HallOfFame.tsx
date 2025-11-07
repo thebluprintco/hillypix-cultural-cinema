@@ -206,67 +206,6 @@ const HallOfFame = () => {
             </div>)}
         </div>
 
-        {/* HillyWood Milestones - Enhanced Timeline */}
-        <div className="mb-16">
-          <div className="text-center mb-12">
-            <Badge className="mb-4 bg-primary/20 text-primary px-4 py-2">
-              📅 TIMELINE
-            </Badge>
-            <h3 className="text-4xl font-anton mb-4">
-              <span className="bg-gradient-to-r from-primary to-golden bg-clip-text text-transparent">
-                HillyWood Milestones
-              </span>
-            </h3>
-            <p className="text-muted-foreground max-w-2xl mx-auto font-merriweather">
-              Journey through the pivotal moments that shaped Northeast India's cinematic heritage
-            </p>
-          </div>
-
-          <div className="max-w-5xl mx-auto relative">
-            {/* Vertical Timeline Line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-golden via-primary to-golden/20 hidden md:block"></div>
-            
-            {milestones.map((milestone, index) => <div key={index} className="relative mb-12 last:mb-0 group">
-                <div className="flex items-start space-x-8">
-                  {/* Timeline Icon with Pulse Animation */}
-                  <div className="relative flex-shrink-0 z-10">
-                    <div className={`w-16 h-16 rounded-full flex items-center justify-center border-4 border-background ${milestone.highlight ? 'bg-gradient-to-br from-golden to-golden/70 shadow-lg shadow-golden/50' : 'bg-gradient-to-br from-primary to-primary-light'} group-hover:scale-110 theatre-transition`}>
-                      <milestone.icon className={`w-8 h-8 ${milestone.highlight ? 'text-black' : 'text-primary-foreground'}`} />
-                    </div>
-                    {milestone.highlight && <div className="absolute inset-0 rounded-full bg-golden animate-ping opacity-20"></div>}
-                  </div>
-
-                  {/* Content Card */}
-                  <Card className="flex-1 bg-gradient-to-br from-card-accent/60 to-card-accent/20 border-border/30 group-hover:border-primary/50 theatre-transition overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-golden/5 opacity-0 group-hover:opacity-100 theatre-transition"></div>
-                    
-                    <CardContent className="p-6 relative z-10">
-                      <div className="flex flex-wrap items-center gap-3 mb-3">
-                        <span className={`text-3xl font-bold ${milestone.highlight ? 'text-golden' : 'text-primary'}`}>
-                          {milestone.year}
-                        </span>
-                        {milestone.highlight && <Badge className="bg-golden text-black font-semibold animate-pulse">
-                            🎬 Latest
-                          </Badge>}
-                        {milestone.impact && <Badge className="bg-primary/20 text-primary border border-primary/30">
-                            {milestone.impact}
-                          </Badge>}
-                      </div>
-                      
-                      <h4 className="text-2xl font-spartan font-bold text-foreground mb-3 group-hover:text-golden theatre-transition">
-                        {milestone.title}
-                      </h4>
-                      
-                      <p className="text-muted-foreground leading-relaxed font-merriweather">
-                        {milestone.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>)}
-          </div>
-        </div>
-
         {/* Call to Action - Enhanced */}
         <div className="relative overflow-hidden bg-gradient-to-br from-card-accent/60 via-card-accent/40 to-card-accent/20 p-12 rounded-2xl border border-golden/20 theatre-shadow">
           {/* Decorative Background Elements */}
