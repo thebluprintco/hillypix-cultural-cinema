@@ -94,6 +94,10 @@ const Index = () => {
                 <a href="#" className="block text-muted-foreground hover:text-golden theatre-transition">Manipur</a>
                 <a href="#" className="block text-muted-foreground hover:text-golden theatre-transition">Nagaland</a>
                 <a href="#" className="block text-muted-foreground hover:text-golden theatre-transition">Meghalaya</a>
+                <a href="#" className="block text-muted-foreground hover:text-golden theatre-transition">Mizoram</a>
+                <a href="#" className="block text-muted-foreground hover:text-golden theatre-transition">Tripura</a>
+                <a href="#" className="block text-muted-foreground hover:text-golden theatre-transition">Arunachal Pradesh</a>
+                <a href="#" className="block text-muted-foreground hover:text-golden theatre-transition">Sikkim</a>
               </nav>
             </div>
 
