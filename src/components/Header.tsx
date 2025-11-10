@@ -1,17 +1,28 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Search, User, Ticket, Film, Award, Home, Tv, Music, PartyPopper, BookOpen, Info } from 'lucide-react';
+import { Search, User, Film, Award, Home, Tv, Music, PartyPopper, BookOpen, Info, Star } from 'lucide-react';
+import {
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@/components/ui/command';
 import AuthDialog from './AuthDialog';
 import UserProfileDialog from './UserProfileDialog';
+import { searchableContent } from '@/data/searchData';
 
 const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isAuthDialogOpen, setIsAuthDialogOpen] = useState(false);
   const [isProfileDialogOpen, setIsProfileDialogOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
+  const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Load user from localStorage on component mount
   useEffect(() => {
@@ -30,6 +41,34 @@ const Header = () => {
     setUser(null);
     localStorage.removeItem('hillypix-user');
   };
+
+  const filteredContent = searchableContent.filter((item) => {
+    const query = searchQuery.toLowerCase();
+    return (
+      item.title.toLowerCase().includes(query) ||
+      item.language.toLowerCase().includes(query) ||
+      item.genre.toLowerCase().includes(query) ||
+      item.type.toLowerCase().includes(query)
+    );
+  });
+
+  const handleSelectItem = (route: string) => {
+    setIsSearchOpen(false);
+    setSearchQuery('');
+    navigate(route);
+  };
+
+  // Keyboard shortcut for search (Ctrl+K or Cmd+K)
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setIsSearchOpen((open) => !open);
+      }
+    };
+    document.addEventListener('keydown', down);
+    return () => document.removeEventListener('keydown', down);
+  }, []);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/20">
@@ -98,33 +137,18 @@ const Header = () => {
           {/* User Actions */}
           <div className="flex items-center space-x-4">
             {/* Search */}
-            <div className="relative">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className="text-muted-foreground hover:text-golden"
-              >
-                <Search className="w-4 h-4" />
-              </Button>
-              {isSearchOpen && (
-                <div className="absolute right-0 top-12 w-80 animate-theatre-entrance">
-                  <div className="bg-card-accent/95 backdrop-blur-md rounded-lg p-4 border border-border/30">
-                    <input
-                      type="text"
-                      placeholder="Search films, states, languages..."
-                      className="w-full bg-background/50 text-foreground placeholder:text-muted-foreground px-4 py-2 rounded-lg border border-border/20 focus:outline-none focus:ring-2 focus:ring-primary/50"
-                      autoFocus
-                    />
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      <Badge variant="secondary" className="text-xs">Assamese</Badge>
-                      <Badge variant="secondary" className="text-xs">Manipuri</Badge>
-                      <Badge variant="secondary" className="text-xs">Folk Tales</Badge>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsSearchOpen(true)}
+              className="text-muted-foreground hover:text-golden"
+            >
+              <Search className="w-4 h-4 mr-2" />
+              <span className="hidden sm:inline text-xs">Search</span>
+              <kbd className="hidden lg:inline-flex ml-2 pointer-events-none h-5 select-none items-center gap-1 rounded border border-border/30 bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <span className="text-xs">⌘</span>K
+              </kbd>
+            </Button>
 
             {/* My Library / Auth */}
             {user ? (
@@ -189,6 +213,67 @@ const Header = () => {
             onSignOut={handleSignOut}
           />
         )}
+
+        {/* Search Command Dialog */}
+        <CommandDialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
+          <CommandInput 
+            placeholder="Search movies, series, music, languages..." 
+            value={searchQuery}
+            onValueChange={setSearchQuery}
+          />
+          <CommandList>
+            <CommandEmpty>No results found.</CommandEmpty>
+            
+            {filteredContent.length > 0 && (
+              <>
+                {['movie', 'series', 'music'].map((type) => {
+                  const items = filteredContent.filter((item) => item.type === type);
+                  if (items.length === 0) return null;
+                  
+                  return (
+                    <CommandGroup 
+                      key={type} 
+                      heading={type.charAt(0).toUpperCase() + type.slice(1) + 's'}
+                    >
+                      {items.map((item) => (
+                        <CommandItem
+                          key={item.id}
+                          value={`${item.title}-${item.language}-${item.genre}`}
+                          onSelect={() => handleSelectItem(item.route)}
+                          className="flex items-center gap-3 py-3 cursor-pointer"
+                        >
+                          <img 
+                            src={item.poster} 
+                            alt={item.title}
+                            className="w-12 h-16 object-cover rounded"
+                          />
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2">
+                              <p className="font-medium">{item.title}</p>
+                              <Badge variant="secondary" className="text-xs">
+                                {item.language}
+                              </Badge>
+                            </div>
+                            <div className="flex items-center gap-2 mt-1">
+                              <span className="text-xs text-muted-foreground">{item.genre}</span>
+                              <span className="text-xs text-muted-foreground">•</span>
+                              <span className="text-xs text-muted-foreground">{item.year}</span>
+                              <span className="text-xs text-muted-foreground">•</span>
+                              <span className="flex items-center gap-1 text-xs text-golden">
+                                <Star className="w-3 h-3 fill-golden" />
+                                {item.rating}
+                              </span>
+                            </div>
+                          </div>
+                        </CommandItem>
+                      ))}
+                    </CommandGroup>
+                  );
+                })}
+              </>
+            )}
+          </CommandList>
+        </CommandDialog>
       </div>
     </header>
   );
