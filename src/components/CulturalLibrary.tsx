@@ -378,50 +378,79 @@ const CulturalLibrary = () => {
           </TabsList>
 
           {categories.map(category => <TabsContent key={category.id} value={category.id} className="mt-8">
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div className={`grid ${isMobile ? 'grid-cols-3 gap-2' : 'md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'}`}>
                 {displayedMovies.map(movie => <Card key={movie.id} className="group bg-card-accent/30 border-border/20 hover:border-golden/30 theatre-transition overflow-hidden ticket-hover">
                     <CardContent className="p-0">
                       {/* Movie Poster */}
                       <div className="relative overflow-hidden">
-                        <img src={movie.poster} alt={movie.title} className="w-full h-64 object-cover group-hover:scale-105 theatre-transition" />
+                        <img src={movie.poster} alt={movie.title} className={`w-full ${isMobile ? 'h-36' : 'h-64'} object-cover group-hover:scale-105 theatre-transition`} />
                         
-                        {/* Overlay Info */}
-                        <div className="absolute top-3 left-3 right-3 flex justify-between items-start">
-                          <div className="flex gap-2">
-                            {movie.owned && <Badge className="bg-golden text-black text-xs font-semibold">
-                                <BookOpen className="w-3 h-3 mr-1" />
-                                Owned
-                              </Badge>}
-                            <Button size="sm" variant="secondary" className="h-6 px-2 bg-black/60 backdrop-blur-sm hover:bg-black/80 border-none" onClick={e => handleWatchlistToggle(movie, e)}>
-                              {isInWatchlist(movie.id) ? <BookmarkCheck className="w-3 h-3 text-golden" /> : <BookmarkPlus className="w-3 h-3 text-white" />}
+                        {/* Overlay Info - Hide most on mobile */}
+                        {!isMobile && (
+                          <div className="absolute top-3 left-3 right-3 flex justify-between items-start">
+                            <div className="flex gap-2">
+                              {movie.owned && <Badge className="bg-golden text-black text-xs font-semibold">
+                                  <BookOpen className="w-3 h-3 mr-1" />
+                                  Owned
+                                </Badge>}
+                              <Button size="sm" variant="secondary" className="h-6 px-2 bg-black/60 backdrop-blur-sm hover:bg-black/80 border-none" onClick={e => handleWatchlistToggle(movie, e)}>
+                                {isInWatchlist(movie.id) ? <BookmarkCheck className="w-3 h-3 text-golden" /> : <BookmarkPlus className="w-3 h-3 text-white" />}
+                              </Button>
+                            </div>
+                            <div className="flex items-center space-x-1 bg-black/60 backdrop-blur-sm px-2 py-1 rounded-full">
+                              <Star className="w-3 h-3 text-golden fill-current" />
+                              <span className="text-xs text-white font-medium">{movie.rating}</span>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Mobile: Show only rating */}
+                        {isMobile && (
+                          <div className="absolute top-1 right-1">
+                            <div className="flex items-center space-x-0.5 bg-black/70 backdrop-blur-sm px-1.5 py-0.5 rounded-full">
+                              <Star className="w-2.5 h-2.5 text-golden fill-current" />
+                              <span className="text-[10px] text-white font-medium">{movie.rating}</span>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Play Button Overlay - Desktop only */}
+                        {!isMobile && (
+                          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 theatre-transition flex items-center justify-center">
+                            <Button size="lg" className={movie.owned ? 'bg-golden hover:bg-golden-dark text-black' : 'theatre-gradient text-white'} onClick={() => movie.owned ? null : handleBuyTicket(movie)}>
+                              <Play className="w-4 h-4 mr-2" />
+                              {movie.owned ? 'Watch Now' : 'Buy Ticket'}
                             </Button>
                           </div>
-                          <div className="flex items-center space-x-1 bg-black/60 backdrop-blur-sm px-2 py-1 rounded-full">
-                            <Star className="w-3 h-3 text-golden fill-current" />
-                            <span className="text-xs text-white font-medium">{movie.rating}</span>
-                          </div>
-                        </div>
-
-                        {/* Play Button Overlay */}
-                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 theatre-transition flex items-center justify-center">
-                          <Button size="lg" className={movie.owned ? 'bg-golden hover:bg-golden-dark text-black' : 'theatre-gradient text-white'} onClick={() => movie.owned ? null : handleBuyTicket(movie)}>
-                            <Play className="w-4 h-4 mr-2" />
-                            {movie.owned ? 'Watch Now' : 'Buy Ticket'}
-                          </Button>
-                        </div>
+                        )}
                       </div>
 
                       {/* Movie Details */}
-                      <div className="p-4">
-                        <h3 className="font-bold text-foreground mb-1 line-clamp-1">{movie.title}</h3>
-                        <p className="text-xs text-muted-foreground mb-2">
-                          {movie.language} • {movie.year} • {movie.duration}
-                        </p>
-                        <div className="flex items-center justify-between">
-                          <Badge variant="secondary" className="text-xs">
-                            {genres.find(g => g.id === movie.genre)?.name}
-                          </Badge>
-                        </div>
+                      <div className={isMobile ? 'p-1.5' : 'p-4'}>
+                        {isMobile ? (
+                          // Compact mobile view
+                          <>
+                            <h3 className="text-[10px] font-semibold text-foreground line-clamp-1 mb-0.5">
+                              {movie.title}
+                            </h3>
+                            <p className="text-[8px] text-muted-foreground line-clamp-1">
+                              {movie.duration}
+                            </p>
+                          </>
+                        ) : (
+                          // Full desktop view
+                          <>
+                            <h3 className="font-bold text-foreground mb-1 line-clamp-1">{movie.title}</h3>
+                            <p className="text-xs text-muted-foreground mb-2">
+                              {movie.language} • {movie.year} • {movie.duration}
+                            </p>
+                            <div className="flex items-center justify-between">
+                              <Badge variant="secondary" className="text-xs">
+                                {genres.find(g => g.id === movie.genre)?.name}
+                              </Badge>
+                            </div>
+                          </>
+                        )}
                       </div>
                     </CardContent>
                   </Card>)}
