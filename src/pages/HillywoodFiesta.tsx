@@ -8,12 +8,13 @@ import theatreHero from '@/assets/theatre-hero.jpg';
 import EventRegistrationDialog from '@/components/EventRegistrationDialog';
 import LiveStreamPlayer from '@/components/LiveStreamPlayer';
 import Footer from '@/components/Footer';
+import { useIsMobile } from '@/hooks/use-mobile';
 const HillywoodFiesta = () => {
   const [registrationOpen, setRegistrationOpen] = useState(false);
-  // Toggle this to true when the event is live
   const [isEventLive, setIsEventLive] = useState(false);
-  // Update this with your actual stream URL (YouTube, Vimeo, etc.)
   const streamUrl = '';
+  const isMobile = useIsMobile();
+
   return <div className="min-h-screen bg-background">
       <Header />
       
@@ -26,10 +27,18 @@ const HillywoodFiesta = () => {
               <Badge className="mb-4 bg-golden/20 text-golden px-4 py-2 text-sm">
                 🎬 LIVE RED CARPET EVENT
               </Badge>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bebas mb-4 text-primary">
-                Hillywood Red Carpet Event
+              <h1 className={`${isMobile ? 'text-3xl' : 'text-4xl md:text-6xl lg:text-7xl'} font-bebas mb-4 text-primary`}>
+                Hillywood Red Carpet {isMobile ? '' : 'Event'}
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">Watch the one and only prestigious biannual celebration of North East India's finest talents in Arts, Film, Fashion and Music</p>
+              {isMobile ? (
+                <p className="text-base text-muted-foreground max-w-xl mx-auto line-clamp-2">
+                  Celebrating NE India's finest talents
+                </p>
+              ) : (
+                <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+                  Watch the one and only prestigious biannual celebration of North East India's finest talents in Arts, Film, Fashion and Music
+                </p>
+              )}
             </div>
 
             {/* Live Stream Player */}
@@ -48,15 +57,28 @@ const HillywoodFiesta = () => {
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-anton mb-6 text-foreground">
                   Hillywood Fiesta
                 </h2>
-                <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-merriweather mb-6">
-                  Hillywood Fiesta is a Hillywood biannual red-carpet event to ignite the perennially inherent wealth of talents amongst the people of North East India in the industry of Arts, Film, Fashion and Music. The Hillywood Fiesta gala indulges in ecstasy with voices echoing from the hills and mountains of North-East India to blend with the richly blessed exotic colours of North East India Culture and Tradition.
-                </p>
-                <p className="text-xl md:text-2xl font-bold text-golden mb-3 font-merriweather">
-                  "This isn't just a festival, it is revolution in motion."
-                </p>
-                <p className="text-base md:text-lg font-semibold text-primary italic font-merriweather">
-                  While global festivals chase glitter, Hillywood Fiesta digs for cultural gold.
-                </p>
+                {isMobile ? (
+                  <>
+                    <p className="text-sm text-muted-foreground leading-relaxed font-merriweather mb-4 line-clamp-3">
+                      Biannual red-carpet event celebrating NE India's talents in Arts, Film, Fashion and Music.
+                    </p>
+                    <p className="text-lg font-bold text-golden font-merriweather">
+                      "Cultural revolution in motion"
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-merriweather mb-6">
+                      Hillywood Fiesta is a Hillywood biannual red-carpet event to ignite the perennially inherent wealth of talents amongst the people of North East India in the industry of Arts, Film, Fashion and Music. The Hillywood Fiesta gala indulges in ecstasy with voices echoing from the hills and mountains of North-East India to blend with the richly blessed exotic colours of North East India Culture and Tradition.
+                    </p>
+                    <p className="text-xl md:text-2xl font-bold text-golden mb-3 font-merriweather">
+                      "This isn't just a festival, it is revolution in motion."
+                    </p>
+                    <p className="text-base md:text-lg font-semibold text-primary italic font-merriweather">
+                      While global festivals chase glitter, Hillywood Fiesta digs for cultural gold.
+                    </p>
+                  </>
+                )}
               </div>
             </div>
           </div>

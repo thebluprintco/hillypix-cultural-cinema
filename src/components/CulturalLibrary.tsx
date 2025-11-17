@@ -7,6 +7,7 @@ import { Play, BookOpen, Filter, Star, BookmarkPlus, BookmarkCheck } from 'lucid
 import { useWatchlist } from '@/hooks/useWatchlist';
 import { useToast } from '@/hooks/use-toast';
 import TicketPurchaseDialog from './TicketPurchaseDialog';
+import { useIsMobile } from '@/hooks/use-mobile';
 import moviePoster1 from '@/assets/movie-poster-1.jpg';
 import moviePoster2 from '@/assets/movie-poster-2.jpg';
 import moviePoster3 from '@/assets/movie-poster-3.jpg';
@@ -272,6 +273,7 @@ const CulturalLibrary = () => {
   const [visibleMovies, setVisibleMovies] = useState(6);
   const [selectedMovie, setSelectedMovie] = useState<any>(null);
   const [isTicketDialogOpen, setIsTicketDialogOpen] = useState(false);
+  const isMobile = useIsMobile();
   const {
     addToWatchlist,
     removeFromWatchlist,

@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Clock, Ticket, Star, Play, Calendar } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import TicketPurchaseDialog from './TicketPurchaseDialog';
+import { useIsMobile } from '@/hooks/use-mobile';
 import moviePoster1 from '@/assets/movie-poster-1.jpg';
 import moviePoster2 from '@/assets/movie-poster-2.jpg';
 import moviePoster3 from '@/assets/movie-poster-3.jpg';
@@ -56,6 +57,7 @@ const NowPremiering = () => {
   const [selectedMovie, setSelectedMovie] = useState<any>(null);
   const [isTicketDialogOpen, setIsTicketDialogOpen] = useState(false);
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
   const {
     toast
   } = useToast();
@@ -72,93 +74,109 @@ const NowPremiering = () => {
   const handleViewAllPremieres = () => {
     navigate('/premieres');
   };
-  return <section className="py-20 px-6">
+  return <section className={`${isMobile ? 'py-12' : 'py-20'} px-6`}>
       <div className="container mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <Badge className="mb-4 bg-primary/20 text-primary-light px-4 py-2">
-            🎬 NOW PREMIERING
+            🎬 {isMobile ? 'PREMIERING' : 'NOW PREMIERING'}
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-golden to-primary-light bg-clip-text text-transparent">
-              This Week's
-            </span>
-            <br />
-            Premieres
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Get your digital tickets now for exclusive premieres celebrating the diverse cultures and stories of Northeast India.</p>
+          {isMobile ? (
+            <h2 className="text-3xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-golden to-primary-light bg-clip-text text-transparent">
+                This Week
+              </span>
+            </h2>
+          ) : (
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-golden to-primary-light bg-clip-text text-transparent">
+                This Week's
+              </span>
+              <br />
+              Premieres
+            </h2>
+          )}
+          {!isMobile && (
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Get your digital tickets now for exclusive premieres celebrating the diverse cultures and stories of Northeast India.
+            </p>
+          )}
         </div>
 
         {/* Premieres Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className={`grid md:grid-cols-2 lg:grid-cols-3 ${isMobile ? 'gap-4' : 'gap-8'} mb-12`}>
           {premieres.map(movie => <Card key={movie.id} className="group bg-card-accent/30 border-border/20 hover:border-golden/30 theatre-transition overflow-hidden ticket-hover premiere-spotlight">
               <CardContent className="p-0">
                 {/* Movie Poster */}
                 <div className="relative overflow-hidden">
-                  <img src={movie.poster} alt={movie.title} className="w-full h-80 object-cover group-hover:scale-105 theatre-transition" />
+                  <img src={movie.poster} alt={movie.title} className={`w-full ${isMobile ? 'h-60' : 'h-80'} object-cover group-hover:scale-105 theatre-transition`} />
                   
                   {/* Overlay Info */}
                   <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
-                    <Badge className="bg-golden text-black font-semibold">
+                    <Badge className="bg-golden text-black font-semibold text-xs">
                       {movie.state}
                     </Badge>
-                    <div className="flex items-center space-x-1 bg-black/60 backdrop-blur-sm px-2 py-1 rounded-full">
-                      <Star className="w-3 h-3 text-golden fill-current" />
-                      <span className="text-xs text-white font-medium">{movie.rating}</span>
-                    </div>
+                    <Badge variant="secondary" className="bg-background/80 backdrop-blur-sm text-xs">
+                      <Clock className="w-3 h-3 mr-1" />
+                      {isMobile ? movie.countdown.replace(' left', '') : movie.countdown}
+                    </Badge>
                   </div>
 
-                  {/* Countdown */}
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="bg-primary/90 backdrop-blur-sm text-white px-3 py-2 rounded-lg flex items-center justify-between">
-                      <div className="flex items-center space-x-2">
-                        <Clock className="w-4 h-4" />
-                        <span className="text-sm font-medium">{movie.countdown}</span>
-                      </div>
-                      <span className="text-lg font-bold">{movie.price}</span>
-                    </div>
-                  </div>
-
-                  {/* Play Button Overlay */}
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 theatre-transition flex items-center justify-center">
-                    <Button size="lg" className="bg-golden hover:bg-golden-dark text-black" onClick={() => handleWatchTrailer(movie)}>
-                      <Play className="w-5 h-5 mr-2" />
-                      Watch Trailer
-                    </Button>
+                  {/* Premiere Date Badge */}
+                  <div className="absolute bottom-4 left-4">
+                    <Badge className="bg-primary/90 backdrop-blur-sm text-white text-xs">
+                      <Calendar className="w-3 h-3 mr-2" />
+                      {new Date(movie.premiereDate).toLocaleDateString('en-US', {
+                      month: 'short',
+                      day: 'numeric'
+                    })}
+                    </Badge>
                   </div>
                 </div>
 
                 {/* Movie Details */}
-                <div className="p-6">
+                <div className={isMobile ? 'p-4' : 'p-6'}>
                   <div className="flex items-start justify-between mb-3">
                     <div>
-                      <h3 className="text-xl font-bold text-foreground mb-1">{movie.title}</h3>
-                      <p className="text-sm text-muted-foreground">{movie.language} • {movie.duration}</p>
+                      <h3 className={`${isMobile ? 'text-lg' : 'text-xl'} font-bold text-foreground mb-1 group-hover:text-golden theatre-transition`}>
+                        {movie.title}
+                      </h3>
+                      <p className="text-xs text-muted-foreground">
+                        {movie.language} • {movie.genre}
+                      </p>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <Star className="w-4 h-4 text-golden fill-golden" />
+                      <span className="text-xs font-semibold text-golden">{movie.rating}</span>
                     </div>
                   </div>
 
-                  <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-                    {movie.description}
-                  </p>
+                  {!isMobile && (
+                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed line-clamp-2">
+                      {movie.description}
+                    </p>
+                  )}
 
-                  <div className="flex items-center justify-between">
-                    <Badge variant="secondary" className="text-xs">
-                      {movie.genre}
-                    </Badge>
-                    <div className="flex items-center space-x-1 text-xs text-muted-foreground">
-                      <Calendar className="w-3 h-3" />
-                      <span>{new Date(movie.premiereDate).toLocaleDateString('en-US', {
-                      month: 'short',
-                      day: 'numeric'
-                    })}</span>
+                  <div className="flex items-center justify-between pt-4 border-t border-border/20">
+                    <div className="flex items-center space-x-4 text-xs text-muted-foreground">
+                      <span className="flex items-center">
+                        <Clock className="w-3 h-3 mr-1" />
+                        {movie.duration}
+                      </span>
                     </div>
+                    <span className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold text-golden`}>{movie.price}</span>
                   </div>
 
-                  {/* Action Button */}
-                  <Button className="w-full mt-4 theatre-gradient text-white font-semibold hover:scale-105 theatre-transition" onClick={() => handleBuyTicket(movie)}>
-                    <Ticket className="w-4 h-4 mr-2" />
-                    Buy Premiere Ticket
-                  </Button>
+                  {/* Action Buttons */}
+                  <div className="flex gap-3 mt-4">
+                    <Button onClick={() => handleBuyTicket(movie)} size={isMobile ? 'sm' : 'default'} className="flex-1 theatre-gradient text-white hover:scale-105 theatre-transition premiere-glow text-xs">
+                      <Ticket className="w-3 h-3 mr-2" />
+                      {isMobile ? 'Buy' : 'Buy Ticket'}
+                    </Button>
+                    <Button onClick={() => handleWatchTrailer(movie)} variant="outline" size="icon" className="border-golden/50 text-golden hover:bg-golden/10 hover:scale-105 theatre-transition">
+                      <Play className="w-3 h-3" />
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>)}
