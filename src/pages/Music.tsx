@@ -4,8 +4,9 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Play, TrendingUp, Sparkles, MapPin, Eye, Heart, Share2 } from 'lucide-react';
+import { Play, TrendingUp, Sparkles, MapPin, Eye, Heart, Share2, BookmarkPlus, BookmarkCheck } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useWatchlist } from '@/hooks/useWatchlist';
 import { useIsMobile } from '@/hooks/use-mobile';
 import Footer from '@/components/Footer';
 import moviePoster1 from '@/assets/movie-poster-1.jpg';
@@ -68,6 +69,24 @@ const Music = () => {
   const [selectedState, setSelectedState] = useState('all');
   const { toast } = useToast();
   const isMobile = useIsMobile();
+  const { addToWatchlist, removeFromWatchlist, isInWatchlist } = useWatchlist();
+
+  const handleWatchlistToggle = (video: any, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (isInWatchlist(video.id)) {
+      removeFromWatchlist(video.id);
+      toast({
+        title: "Removed from Watchlist",
+        description: `${video.title} has been removed from your watchlist.`,
+      });
+    } else {
+      addToWatchlist(video);
+      toast({
+        title: "Added to Watchlist",
+        description: `${video.title} has been added to your watchlist.`,
+      });
+    }
+  };
 
   const handlePlayVideo = (video: any) => {
     if (video.isFree) {
@@ -197,7 +216,7 @@ const Music = () => {
         {/* Music Videos Grid */}
         <section className="py-16 px-6">
           <div className="container mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className={`grid ${isMobile ? 'grid-cols-3 gap-2' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'}`}>
               {filteredVideos.map((video) => (
                 <Card 
                   key={video.id}
@@ -212,86 +231,112 @@ const Music = () => {
                         className="w-full h-full object-cover group-hover:scale-105 theatre-transition"
                       />
                       
-                      {/* Badges */}
-                      <div className="absolute top-3 left-3 right-3 flex justify-between items-start">
-                        <div className="flex gap-2">
-                          {video.isFree && (
-                            <Badge className="bg-green-600 text-white text-xs">
-                              FREE
-                            </Badge>
-                          )}
-                          {!video.isFree && (
-                            <Badge className="bg-golden text-black text-xs font-semibold">
-                              ₹{video.price}
-                            </Badge>
-                          )}
-                          {video.new && (
-                            <Badge className="bg-primary text-primary-foreground text-xs">
-                              NEW
-                            </Badge>
-                          )}
+                      {/* Badges - Desktop only or minimal on mobile */}
+                      {!isMobile && (
+                        <div className="absolute top-3 left-3 right-3 flex justify-between items-start">
+                          <div className="flex gap-2">
+                            {video.isFree && (
+                              <Badge className="bg-green-600 text-white text-xs">
+                                FREE
+                              </Badge>
+                            )}
+                            {!video.isFree && (
+                              <Badge className="bg-golden text-black text-xs font-semibold">
+                                ₹{video.price}
+                              </Badge>
+                            )}
+                            {video.new && (
+                              <Badge className="bg-primary text-primary-foreground text-xs">
+                                NEW
+                              </Badge>
+                            )}
+                          </div>
                         </div>
-                      </div>
+                      )}
 
-                      {/* Play Overlay */}
-                      <div 
-                        className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 theatre-transition flex items-center justify-center cursor-pointer"
-                        onClick={() => handlePlayVideo(video)}
-                      >
-                        <div className="w-16 h-16 rounded-full bg-golden flex items-center justify-center">
-                          <Play className="w-8 h-8 text-black fill-black ml-1" />
+                      {/* Mobile: Show only price/free badge */}
+                      {isMobile && (
+                        <div className="absolute top-1 right-1">
+                          {video.isFree ? (
+                            <Badge className="bg-green-600 text-white text-[10px] px-1 py-0">FREE</Badge>
+                          ) : (
+                            <Badge className="bg-golden text-black text-[10px] px-1 py-0">₹{video.price}</Badge>
+                          )}
                         </div>
-                      </div>
+                      )}
+
+                      {/* Play Overlay - Desktop only */}
+                      {!isMobile && (
+                        <div 
+                          className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 theatre-transition flex items-center justify-center cursor-pointer"
+                          onClick={() => handlePlayVideo(video)}
+                        >
+                          <div className="w-16 h-16 rounded-full bg-golden flex items-center justify-center">
+                            <Play className="w-8 h-8 text-black fill-black ml-1" />
+                          </div>
+                        </div>
+                      )}
                     </div>
 
                     {/* Video Info */}
-                    <div className="p-4">
-                      <h3 className="font-bold text-foreground mb-1 line-clamp-1">{video.title}</h3>
-                      <p className="text-sm text-muted-foreground mb-2">{video.artist}</p>
-                      
-                      <div className="flex items-center justify-between text-xs text-muted-foreground mb-3">
-                        <div className="flex items-center gap-3">
-                          <div className="flex items-center gap-1">
-                            <Eye className="w-3 h-3" />
-                            {video.views}
+                    <div className={isMobile ? 'p-1.5' : 'p-4'}>
+                      {isMobile ? (
+                        // Compact mobile view
+                        <>
+                          <h3 className="text-[10px] font-semibold text-foreground line-clamp-1 mb-0.5">
+                            {video.title}
+                          </h3>
+                          <p className="text-[8px] text-muted-foreground line-clamp-1">
+                            {video.artist}
+                          </p>
+                        </>
+                      ) : (
+                        // Full desktop view
+                        <>
+                          <h3 className="font-bold text-foreground mb-1 line-clamp-1">{video.title}</h3>
+                          <p className="text-sm text-muted-foreground mb-2">{video.artist}</p>
+                          
+                          <div className="flex items-center justify-between text-xs text-muted-foreground mb-3">
+                            <div className="flex items-center gap-3">
+                              <div className="flex items-center gap-1">
+                                <Eye className="w-3 h-3" />
+                                {video.views}
+                              </div>
+                              <div className="flex items-center gap-1">
+                                <Heart className="w-3 h-3" />
+                                {video.likes}
+                              </div>
+                            </div>
+                            <Badge variant="secondary" className="text-xs">
+                              {video.state}
+                            </Badge>
                           </div>
-                          <div className="flex items-center gap-1">
-                            <Heart className="w-3 h-3" />
-                            {video.likes}
-                          </div>
-                        </div>
-                        <Badge variant="secondary" className="text-xs">
-                          {video.state}
-                        </Badge>
-                      </div>
 
-                      {/* Actions */}
-                      <div className="flex gap-2">
-                        <Button 
-                          size="sm" 
-                          className="flex-1 bg-golden text-black hover:bg-golden/90"
-                          onClick={() => handlePlayVideo(video)}
-                        >
-                          <Play className="w-3 h-3 mr-1" />
-                          {video.isFree ? 'Watch' : 'Buy'}
-                        </Button>
-                        <Button 
-                          size="sm" 
-                          variant="outline"
-                          className="border-golden/30"
-                          onClick={() => handleLike(video)}
-                        >
-                          <Heart className="w-3 h-3" />
-                        </Button>
-                        <Button 
-                          size="sm" 
-                          variant="outline"
-                          className="border-golden/30"
-                          onClick={() => handleShare(video)}
-                        >
-                          <Share2 className="w-3 h-3" />
-                        </Button>
-                      </div>
+                          {/* Actions */}
+                          <div className="flex gap-2">
+                            <Button 
+                              size="sm" 
+                              className="flex-1 bg-golden text-black hover:bg-golden/90"
+                              onClick={() => handlePlayVideo(video)}
+                            >
+                              <Play className="w-3 h-3 mr-1" />
+                              {video.isFree ? 'Watch' : 'Buy'}
+                            </Button>
+                            <Button 
+                              size="sm" 
+                              variant="outline"
+                              className="border-golden/30"
+                              onClick={(e) => handleWatchlistToggle(video, e)}
+                            >
+                              {isInWatchlist(video.id) ? (
+                                <BookmarkCheck className="w-3 h-3 text-golden" />
+                              ) : (
+                                <BookmarkPlus className="w-3 h-3" />
+                              )}
+                            </Button>
+                          </div>
+                        </>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
