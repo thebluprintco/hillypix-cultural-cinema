@@ -9,6 +9,7 @@ import { Play, Lock, Star, Clock, BookmarkPlus, BookmarkCheck, ChevronRight } fr
 import { useWatchlist } from '@/hooks/useWatchlist';
 import { useWatchProgress } from '@/hooks/useWatchProgress';
 import { useToast } from '@/hooks/use-toast';
+import { useIsMobile } from '@/hooks/use-mobile';
 import TicketPurchaseDialog from '@/components/TicketPurchaseDialog';
 import Footer from '@/components/Footer';
 import moviePoster1 from '@/assets/movie-poster-1.jpg';
@@ -164,6 +165,7 @@ const TVSeries = () => {
   const { getContinueWatching, getProgress } = useWatchProgress();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
 
   const handleWatchlistToggle = (series: any, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -294,12 +296,13 @@ const TVSeries = () => {
         <section className="py-16 px-6">
           <div className="container mx-auto">
             <Tabs value={selectedTab} onValueChange={setSelectedTab} className="mb-8">
-              <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-5 bg-card-accent/50">
-                <TabsTrigger value="all">All</TabsTrigger>
-                <TabsTrigger value="horror">Horror</TabsTrigger>
-                <TabsTrigger value="romance">Romance</TabsTrigger>
-                <TabsTrigger value="documentary">Documentary</TabsTrigger>
-                <TabsTrigger value="thriller">Thriller</TabsTrigger>
+              <TabsList className={`grid w-full ${isMobile ? 'grid-cols-3' : 'max-w-2xl mx-auto grid-cols-5'} bg-card-accent/50`}>
+                <TabsTrigger value="all" className={isMobile ? 'text-xs' : ''}>All</TabsTrigger>
+                <TabsTrigger value="horror" className={isMobile ? 'text-xs' : ''}>Horror</TabsTrigger>
+                <TabsTrigger value="romance" className={isMobile ? 'text-xs' : ''}>Romance</TabsTrigger>
+                {!isMobile && <TabsTrigger value="documentary">Documentary</TabsTrigger>}
+                {!isMobile && <TabsTrigger value="thriller">Thriller</TabsTrigger>}
+                {isMobile && <TabsTrigger value="documentary" className="text-xs">Doc</TabsTrigger>}
               </TabsList>
             </Tabs>
 

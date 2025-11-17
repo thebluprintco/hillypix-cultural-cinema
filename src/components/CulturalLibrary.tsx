@@ -351,24 +351,29 @@ const CulturalLibrary = () => {
               Filter by Genre
             </h3>
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className={`${isMobile ? 'grid grid-cols-2 gap-2' : 'flex flex-wrap gap-3'}`}>
             {genres.map(genre => <Button key={genre.id} variant={selectedGenre === genre.id ? "default" : "outline"} onClick={() => handleGenreChange(genre.id)} className={`
                   ${selectedGenre === genre.id ? 'theatre-gradient text-white' : 'border-border/30 hover:border-golden/30'} theatre-transition
+                  ${isMobile ? 'text-xs px-2 h-auto py-2' : ''}
                 `}>
-                <span className={selectedGenre !== genre.id ? genre.color : ''}>{genre.name}</span>
-                <Badge variant="secondary" className="ml-2 text-xs">
-                  {genre.count}
-                </Badge>
+                <span className={selectedGenre !== genre.id ? genre.color : ''}>{isMobile && genre.id !== 'all' ? genre.name.split('/')[0] : genre.name}</span>
+                {!isMobile && (
+                  <Badge variant="secondary" className="ml-2 text-xs">
+                    {genre.count}
+                  </Badge>
+                )}
               </Button>)}
           </div>
         </div>
 
         {/* Category Tabs */}
         <Tabs value={selectedCategory} onValueChange={handleCategoryChange} className="mb-8">
-          <TabsList className="grid w-full grid-cols-4 bg-card-accent/50">
-            {categories.map(category => <TabsTrigger key={category.id} value={category.id} className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                <span className="mr-2">{category.icon}</span>
-                {category.name}
+          <TabsList className={`grid w-full ${isMobile ? 'grid-cols-2' : 'grid-cols-4'} bg-card-accent/50`}>
+            {categories.map(category => <TabsTrigger key={category.id} value={category.id} className={`data-[state=active]:bg-primary data-[state=active]:text-primary-foreground ${isMobile ? 'text-xs px-2' : ''}`}>
+                <span className={isMobile ? 'text-base' : 'mr-2'}>{category.icon}</span>
+                {!isMobile && category.name}
+                {isMobile && category.id === 'documentary' && <span className="ml-1 text-xs">Doc</span>}
+                {isMobile && category.id === 'folk' && <span className="ml-1 text-xs">Folk</span>}
               </TabsTrigger>)}
           </TabsList>
 

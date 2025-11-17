@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Search, User, Film, Award, Home, Tv, Music, PartyPopper, BookOpen, Info, Star } from 'lucide-react';
+import { Search, User, Film, Award, Home, Tv, Music, PartyPopper, BookOpen, Info, Star, Menu } from 'lucide-react';
 import hillywoodLogo from '@/assets/hillywood-logo.svg';
 import {
   CommandDialog,
@@ -12,6 +12,13 @@ import {
   CommandItem,
   CommandList,
 } from '@/components/ui/command';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import AuthDialog from './AuthDialog';
 import UserProfileDialog from './UserProfileDialog';
 import { searchableContent } from '@/data/searchData';
@@ -20,6 +27,7 @@ const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isAuthDialogOpen, setIsAuthDialogOpen] = useState(false);
   const [isProfileDialogOpen, setIsProfileDialogOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
@@ -131,7 +139,7 @@ const Header = () => {
           </nav>
 
           {/* User Actions */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2">
             {/* Search */}
             <Button
               variant="ghost"
@@ -172,7 +180,7 @@ const Header = () => {
                 variant="ghost" 
                 size="sm" 
                 onClick={() => setIsProfileDialogOpen(true)}
-                className="text-muted-foreground hover:text-golden"
+                className="text-muted-foreground hover:text-golden hidden md:flex"
               >
                 <div className="w-8 h-8 rounded-full bg-golden/20 flex items-center justify-center">
                   <span className="text-xs font-semibold text-golden">
@@ -180,16 +188,152 @@ const Header = () => {
                   </span>
                 </div>
               </Button>
-            ) : (
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={() => setIsAuthDialogOpen(true)}
-                className="text-muted-foreground hover:text-golden md:hidden"
-              >
-                <User className="w-4 h-4" />
-              </Button>
-            )}
+            ) : null}
+
+            {/* Mobile Menu */}
+            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="md:hidden text-muted-foreground hover:text-golden"
+                >
+                  <Menu className="w-5 h-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[280px] bg-background">
+                <SheetHeader>
+                  <SheetTitle className="flex items-center">
+                    <img 
+                      src={hillywoodLogo} 
+                      alt="HillyWood" 
+                      className="h-8 w-auto"
+                    />
+                  </SheetTitle>
+                </SheetHeader>
+                <nav className="flex flex-col space-y-1 mt-8">
+                  <Button 
+                    variant="ghost" 
+                    asChild 
+                    className={`justify-start text-foreground hover:text-golden theatre-transition ${location.pathname === '/' ? 'text-golden bg-golden/10' : ''}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <Link to="/">
+                      <Home className="w-4 h-4 mr-3" />
+                      Home
+                    </Link>
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    asChild 
+                    className={`justify-start text-foreground hover:text-golden theatre-transition ${location.pathname === '/premieres' ? 'text-golden bg-golden/10' : ''}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <Link to="/premieres">
+                      <Film className="w-4 h-4 mr-3" />
+                      Movies
+                    </Link>
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    asChild 
+                    className={`justify-start text-foreground hover:text-golden theatre-transition ${location.pathname === '/tv-series' ? 'text-golden bg-golden/10' : ''}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <Link to="/tv-series">
+                      <Tv className="w-4 h-4 mr-3" />
+                      Series
+                    </Link>
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    asChild 
+                    className={`justify-start text-foreground hover:text-golden theatre-transition ${location.pathname === '/music' ? 'text-golden bg-golden/10' : ''}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <Link to="/music">
+                      <Music className="w-4 h-4 mr-3" />
+                      Music
+                    </Link>
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    asChild 
+                    className={`justify-start text-foreground hover:text-golden theatre-transition ${location.pathname === '/hall-of-fame' ? 'text-golden bg-golden/10' : ''}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <Link to="/hall-of-fame">
+                      <Award className="w-4 h-4 mr-3" />
+                      Hall of Fame
+                    </Link>
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    asChild 
+                    className={`justify-start text-foreground hover:text-golden theatre-transition ${location.pathname === '/hillywood-fiesta' ? 'text-golden bg-golden/10' : ''}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <Link to="/hillywood-fiesta">
+                      <PartyPopper className="w-4 h-4 mr-3" />
+                      Hillywood Fiesta
+                    </Link>
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    asChild 
+                    className={`justify-start text-foreground hover:text-golden theatre-transition ${location.pathname === '/about' ? 'text-golden bg-golden/10' : ''}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <Link to="/about">
+                      <Info className="w-4 h-4 mr-3" />
+                      About
+                    </Link>
+                  </Button>
+
+                  {/* Mobile User Actions */}
+                  <div className="pt-6 border-t border-border/20 mt-6 space-y-2">
+                    {user ? (
+                      <>
+                        <Button 
+                          variant="ghost" 
+                          asChild 
+                          className="justify-start w-full border-golden/30 text-golden hover:bg-golden/10"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          <Link to="/my-library">
+                            <BookOpen className="w-4 h-4 mr-3" />
+                            My Library ({user.purchasedMovies})
+                          </Link>
+                        </Button>
+                        <Button 
+                          variant="ghost" 
+                          onClick={() => {
+                            setIsMobileMenuOpen(false);
+                            setIsProfileDialogOpen(true);
+                          }}
+                          className="justify-start w-full text-muted-foreground hover:text-golden"
+                        >
+                          <User className="w-4 h-4 mr-3" />
+                          Profile
+                        </Button>
+                      </>
+                    ) : (
+                      <Button 
+                        variant="outline" 
+                        onClick={() => {
+                          setIsMobileMenuOpen(false);
+                          setIsAuthDialogOpen(true);
+                        }}
+                        className="w-full border-golden/30 text-golden hover:bg-golden/10"
+                      >
+                        <User className="w-4 h-4 mr-2" />
+                        Sign In
+                      </Button>
+                    )}
+                  </div>
+                </nav>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
 
