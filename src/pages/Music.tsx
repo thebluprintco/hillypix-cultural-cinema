@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Play, TrendingUp, Sparkles, MapPin, Eye, Heart, Share2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useIsMobile } from '@/hooks/use-mobile';
 import Footer from '@/components/Footer';
 import moviePoster1 from '@/assets/movie-poster-1.jpg';
 import moviePoster2 from '@/assets/movie-poster-2.jpg';
@@ -66,6 +67,7 @@ const Music = () => {
   const [selectedTab, setSelectedTab] = useState('trending');
   const [selectedState, setSelectedState] = useState('all');
   const { toast } = useToast();
+  const isMobile = useIsMobile();
 
   const handlePlayVideo = (video: any) => {
     if (video.isFree) {
@@ -155,17 +157,17 @@ const Music = () => {
           <div className="container mx-auto">
             <Tabs value={selectedTab} onValueChange={setSelectedTab}>
               <TabsList className="grid w-full max-w-lg mx-auto grid-cols-3 bg-card-accent/50">
-                <TabsTrigger value="trending" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                  <TrendingUp className="w-4 h-4 mr-2" />
-                  Trending Music
+                <TabsTrigger value="trending" className={`data-[state=active]:bg-primary data-[state=active]:text-primary-foreground ${isMobile ? 'text-xs px-2' : ''}`}>
+                  <TrendingUp className={`${isMobile ? 'w-3 h-3 mr-1' : 'w-4 h-4 mr-2'}`} />
+                  {isMobile ? 'Trending' : 'Trending Music'}
                 </TabsTrigger>
-                <TabsTrigger value="new" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                  <Sparkles className="w-4 h-4 mr-2" />
-                  New Releases
+                <TabsTrigger value="new" className={`data-[state=active]:bg-primary data-[state=active]:text-primary-foreground ${isMobile ? 'text-xs px-2' : ''}`}>
+                  <Sparkles className={`${isMobile ? 'w-3 h-3 mr-1' : 'w-4 h-4 mr-2'}`} />
+                  {isMobile ? 'New' : 'New Releases'}
                 </TabsTrigger>
-                <TabsTrigger value="state" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                  <MapPin className="w-4 h-4 mr-2" />
-                  Languages
+                <TabsTrigger value="state" className={`data-[state=active]:bg-primary data-[state=active]:text-primary-foreground ${isMobile ? 'text-xs px-2' : ''}`}>
+                  <MapPin className={`${isMobile ? 'w-3 h-3 mr-1' : 'w-4 h-4 mr-2'}`} />
+                  {isMobile ? 'States' : 'Languages'}
                 </TabsTrigger>
               </TabsList>
             </Tabs>
@@ -176,13 +178,13 @@ const Music = () => {
         {selectedTab === 'state' && (
           <section className="py-6 px-6 bg-card-accent/10">
             <div className="container mx-auto">
-              <div className="flex flex-wrap gap-2 justify-center">
+              <div className={`${isMobile ? 'grid grid-cols-2 gap-2' : 'flex flex-wrap gap-2 justify-center'}`}>
                 {states.map((state) => (
                   <Button
                     key={state.id}
                     variant={selectedState === state.id ? "default" : "outline"}
                     onClick={() => setSelectedState(state.id)}
-                    className={selectedState === state.id ? 'bg-golden text-black hover:bg-golden/90' : 'border-border/30'}
+                    className={`${selectedState === state.id ? 'bg-golden text-black hover:bg-golden/90' : 'border-border/30'} ${isMobile ? 'text-xs px-2 h-auto py-2' : ''}`}
                   >
                     {state.name}
                   </Button>

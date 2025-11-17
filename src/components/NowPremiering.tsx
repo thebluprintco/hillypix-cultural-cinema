@@ -79,7 +79,7 @@ const NowPremiering = () => {
         {/* Section Header */}
         <div className="text-center mb-12">
           <Badge className="mb-4 bg-primary/20 text-primary-light px-4 py-2">
-            🎬 {isMobile ? 'PREMIERING' : 'NOW PREMIERING'}
+            🎬 NOW PREMIERING
           </Badge>
           {isMobile ? (
             <h2 className="text-3xl font-bold mb-4">
