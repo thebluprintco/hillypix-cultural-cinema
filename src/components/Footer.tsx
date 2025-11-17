@@ -1,5 +1,6 @@
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import hillywoodLogo from '@/assets/hillywood-logo.svg';
 
 const Footer = () => {
   const isMobile = useIsMobile();
@@ -11,9 +12,11 @@ const Footer = () => {
           <>
             {/* Mobile: Brand Section */}
             <div className="mb-6">
-              <h3 className="text-2xl font-bebas bg-gradient-to-r from-golden to-primary-light bg-clip-text text-transparent mb-3">
-                HillyPix
-              </h3>
+              <img 
+                src={hillywoodLogo} 
+                alt="HillyWood" 
+                className="h-10 w-auto mb-3"
+              />
               <p className="text-sm text-muted-foreground mb-2 font-merriweather line-clamp-2">
                 Celebrating Northeast India's cultural cinema
               </p>
@@ -62,9 +65,11 @@ const Footer = () => {
             <div className="grid md:grid-cols-4 gap-8">
               {/* Brand */}
               <div className="col-span-2 md:col-span-1">
-                <h3 className="text-2xl font-bebas bg-gradient-to-r from-golden to-primary-light bg-clip-text text-transparent mb-4">
-                  HillyPix
-                </h3>
+                <img 
+                  src={hillywoodLogo} 
+                  alt="HillyWood" 
+                  className="h-12 w-auto mb-4"
+                />
                 <p className="text-sm text-muted-foreground mb-3 font-merriweather">
                   Celebrating Northeast India's cultural cinema through the HillyWood movement.
                 </p>
@@ -72,7 +77,7 @@ const Footer = () => {
                   Traditionally rooted, futuristically bold
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  © 2024 HillyPix. Preserving culture through cinema.
+                  © 2024 HillyWood. Preserving culture through cinema.
                 </p>
               </div>
 

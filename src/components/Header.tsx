@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Search, User, Film, Award, Home, Tv, Music, PartyPopper, BookOpen, Info, Star } from 'lucide-react';
+import hillywoodLogo from '@/assets/hillywood-logo.svg';
 import {
   CommandDialog,
   CommandEmpty,
@@ -75,17 +76,12 @@ const Header = () => {
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo & Brand */}
-          <Link to="/" className="flex items-center space-x-3 hover:opacity-80 theatre-transition">
-            <div className="relative">
-              <Film className="h-8 w-8 text-golden" />
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full"></div>
-            </div>
-            <div>
-              <h1 className="text-2xl font-bebas bg-gradient-to-r from-golden to-primary-light bg-clip-text text-transparent">
-                HillyPix
-              </h1>
-              <p className="text-xs text-muted-foreground tracking-wider font-spartan">HILLYWOOD</p>
-            </div>
+          <Link to="/" className="flex items-center hover:opacity-80 theatre-transition">
+            <img 
+              src={hillywoodLogo} 
+              alt="HillyWood" 
+              className="h-12 w-auto"
+            />
           </Link>
 
           {/* Navigation */}
