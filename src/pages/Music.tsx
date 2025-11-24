@@ -9,47 +9,30 @@ import { useToast } from '@/hooks/use-toast';
 import { useWatchlist } from '@/hooks/useWatchlist';
 import { useIsMobile } from '@/hooks/use-mobile';
 import Footer from '@/components/Footer';
-import moviePoster1 from '@/assets/movie-poster-1.jpg';
-import moviePoster2 from '@/assets/movie-poster-2.jpg';
-import moviePoster3 from '@/assets/movie-poster-3.jpg';
-import moviePoster4 from '@/assets/movie-poster-4.jpg';
-import moviePoster5 from '@/assets/movie-poster-5.jpg';
-import moviePoster6 from '@/assets/movie-poster-6.jpg';
+import agunjiubam from '@/assets/agunjiubam.jpg';
+import betterMan from '@/assets/better-man.jpg';
+import tiThaiLouO from '@/assets/ti-thai-lou-o.jpg';
+import tuna from '@/assets/tuna.jpg';
 
 const musicVideos = [
   // Trending (Free - Ad Supported)
-  { id: 1, title: "Kiman Bhi Bhal", artist: "Traditional Ensemble", state: "Nagaland", genre: "Classical", poster: moviePoster1, views: "125K", likes: "8.2K", isFree: true, price: 0, trending: true, new: false },
-  { id: 2, title: "Hills Echo", artist: "Northeast Voices", state: "Meghalaya", genre: "Folk", poster: moviePoster2, views: "98K", likes: "6.5K", isFree: true, price: 0, trending: true, new: false },
-  { id: 3, title: "Chamdan La Tho", artist: "Gospel Choir", state: "Manipur", genre: "Gospel", poster: moviePoster3, views: "156K", likes: "12K", isFree: true, price: 0, trending: true, new: false },
+  { id: 1, title: "AGUNJIUBAM", artist: "Northeast Artists", state: "Manipur", genre: "Pop", poster: agunjiubam, views: "125K", likes: "8.2K", isFree: true, price: 0, trending: true, new: false },
+  { id: 2, title: "Better Man", artist: "Jazz Fusion", state: "Assam", genre: "Jazz", poster: betterMan, views: "98K", likes: "6.5K", isFree: false, price: 29, trending: true, new: false },
+  { id: 3, title: "TI THAI LOU O", artist: "Traditional Voices", state: "Mizoram", genre: "Folk", poster: tiThaiLouO, views: "156K", likes: "12K", isFree: true, price: 0, trending: true, new: false },
   
   // New Releases (Mix of Free and Paid)
-  { id: 4, title: "Better Man", artist: "Jazz Fusion", state: "Assam", genre: "Jazz", poster: moviePoster4, views: "45K", likes: "3.8K", isFree: false, price: 29, trending: false, new: true },
-  { id: 5, title: "Tuna", artist: "Pop Stars", state: "Mizoram", genre: "Pop", poster: moviePoster5, views: "78K", likes: "5.2K", isFree: true, price: 0, trending: false, new: true },
-  { id: 6, title: "Mountain Melodies", artist: "Folk Ensemble", state: "Arunachal Pradesh", genre: "Traditional", poster: moviePoster6, views: "34K", likes: "2.9K", isFree: false, price: 39, trending: false, new: true },
+  { id: 4, title: "TUNA", artist: "Pop Stars", state: "Mizoram", genre: "Pop", poster: tuna, views: "78K", likes: "5.2K", isFree: true, price: 0, trending: false, new: true },
+  { id: 5, title: "AGUNJIUBAM", artist: "Northeast Artists", state: "Manipur", genre: "Pop", poster: agunjiubam, views: "45K", likes: "3.8K", isFree: true, price: 0, trending: false, new: true },
   
   // Assam
-  { id: 7, title: "Bihu Beats", artist: "Assamese Band", state: "Assam", genre: "Folk", poster: moviePoster1, views: "89K", likes: "7.1K", isFree: true, price: 0, trending: false, new: false },
-  { id: 8, title: "Tea Garden Songs", artist: "Rural Artists", state: "Assam", genre: "Traditional", poster: moviePoster2, views: "52K", likes: "4.3K", isFree: false, price: 49, trending: false, new: true },
+  { id: 6, title: "Better Man", artist: "Jazz Fusion", state: "Assam", genre: "Jazz", poster: betterMan, views: "89K", likes: "7.1K", isFree: false, price: 29, trending: false, new: false },
   
   // Manipur
-  { id: 9, title: "Lai Haraoba", artist: "Manipuri Dancers", state: "Manipur", genre: "Classical", poster: moviePoster3, views: "67K", likes: "5.8K", isFree: true, price: 0, trending: false, new: false },
-  { id: 10, title: "Valley Dreams", artist: "Modern Beats", state: "Manipur", genre: "Pop", poster: moviePoster4, views: "93K", likes: "8.4K", isFree: false, price: 39, trending: true, new: true },
-  
-  // Nagaland  
-  { id: 11, title: "Hornbill Rhythms", artist: "Naga Warriors", state: "Nagaland", genre: "Traditional", poster: moviePoster5, views: "71K", likes: "6.2K", isFree: true, price: 0, trending: false, new: false },
-  { id: 12, title: "Tribal Echoes", artist: "Contemporary Fusion", state: "Nagaland", genre: "Fusion", poster: moviePoster6, views: "44K", likes: "3.5K", isFree: false, price: 29, trending: false, new: true },
-  
-  // Meghalaya
-  { id: 13, title: "Living Root", artist: "Khasi Voices", state: "Meghalaya", genre: "Folk", poster: moviePoster1, views: "58K", likes: "4.9K", isFree: true, price: 0, trending: false, new: false },
+  { id: 7, title: "AGUNJIUBAM", artist: "Northeast Artists", state: "Manipur", genre: "Pop", poster: agunjiubam, views: "67K", likes: "5.8K", isFree: true, price: 0, trending: false, new: false },
   
   // Mizoram
-  { id: 14, title: "Bamboo Whispers", artist: "Mizo Artists", state: "Mizoram", genre: "Traditional", poster: moviePoster2, views: "39K", likes: "3.2K", isFree: true, price: 0, trending: false, new: false },
-  
-  // Tripura
-  { id: 15, title: "Royal Heritage", artist: "Tripuri Ensemble", state: "Tripura", genre: "Classical", poster: moviePoster3, views: "42K", likes: "3.6K", isFree: false, price: 49, trending: false, new: true },
-  
-  // Sikkim
-  { id: 16, title: "Himalayan Hymns", artist: "Mountain Voices", state: "Sikkim", genre: "Folk", poster: moviePoster4, views: "31K", likes: "2.7K", isFree: true, price: 0, trending: false, new: false },
+  { id: 8, title: "TI THAI LOU O", artist: "Traditional Voices", state: "Mizoram", genre: "Folk", poster: tiThaiLouO, views: "93K", likes: "8.4K", isFree: true, price: 0, trending: false, new: true },
+  { id: 9, title: "TUNA", artist: "Pop Stars", state: "Mizoram", genre: "Pop", poster: tuna, views: "71K", likes: "6.2K", isFree: true, price: 0, trending: false, new: false },
 ];
 
 const states = [
