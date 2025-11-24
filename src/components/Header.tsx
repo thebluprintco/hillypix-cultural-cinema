@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Search, User, Film, Award, Home, Tv, Music, PartyPopper, BookOpen, Info, Star, Menu } from 'lucide-react';
+import { Search, User, Film, Award, Home, Tv, Music, PartyPopper, BookOpen, Info, Star, Menu, Globe } from 'lucide-react';
 import hillywoodLogo from '@/assets/hillywood-logo.svg';
 import {
   CommandDialog,
@@ -22,6 +22,13 @@ import {
 import AuthDialog from './AuthDialog';
 import UserProfileDialog from './UserProfileDialog';
 import { searchableContent } from '@/data/searchData';
+import { useLanguage, languages } from '@/contexts/LanguageContext';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -32,6 +39,7 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
+  const { currentLanguage, setLanguage } = useLanguage();
 
   // Load user from localStorage on component mount
   useEffect(() => {
@@ -153,6 +161,30 @@ const Header = () => {
                 <span className="text-xs">⌘</span>K
               </kbd>
             </Button>
+
+            {/* Language Selector */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  className="text-muted-foreground hover:text-golden"
+                >
+                  <Globe className="w-4 h-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="bg-background border-border/20 z-[100]">
+                {languages.map((lang) => (
+                  <DropdownMenuItem
+                    key={lang.code}
+                    onClick={() => setLanguage(lang.code)}
+                    className={`cursor-pointer ${currentLanguage === lang.code ? 'bg-primary/10 text-golden' : ''}`}
+                  >
+                    {lang.name}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
 
             {/* My Library / Auth */}
             {user ? (
@@ -292,6 +324,24 @@ const Header = () => {
 
                   {/* Mobile User Actions */}
                   <div className="pt-6 border-t border-border/20 mt-6 space-y-2">
+                    {/* Language Selector in Mobile */}
+                    <div className="pb-2">
+                      <p className="text-xs text-muted-foreground mb-2 px-3">Language</p>
+                      <div className="grid grid-cols-2 gap-2">
+                        {languages.map((lang) => (
+                          <Button
+                            key={lang.code}
+                            variant={currentLanguage === lang.code ? "default" : "outline"}
+                            size="sm"
+                            onClick={() => setLanguage(lang.code)}
+                            className={`${currentLanguage === lang.code ? 'bg-golden text-black hover:bg-golden/90' : 'border-border/30'} text-xs`}
+                          >
+                            {lang.name}
+                          </Button>
+                        ))}
+                      </div>
+                    </div>
+
                     {user ? (
                       <>
                         <Button 
