@@ -12,12 +12,9 @@ import { useToast } from '@/hooks/use-toast';
 import { useIsMobile } from '@/hooks/use-mobile';
 import TicketPurchaseDialog from '@/components/TicketPurchaseDialog';
 import Footer from '@/components/Footer';
-import moviePoster1 from '@/assets/movie-poster-1.jpg';
-import moviePoster2 from '@/assets/movie-poster-2.jpg';
-import moviePoster3 from '@/assets/movie-poster-3.jpg';
-import moviePoster4 from '@/assets/movie-poster-4.jpg';
-import moviePoster5 from '@/assets/movie-poster-5.jpg';
-import moviePoster6 from '@/assets/movie-poster-6.jpg';
+import duipengThangTei from '@/assets/duipeng-thang-tei.jpg';
+import cathyRongmei from '@/assets/cathy-rongmei.jpg';
+import ngaanSantampu from '@/assets/ngaan-santampu.jpg';
 
 const tvSeriesData = [
   {
@@ -25,7 +22,7 @@ const tvSeriesData = [
     title: "Duipeng Thang Tei",
     state: "Manipur",
     language: "Rongmei",
-    poster: moviePoster1,
+    poster: duipengThangTei,
     rating: 5.0,
     year: 2021,
     genre: "Horror",
@@ -43,117 +40,7 @@ const tvSeriesData = [
       { id: 7, title: "Confrontation", duration: "50:00", isFree: false, season: 1, episodeNumber: 7 },
       { id: 8, title: "Resolution", duration: "52:00", isFree: false, season: 1, episodeNumber: 8 },
     ]
-  },
-  {
-    id: 2,
-    title: "Ngaan Santanpou",
-    state: "Manipur",
-    language: "Tangkhul",
-    poster: moviePoster2,
-    rating: 4.5,
-    year: 2025,
-    genre: "Romance",
-    totalSeasons: 1,
-    totalEpisodes: 12,
-    duration: "40 min per episode",
-    description: "A heartwarming romance set in the hills of Manipur, celebrating traditional Tangkhul culture.",
-    episodes: Array.from({ length: 12 }, (_, i) => ({
-      id: i + 1,
-      title: `Episode ${i + 1}`,
-      duration: "40:00",
-      isFree: i === 0,
-      season: 1,
-      episodeNumber: i + 1
-    }))
-  },
-  {
-    id: 3,
-    title: "Cultural Chronicles",
-    state: "Assam",
-    language: "Assamese",
-    poster: moviePoster3,
-    rating: 4.8,
-    year: 2024,
-    genre: "Documentary",
-    totalSeasons: 2,
-    totalEpisodes: 20,
-    duration: "35 min per episode",
-    description: "Exploring the rich cultural heritage, traditions, and stories of Northeast India.",
-    episodes: Array.from({ length: 10 }, (_, i) => ({
-      id: i + 1,
-      title: `Season 1 - Episode ${i + 1}`,
-      duration: "35:00",
-      isFree: i === 0,
-      season: 1,
-      episodeNumber: i + 1
-    }))
-  },
-  {
-    id: 4,
-    title: "Cathy",
-    state: "Manipur",
-    language: "Rongmei",
-    poster: moviePoster4,
-    rating: 4.7,
-    year: 2025,
-    genre: "Romance",
-    totalSeasons: 1,
-    totalEpisodes: 10,
-    duration: "42 min per episode",
-    description: "A modern love story intertwined with traditional values and cultural identity.",
-    episodes: Array.from({ length: 10 }, (_, i) => ({
-      id: i + 1,
-      title: `Episode ${i + 1}`,
-      duration: "42:00",
-      isFree: i === 0,
-      season: 1,
-      episodeNumber: i + 1
-    }))
-  },
-  {
-    id: 5,
-    title: "Kiman Bhi Bhal",
-    state: "Nagaland",
-    language: "Nagamese",
-    poster: moviePoster5,
-    rating: 4.7,
-    year: 2022,
-    genre: "Classical",
-    totalSeasons: 1,
-    totalEpisodes: 6,
-    duration: "50 min per episode",
-    description: "A classical drama series showcasing the artistic traditions of Nagaland.",
-    episodes: Array.from({ length: 6 }, (_, i) => ({
-      id: i + 1,
-      title: `Episode ${i + 1}`,
-      duration: "50:00",
-      isFree: i === 0,
-      season: 1,
-      episodeNumber: i + 1
-    }))
-  },
-  {
-    id: 6,
-    title: "Hills of Mystery",
-    state: "Meghalaya",
-    language: "Khasi",
-    poster: moviePoster6,
-    rating: 4.6,
-    year: 2023,
-    genre: "Thriller",
-    totalSeasons: 2,
-    totalEpisodes: 16,
-    duration: "45 min per episode",
-    description: "A gripping thriller series exploring mysterious events in the hills of Meghalaya.",
-    episodes: Array.from({ length: 8 }, (_, i) => ({
-      id: i + 1,
-      title: `Season 1 - Episode ${i + 1}`,
-      duration: "45:00",
-      isFree: i === 0,
-      season: 1,
-      episodeNumber: i + 1
-    }))
-  },
+  }
 ];
 
 const TVSeries = () => {
