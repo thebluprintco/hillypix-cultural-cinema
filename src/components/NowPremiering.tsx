@@ -7,50 +7,47 @@ import { Clock, Ticket, Star, Play, Calendar } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import TicketPurchaseDialog from './TicketPurchaseDialog';
 import { useIsMobile } from '@/hooks/use-mobile';
-import moviePoster1 from '@/assets/movie-poster-1.jpg';
-import moviePoster2 from '@/assets/movie-poster-2.jpg';
-import moviePoster3 from '@/assets/movie-poster-3.jpg';
-import moviePoster4 from '@/assets/movie-poster-4.jpg';
-import moviePoster5 from '@/assets/movie-poster-5.jpg';
-import moviePoster6 from '@/assets/movie-poster-6.jpg';
+import duipengThangTei from '@/assets/duipeng-thang-tei.jpg';
+import cathyRongmei from '@/assets/cathy-rongmei.jpg';
+import ngaanSantampu from '@/assets/ngaan-santampu.jpg';
 const premieres = [{
   id: 1,
-  title: 'Ka Jainsen',
-  state: 'Meghalaya',
-  language: 'Khasi',
-  poster: moviePoster1,
+  title: 'Ngaan Santanpou',
+  state: 'Manipur',
+  language: 'Tangkhul',
+  poster: ngaanSantampu,
   price: '₹299',
-  premiereDate: '2024-01-15',
-  duration: '2h 15m',
-  genre: 'Cultural Drama',
-  rating: 4.8,
-  description: 'A powerful story celebrating Khasi matrilineal traditions and the strength of women.',
+  premiereDate: '2025-02-15',
+  duration: '1h 58m',
+  genre: 'Romance',
+  rating: 4.5,
+  description: 'A heartwarming romance set in the hills of Manipur, celebrating traditional Tangkhul culture.',
   countdown: '2 days left'
 }, {
   id: 2,
-  title: 'Naga Rangtsa',
-  state: 'Nagaland',
-  language: 'Ao Naga',
-  poster: moviePoster2,
+  title: 'Cathy',
+  state: 'Manipur',
+  language: 'Rongmei',
+  poster: cathyRongmei,
   price: '₹349',
-  premiereDate: '2024-01-20',
-  duration: '2h 05m',
-  genre: 'Tribal Epic',
-  rating: 4.9,
-  description: 'Epic tale of Naga warriors and their sacred tribal traditions.',
+  premiereDate: '2025-02-20',
+  duration: '2h 15m',
+  genre: 'Romance',
+  rating: 4.7,
+  description: 'A modern love story intertwined with traditional values and cultural identity.',
   countdown: '7 days left'
 }, {
   id: 3,
-  title: 'Puanchei',
-  state: 'Mizoram',
-  language: 'Mizo',
-  poster: moviePoster3,
+  title: 'Kiman Bhi Bhal',
+  state: 'Nagaland',
+  language: 'Nagamese',
+  poster: ngaanSantampu,
   price: '₹279',
-  premiereDate: '2024-01-25',
-  duration: '1h 58m',
-  genre: 'Traditional Drama',
+  premiereDate: '2025-02-25',
+  duration: '1h 45m',
+  genre: 'Classical',
   rating: 4.7,
-  description: 'Beautiful narrative woven around traditional Mizo handloom and cultural heritage.',
+  description: 'A classical drama showcasing the artistic traditions of Nagaland.',
   countdown: '12 days left'
 }];
 const NowPremiering = () => {
