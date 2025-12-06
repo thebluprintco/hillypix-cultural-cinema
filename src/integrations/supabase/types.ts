@@ -14,16 +14,194 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      movies: {
+        Row: {
+          created_at: string
+          description: string | null
+          duration_minutes: number | null
+          genre: string[] | null
+          id: string
+          language: string | null
+          poster_url: string | null
+          premiere_end_at: string | null
+          premiere_start_at: string | null
+          price: number | null
+          rating: string | null
+          release_date: string | null
+          state: string | null
+          status: Database["public"]["Enums"]["movie_status"]
+          title: string
+          trailer_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          duration_minutes?: number | null
+          genre?: string[] | null
+          id?: string
+          language?: string | null
+          poster_url?: string | null
+          premiere_end_at?: string | null
+          premiere_start_at?: string | null
+          price?: number | null
+          rating?: string | null
+          release_date?: string | null
+          state?: string | null
+          status?: Database["public"]["Enums"]["movie_status"]
+          title: string
+          trailer_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          duration_minutes?: number | null
+          genre?: string[] | null
+          id?: string
+          language?: string | null
+          poster_url?: string | null
+          premiere_end_at?: string | null
+          premiere_start_at?: string | null
+          price?: number | null
+          rating?: string | null
+          release_date?: string | null
+          state?: string | null
+          status?: Database["public"]["Enums"]["movie_status"]
+          title?: string
+          trailer_url?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      purchase_devices: {
+        Row: {
+          device_fingerprint: string
+          device_name: string | null
+          first_used_at: string
+          id: string
+          is_active: boolean
+          last_used_at: string
+          purchase_id: string
+        }
+        Insert: {
+          device_fingerprint: string
+          device_name?: string | null
+          first_used_at?: string
+          id?: string
+          is_active?: boolean
+          last_used_at?: string
+          purchase_id: string
+        }
+        Update: {
+          device_fingerprint?: string
+          device_name?: string | null
+          first_used_at?: string
+          id?: string
+          is_active?: boolean
+          last_used_at?: string
+          purchase_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "purchase_devices_purchase_id_fkey"
+            columns: ["purchase_id"]
+            isOneToOne: false
+            referencedRelation: "purchases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      purchases: {
+        Row: {
+          created_at: string
+          expires_at: string
+          id: string
+          is_active: boolean
+          max_devices: number
+          movie_id: string
+          playback_expires_at: string | null
+          playback_started_at: string | null
+          purchased_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at?: string
+          id?: string
+          is_active?: boolean
+          max_devices?: number
+          movie_id: string
+          playback_expires_at?: string | null
+          playback_started_at?: string | null
+          purchased_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string
+          id?: string
+          is_active?: boolean
+          max_devices?: number
+          movie_id?: string
+          playback_expires_at?: string | null
+          playback_started_at?: string | null
+          purchased_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "purchases_movie_id_fkey"
+            columns: ["movie_id"]
+            isOneToOne: false
+            referencedRelation: "movies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      register_playback_device: {
+        Args: {
+          p_device_fingerprint: string
+          p_device_name?: string
+          p_purchase_id: string
+        }
+        Returns: Json
+      }
     }
     Enums: {
-      [_ in never]: never
+      movie_status: "premiere" | "coming_soon" | "library"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +328,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      movie_status: ["premiere", "coming_soon", "library"],
+    },
   },
 } as const

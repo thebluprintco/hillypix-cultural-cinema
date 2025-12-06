@@ -1,22 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
-import { Ticket, Star, Clock, MapPin, CreditCard, Users, Calendar, Check } from 'lucide-react';
+import { Ticket, Star, Clock, MapPin, CreditCard, Check, AlertTriangle, Shield, Smartphone, Info } from 'lucide-react';
+import { useCreatePurchase, useRegisterDevice } from '@/hooks/usePurchases';
+import { supabase } from '@/integrations/supabase/client';
 
 interface TicketPurchaseDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   movie: {
+    id?: string;
     title: string;
     poster: string;
     rating: number;
     duration: string;
     language: string;
     state: string;
+    price?: number;
   };
 }
 
@@ -25,47 +30,110 @@ const ticketTypes = [
     id: 'single',
     name: 'Basic Tier',
     price: 299,
-    description: 'Perfect for casual viewing',
-    viewingLimit: '3 times',
-    features: ['Watch up to 3 times', 'HD quality streaming', '48-hour access window', 'Mobile & desktop viewing']
+    description: 'Perfect for personal viewing',
+    maxDevices: 1,
+    accessDays: 30,
+    playbackHours: 48,
+    features: ['30 days to start watching', '48 hours to finish once started', 'HD quality streaming', '1 device only']
   },
   {
     id: 'premium',
     name: 'Premium Tier',
     price: 499,
-    description: 'Enhanced viewing experience',
-    viewingLimit: '6 times',
-    features: ['Watch up to 6 times', 'Full HD quality', '7-day access window', 'Behind-the-scenes content', 'Download option', 'Multi-device support']
+    description: 'For you and a friend',
+    maxDevices: 2,
+    accessDays: 30,
+    playbackHours: 48,
+    features: ['30 days to start watching', '48 hours to finish once started', 'Full HD quality', 'Up to 2 devices', 'Download for offline viewing']
   },
   {
     id: 'bundle',
-    name: 'Unlimited Tier',
+    name: 'Family Tier',
     price: 899,
-    description: 'Complete unlimited access',
-    viewingLimit: 'Unlimited',
-    features: ['Unlimited viewing', 'Lifetime access', '4K quality available', 'All bonus content', 'Download for offline', 'Priority support', 'Share with family (2 devices)']
+    description: 'Share with family',
+    maxDevices: 3,
+    accessDays: 30,
+    playbackHours: 72,
+    features: ['30 days to start watching', '72 hours to finish once started', '4K quality available', 'Up to 3 devices', 'Offline downloads', 'Priority support']
   }
 ];
 
 const TicketPurchaseDialog = ({ open, onOpenChange, movie }: TicketPurchaseDialogProps) => {
   const { toast } = useToast();
   const [selectedTicket, setSelectedTicket] = useState('single');
-  const [step, setStep] = useState(1); // 1: Select ticket, 2: Payment details, 3: Confirmation
+  const [step, setStep] = useState(1);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  
+  const createPurchase = useCreatePurchase();
+  const registerDevice = useRegisterDevice();
   
   const selectedTicketType = ticketTypes.find(t => t.id === selectedTicket);
 
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setIsAuthenticated(!!user);
+    };
+    checkAuth();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
+      setIsAuthenticated(!!session?.user);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
   const handleProceedToPayment = () => {
+    if (!isAuthenticated) {
+      toast({
+        title: "Sign in Required",
+        description: "Please sign in to purchase tickets.",
+        variant: "destructive",
+      });
+      return;
+    }
     setStep(2);
   };
 
-  const handleCompletePurchase = () => {
-    // Simulate purchase
-    toast({
-      title: "Ticket Purchased Successfully!",
-      description: `Your ${selectedTicketType?.name} for "${movie.title}" has been added to your library.`,
-    });
+  const handleCompletePurchase = async () => {
+    if (!movie.id || !selectedTicketType) {
+      // Demo mode - simulate purchase
+      toast({
+        title: "Ticket Purchased Successfully!",
+        description: `Your ${selectedTicketType?.name} for "${movie.title}" has been added to your library.`,
+      });
+      setStep(3);
+      return;
+    }
+
+    setIsProcessing(true);
     
-    setStep(3);
+    try {
+      // Create purchase in database
+      const purchase = await createPurchase.mutateAsync({
+        movieId: movie.id,
+        maxDevices: selectedTicketType.maxDevices,
+      });
+
+      // Register current device
+      await registerDevice.mutateAsync(purchase.id);
+
+      toast({
+        title: "Ticket Purchased Successfully!",
+        description: `Your ${selectedTicketType.name} for "${movie.title}" has been added to your library.`,
+      });
+      
+      setStep(3);
+    } catch (error: any) {
+      toast({
+        title: "Purchase Failed",
+        description: error.message || "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const handleClose = () => {
@@ -84,7 +152,7 @@ const TicketPurchaseDialog = ({ open, onOpenChange, movie }: TicketPurchaseDialo
             </div>
             <div>
               <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-golden to-primary-light bg-clip-text text-transparent">
-                {step === 3 ? 'Purchase Complete!' : 'Buy Premiere Ticket'}
+                {step === 3 ? 'Purchase Complete!' : 'Buy Digital Ticket'}
               </DialogTitle>
               <Badge className="bg-golden/20 text-golden text-xs mt-1">
                 🎭 {movie.title}
@@ -93,7 +161,7 @@ const TicketPurchaseDialog = ({ open, onOpenChange, movie }: TicketPurchaseDialo
           </div>
           {step !== 3 && (
             <DialogDescription className="text-muted-foreground">
-              Step {step} of 2: {step === 1 ? 'Select your ticket type' : 'Complete your purchase'}
+              Step {step} of 2: {step === 1 ? 'Select your access tier' : 'Complete your purchase'}
             </DialogDescription>
           )}
         </DialogHeader>
@@ -127,10 +195,22 @@ const TicketPurchaseDialog = ({ open, onOpenChange, movie }: TicketPurchaseDialo
           </div>
         </div>
 
+        {/* Access Model Explanation */}
+        {step === 1 && (
+          <Alert className="mb-6 border-golden/30 bg-golden/5">
+            <Info className="w-4 h-4 text-golden" />
+            <AlertDescription className="text-sm text-muted-foreground">
+              <strong className="text-golden">How it works:</strong> After purchase, you have <strong>30 days to start watching</strong>. 
+              Once you press play, you have <strong>48-72 hours</strong> (depending on tier) to finish the movie. 
+              This helps us protect content from unauthorized sharing.
+            </AlertDescription>
+          </Alert>
+        )}
+
         {/* Step 1: Ticket Selection */}
         {step === 1 && (
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-foreground">Choose Your Experience</h3>
+            <h3 className="text-lg font-semibold text-foreground">Choose Your Access Tier</h3>
             
             <div className="grid gap-4">
               {ticketTypes.map((ticket) => (
@@ -157,16 +237,23 @@ const TicketPurchaseDialog = ({ open, onOpenChange, movie }: TicketPurchaseDialo
                             ₹{ticket.price}
                           </Badge>
                         </div>
-                        <div className="flex items-center gap-2 mb-2">
+                        
+                        <div className="flex items-center gap-2 mb-3">
                           <Badge variant="outline" className="border-golden/30 text-golden text-xs">
-                            {ticket.viewingLimit}
+                            <Smartphone className="w-3 h-3 mr-1" />
+                            {ticket.maxDevices} {ticket.maxDevices === 1 ? 'Device' : 'Devices'}
+                          </Badge>
+                          <Badge variant="outline" className="border-primary/30 text-primary-light text-xs">
+                            <Clock className="w-3 h-3 mr-1" />
+                            {ticket.playbackHours}h playback
                           </Badge>
                           <p className="text-sm text-muted-foreground">{ticket.description}</p>
                         </div>
-                        <div className="space-y-1">
+                        
+                        <div className="grid grid-cols-2 gap-1">
                           {ticket.features.map((feature, index) => (
                             <div key={index} className="flex items-center text-xs text-muted-foreground">
-                              <Check className="w-3 h-3 text-golden mr-2" />
+                              <Check className="w-3 h-3 text-golden mr-2 flex-shrink-0" />
                               {feature}
                             </div>
                           ))}
@@ -177,6 +264,24 @@ const TicketPurchaseDialog = ({ open, onOpenChange, movie }: TicketPurchaseDialo
                 </Card>
               ))}
             </div>
+
+            {/* Device Limit Warning */}
+            <Alert className="border-primary/30 bg-primary/5">
+              <Shield className="w-4 h-4 text-primary-light" />
+              <AlertDescription className="text-sm text-muted-foreground">
+                <strong className="text-primary-light">Account Security:</strong> Each tier has a device limit to prevent unauthorized sharing. 
+                If you try to watch on more devices than allowed, you'll need to remove a device first.
+              </AlertDescription>
+            </Alert>
+
+            {!isAuthenticated && (
+              <Alert className="border-destructive/30 bg-destructive/5">
+                <AlertTriangle className="w-4 h-4 text-destructive" />
+                <AlertDescription className="text-sm text-destructive">
+                  You need to sign in to purchase tickets. Please sign in first.
+                </AlertDescription>
+              </Alert>
+            )}
 
             <div className="flex gap-3 pt-4">
               <Button
@@ -206,6 +311,31 @@ const TicketPurchaseDialog = ({ open, onOpenChange, movie }: TicketPurchaseDialo
                 <p className="text-2xl font-bold text-golden">₹{selectedTicketType?.price}</p>
               </div>
             </div>
+
+            {/* Purchase Summary */}
+            <Card className="bg-background/30 border-border/20">
+              <CardContent className="p-4">
+                <h4 className="font-semibold text-foreground mb-3">Purchase Summary</h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Tier</span>
+                    <span className="text-foreground">{selectedTicketType?.name}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Device Limit</span>
+                    <span className="text-foreground">{selectedTicketType?.maxDevices} devices</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Access Window</span>
+                    <span className="text-foreground">{selectedTicketType?.accessDays} days to start</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Playback Time</span>
+                    <span className="text-foreground">{selectedTicketType?.playbackHours} hours after starting</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
 
             <Tabs defaultValue="card" className="w-full">
               <TabsList className="grid w-full grid-cols-3 bg-card-accent/50">
@@ -280,14 +410,16 @@ const TicketPurchaseDialog = ({ open, onOpenChange, movie }: TicketPurchaseDialo
                 variant="outline"
                 onClick={() => setStep(1)}
                 className="flex-1 border-border/30 text-muted-foreground hover:bg-background/50"
+                disabled={isProcessing}
               >
                 Back
               </Button>
               <Button
                 onClick={handleCompletePurchase}
                 className="flex-1 theatre-gradient text-white hover:scale-105 theatre-transition"
+                disabled={isProcessing}
               >
-                Complete Purchase
+                {isProcessing ? 'Processing...' : 'Complete Purchase'}
               </Button>
             </div>
           </div>
@@ -307,24 +439,40 @@ const TicketPurchaseDialog = ({ open, onOpenChange, movie }: TicketPurchaseDialo
               </p>
               
               <Card className="bg-card-accent/30 border-border/20 max-w-md mx-auto">
-                <CardContent className="p-4">
+                <CardContent className="p-4 space-y-3">
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">Order ID:</span>
                     <span className="font-mono text-foreground">HPX{Math.random().toString(36).substr(2, 8).toUpperCase()}</span>
                   </div>
-                  <div className="flex items-center justify-between text-sm mt-2">
+                  <div className="flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">Amount Paid:</span>
                     <span className="font-semibold text-golden">₹{selectedTicketType?.price}</span>
                   </div>
-                  <div className="flex items-center justify-between text-sm mt-2">
-                    <span className="text-muted-foreground">Access:</span>
-                    <span className="text-foreground">Immediate</span>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-muted-foreground">Valid For:</span>
+                    <span className="text-foreground">30 days to start</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-muted-foreground">Playback Window:</span>
+                    <span className="text-foreground">{selectedTicketType?.playbackHours}h after starting</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-muted-foreground">Device Limit:</span>
+                    <span className="text-foreground">{selectedTicketType?.maxDevices} device(s)</span>
                   </div>
                 </CardContent>
               </Card>
             </div>
 
-            <div className="flex gap-3">
+            <Alert className="border-golden/30 bg-golden/5 text-left max-w-md mx-auto">
+              <Info className="w-4 h-4 text-golden" />
+              <AlertDescription className="text-sm text-muted-foreground">
+                Remember: Once you start watching, you have {selectedTicketType?.playbackHours} hours to finish. 
+                This device is now registered for playback.
+              </AlertDescription>
+            </Alert>
+
+            <div className="flex gap-3 max-w-md mx-auto">
               <Button
                 variant="outline"
                 onClick={handleClose}
