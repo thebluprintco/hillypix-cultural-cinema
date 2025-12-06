@@ -4,11 +4,13 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Clock, Ticket, Star, Play, Calendar, Film, Eye } from 'lucide-react';
+import { Clock, Ticket, Star, Play, Calendar, Film, Eye, Bell, Info } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import TicketPurchaseDialog from './TicketPurchaseDialog';
+import MovieDetailsDialog from './MovieDetailsDialog';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useMoviesByStatus, Movie } from '@/hooks/useMovies';
+import { requestNotificationPermission, scheduleReminder } from '@/utils/notifications';
 
 // Fallback images for demo
 import duipengThangTei from '@/assets/duipeng-thang-tei.jpg';
@@ -123,11 +125,12 @@ interface MovieCardProps {
   movie: Movie;
   type: 'premiere' | 'coming_soon' | 'library';
   onBuyTicket: (movie: Movie) => void;
-  onWatchTrailer: (movie: Movie) => void;
+  onLearnMore: (movie: Movie) => void;
+  onSetReminder: (movie: Movie) => void;
   isMobile: boolean;
 }
 
-const MovieCard = ({ movie, type, onBuyTicket, onWatchTrailer, isMobile }: MovieCardProps) => {
+const MovieCard = ({ movie, type, onBuyTicket, onLearnMore, onSetReminder, isMobile }: MovieCardProps) => {
   const countdown = type === 'premiere' 
     ? getCountdown(movie.premiere_end_at) 
     : type === 'coming_soon' 
@@ -211,23 +214,35 @@ const MovieCard = ({ movie, type, onBuyTicket, onWatchTrailer, isMobile }: Movie
                 {formatDuration(movie.duration_minutes)}
               </span>
             </div>
-            <span className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold text-golden`}>
-              ₹{movie.price}
-            </span>
+            {type !== 'coming_soon' && (
+              <span className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold text-golden`}>
+                ₹{movie.price}
+              </span>
+            )}
           </div>
 
           {/* Action Buttons */}
-          <div className="flex gap-3 mt-4">
+          <div className="flex gap-2 mt-4">
             {type === 'coming_soon' ? (
-              <Button 
-                onClick={() => onWatchTrailer(movie)} 
-                size={isMobile ? 'sm' : 'default'} 
-                variant="outline"
-                className="flex-1 border-golden/50 text-golden hover:bg-golden/10 text-xs"
-              >
-                <Play className="w-3 h-3 mr-2" />
-                Notify Me
-              </Button>
+              <>
+                <Button 
+                  onClick={() => onSetReminder(movie)} 
+                  size={isMobile ? 'sm' : 'default'} 
+                  className="flex-1 theatre-gradient text-white hover:scale-105 theatre-transition text-xs"
+                >
+                  <Bell className="w-3 h-3 mr-2" />
+                  {isMobile ? 'Remind' : 'Set Reminder'}
+                </Button>
+                <Button 
+                  onClick={() => onLearnMore(movie)} 
+                  variant="outline" 
+                  size={isMobile ? 'sm' : 'default'}
+                  className="flex-1 border-golden/50 text-golden hover:bg-golden/10 text-xs"
+                >
+                  <Info className="w-3 h-3 mr-2" />
+                  {isMobile ? 'Info' : 'Learn More'}
+                </Button>
+              </>
             ) : (
               <>
                 <Button 
@@ -239,12 +254,13 @@ const MovieCard = ({ movie, type, onBuyTicket, onWatchTrailer, isMobile }: Movie
                   {isMobile ? 'Buy' : 'Buy Ticket'}
                 </Button>
                 <Button 
-                  onClick={() => onWatchTrailer(movie)} 
+                  onClick={() => onLearnMore(movie)} 
                   variant="outline" 
-                  size="icon" 
-                  className="border-golden/50 text-golden hover:bg-golden/10 hover:scale-105 theatre-transition"
+                  size={isMobile ? 'sm' : 'default'}
+                  className="border-golden/50 text-golden hover:bg-golden/10 text-xs"
                 >
-                  <Play className="w-3 h-3" />
+                  <Info className="w-3 h-3 mr-2" />
+                  {isMobile ? 'Info' : 'Learn More'}
                 </Button>
               </>
             )}
@@ -274,7 +290,9 @@ const LoadingSkeleton = ({ count = 3, isMobile }: { count?: number; isMobile: bo
 
 const MoviesSection = () => {
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+  const [detailsMovie, setDetailsMovie] = useState<Movie | null>(null);
   const [isTicketDialogOpen, setIsTicketDialogOpen] = useState(false);
+  const [isDetailsDialogOpen, setIsDetailsDialogOpen] = useState(false);
   const navigate = useNavigate();
   const isMobile = useIsMobile();
   const { toast } = useToast();
@@ -295,18 +313,28 @@ const MoviesSection = () => {
     setIsTicketDialogOpen(true);
   };
 
-  const handleWatchTrailer = (movie: Movie) => {
-    if (movie.status === 'coming_soon') {
+  const handleLearnMore = (movie: Movie) => {
+    setDetailsMovie(movie);
+    setIsDetailsDialogOpen(true);
+  };
+
+  const handleSetReminder = async (movie: Movie) => {
+    const hasPermission = await requestNotificationPermission();
+    if (!hasPermission) {
       toast({
-        title: "Notification Set!",
-        description: `We'll notify you when "${movie.title}" is available.`,
+        title: "Notification Permission Denied",
+        description: "Please enable notifications in your browser settings to receive reminders.",
+        variant: "destructive"
       });
-    } else {
-      toast({
-        title: "Trailer Coming Soon",
-        description: `The trailer for "${movie.title}" will be available shortly.`,
-      });
+      return;
     }
+
+    const reminderDate = movie.release_date || movie.premiere_start_at || new Date().toISOString();
+    scheduleReminder(movie.title, reminderDate);
+    toast({
+      title: "Reminder Set!",
+      description: `We'll notify you when "${movie.title}" is available.`,
+    });
   };
 
   const handleViewAllPremieres = () => {
@@ -362,7 +390,8 @@ const MoviesSection = () => {
                   movie={movie as Movie}
                   type="premiere"
                   onBuyTicket={handleBuyTicket}
-                  onWatchTrailer={handleWatchTrailer}
+                  onLearnMore={handleLearnMore}
+                  onSetReminder={handleSetReminder}
                   isMobile={isMobile}
                 />
               ))}
@@ -409,7 +438,8 @@ const MoviesSection = () => {
                   movie={movie as Movie}
                   type="coming_soon"
                   onBuyTicket={handleBuyTicket}
-                  onWatchTrailer={handleWatchTrailer}
+                  onLearnMore={handleLearnMore}
+                  onSetReminder={handleSetReminder}
                   isMobile={isMobile}
                 />
               ))}
@@ -445,7 +475,8 @@ const MoviesSection = () => {
                   movie={movie as Movie}
                   type="library"
                   onBuyTicket={handleBuyTicket}
-                  onWatchTrailer={handleWatchTrailer}
+                  onLearnMore={handleLearnMore}
+                  onSetReminder={handleSetReminder}
                   isMobile={isMobile}
                 />
               ))}
@@ -482,6 +513,23 @@ const MoviesSection = () => {
           }} 
         />
       )}
+
+      {/* Movie Details Dialog */}
+      <MovieDetailsDialog 
+        open={isDetailsDialogOpen} 
+        onOpenChange={setIsDetailsDialogOpen}
+        movie={detailsMovie}
+        onBuyTicket={() => {
+          if (detailsMovie) {
+            handleBuyTicket(detailsMovie);
+          }
+        }}
+        onSetReminder={() => {
+          if (detailsMovie) {
+            handleSetReminder(detailsMovie);
+          }
+        }}
+      />
     </>
   );
 };
